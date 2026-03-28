@@ -5,7 +5,7 @@ export const products = [
     id:    0,
     name:  'The Rooster',
     cat:   'Birds',
-    price: 1850,
+    price: 2190,
     sold:  false,
     desc:  "A bold, colourful celebration of one of Africa's most recognised birds. The Rooster stands tall with an air of confidence — its comb and tail feathers rendered in vibrant reds, oranges, and golden yellows. A piece that commands attention from across a room.",
     size:  'To be confirmed',
