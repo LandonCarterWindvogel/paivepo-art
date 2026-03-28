@@ -59,7 +59,7 @@ export const products = [
     cat:   'Wire',
     price: 980,
     sold:  false,
-    desc:  "Elegant and elongated, the Wire Giraffe showcases Tinashe's mastery of form through wire alone. The piece balances delicacy and structural precision — a giraffe mid-stride, neck extended, caught in a moment of grace.",
+    desc:  "Elegant and elongated, the Wire Fairie showcases Tinashe's mastery of form through wire alone. The piece balances delicacy and structural precision — a fairie.",
     size:  'To be confirmed',
     mats:  'Decorative wire, beaded accents',
     beads: 'Accent beads',
