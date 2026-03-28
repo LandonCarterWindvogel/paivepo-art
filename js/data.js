@@ -55,7 +55,7 @@ export const products = [
   },
   {
     id:    4,
-    name:  'Wire Giraffe',
+    name:  'Wire Fairie',
     cat:   'Wire',
     price: 980,
     sold:  false,
