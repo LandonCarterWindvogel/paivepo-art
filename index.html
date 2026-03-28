@@ -402,20 +402,22 @@
         </div>
       </div>
       <div class="con-form">
-        <div class="form-t">Send a Message</div>
-        <div class="fg"><label class="fl">Your Name</label><input class="fi" type="text" placeholder="First & Last Name"></div>
-        <div class="fg"><label class="fl">Email Address</label><input class="fi" type="email" placeholder="your@email.com"></div>
-        <div class="fg">
-          <label class="fl">Enquiry Type</label>
-          <select class="fsel">
-            <option value="">Select...</option>
-            <option>General Question</option>
-            <option>Commission a Custom Piece</option>
-            <option>Shipping & Delivery</option>
-            <option>Wholesale / Gallery</option>
-            <option>Press / Media</option>
-          </select>
-        </div>
+  <form id="contact-form" action="https://formspree.io/f/mnjopqne" method="POST">
+    <div class="fg">
+      <label class="fl">Name</label>
+      <input class="fi" type="text" name="name" required placeholder="Your name">
+    </div>
+    <div class="fg">
+      <label class="fl">Email</label>
+      <input class="fi" type="email" name="email" required placeholder="your@email.com">
+    </div>
+    <div class="fg full">
+      <label class="fl">Message</label>
+      <textarea class="fi" name="message" rows="5" required placeholder="How can Tinashe help you?"></textarea>
+    </div>
+    <button type="submit" class="po-btn" id="contactSubmitBtn">Send Message</button>
+  </form>
+</div>
         <div class="fg"><label class="fl">Message</label><textarea class="ft2" placeholder="Tell Tinashe about your enquiry..."></textarea></div>
         <button class="fsub" id="contactSubmitBtn">Send Message</button>
         <p style="font-size:10.5px;color:var(--muted);margin-top:20px;line-height:1.75;text-align:center;">Tinashe responds within 48 hours · Commissions also accepted via WhatsApp</p>
