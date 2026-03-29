@@ -1,3 +1,5 @@
+import { sounds, toggleSound, isSoundEnabled } from './sound.js';
+
 let toastTimer = null;
 
 export function showToast(message) {
@@ -13,6 +15,7 @@ export function openZoom() {
   document.getElementById('zmImg').src = src;
   document.getElementById('zm').classList.add('open');
   document.body.style.overflow = 'hidden';
+  sounds.click();
 }
 
 export function closeZoom() {
@@ -23,7 +26,7 @@ export function closeZoom() {
 export function initNav() {
   window.addEventListener('scroll', () => {
     document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-  });
+  }, { passive: true });
 }
 
 export function initZoom() {
@@ -39,5 +42,17 @@ export function initKeyboard(cartIsOpen, closeCart) {
     if (e.key !== 'Escape') return;
     closeZoom();
     if (cartIsOpen()) closeCart();
+  });
+}
+
+export function initSoundToggle() {
+  const btn = document.getElementById('soundToggleBtn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const on = toggleSound();
+    btn.textContent = on ? '♪' : '♪̶';
+    btn.title       = on ? 'Sound on' : 'Sound off';
+    btn.classList.toggle('muted', !on);
   });
 }

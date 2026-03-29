@@ -46,7 +46,7 @@ export const products = [
     cat:   'Floral',
     price: 1200,
     sold:  false,
-    desc:  "The Protea — South Africa's national flower — interpreted through colour and bead. Layers of pale pinks, creamy whites, and blush tones build outward from a dense, textured centre. An extraordinary object for any space.",
+    desc:  "The Protea — South Africa's national flower — interpreted through colour and bead. Layers of pale pinks, creamy whites, and blush tones build outward from a dense, textured centre.",
     size:  'To be confirmed',
     mats:  'Glass seed beads, wire stem',
     beads: 'To be confirmed',

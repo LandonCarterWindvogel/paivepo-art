@@ -1,8 +1,22 @@
 import { renderGallery, setFilter } from './gallery.js';
+import { sounds } from './sound.js';
 
-let currentPage = 'home';
+let currentPage   = 'home';
+let transitionTo  = null;
 
-export function go(pageId) {
+export function setTransition(fn) {
+  transitionTo = fn;
+}
+
+export function go(pageId, skipTransition = false) {
+  if (skipTransition || !transitionTo) {
+    _swap(pageId);
+  } else {
+    transitionTo(() => _swap(pageId));
+  }
+}
+
+function _swap(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(`page-${pageId}`).classList.add('active');
   window.scrollTo(0, 0);
@@ -22,10 +36,9 @@ export function initRouter() {
     const page   = target.dataset.page;
     const filter = target.dataset.filter;
 
-    if (filter) {
-      setFilter(filter);
-    }
+    sounds.nav();
 
+    if (filter) setFilter(filter);
     go(page);
   });
 }

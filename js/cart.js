@@ -1,19 +1,18 @@
 import { showToast } from './ui.js';
 import { go } from './router.js';
+import { sounds } from './sound.js';
 
-let cart = [];
+let cart     = [];
 let cartOpen = false;
 
-export function isCartOpen() {
-  return cartOpen;
-}
+export function isCartOpen() { return cartOpen; }
 
 export function toggleCart() {
   cartOpen = !cartOpen;
   document.getElementById('cartSb').classList.toggle('open', cartOpen);
   document.getElementById('cartOv').classList.toggle('open', cartOpen);
   document.body.style.overflow = cartOpen ? 'hidden' : '';
-  if (cartOpen) renderCart();
+  if (cartOpen) { sounds.cartOpen(); renderCart(); }
 }
 
 export function closeCart() {
@@ -25,18 +24,15 @@ export function closeCart() {
 
 export function addToCart(product) {
   const existing = cart.find(i => i.id === product.id);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ ...product, qty: 1 });
-  }
-  updateCartCount();
+  if (existing) { existing.qty++; } else { cart.push({ ...product, qty: 1 }); }
+  updateCount();
+  sounds.addCart();
   showToast(`"${product.name}" added to your bag`);
 }
 
 export function renderCart() {
-  const body = document.getElementById('cartBody');
-  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const body  = document.getElementById('cartBody');
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
   if (!cart.length) {
     body.innerHTML = '<div class="cart-empty">Your bag is empty</div>';
@@ -66,24 +62,16 @@ export function renderCart() {
 }
 
 export function goCheckout() {
-  if (!cart.length) {
-    showToast('Your bag is empty');
-    return;
-  }
+  if (!cart.length) { showToast('Your bag is empty'); return; }
   closeCart();
-
   document.getElementById('coContent').style.display = '';
   document.getElementById('oSuccess').classList.remove('show');
 
-  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   document.getElementById('coItems').innerHTML = cart.map(i => `
     <div class="oi">
       <img class="oi-img" src="${i.imgs[0]}" alt="${i.name}">
-      <div>
-        <div class="oi-name">${i.name}</div>
-        <div class="oi-qty">Qty: ${i.qty}</div>
-      </div>
+      <div><div class="oi-name">${i.name}</div><div class="oi-qty">Qty: ${i.qty}</div></div>
       <div class="oi-price">R${(i.price * i.qty).toLocaleString()}</div>
     </div>
   `).join('');
@@ -93,20 +81,19 @@ export function goCheckout() {
     <div class="o-row"><span>Shipping</span><span>To be arranged</span></div>
     <div class="o-row tot"><span>Total</span><span>R${total.toLocaleString()}</span></div>
   `;
-
   go('checkout');
 }
 
 export function placeOrder() {
   document.getElementById('coContent').style.display = 'none';
   document.getElementById('oSuccess').classList.add('show');
+  sounds.addCart();
   cart = [];
-  updateCartCount();
+  updateCount();
 }
 
-function updateCartCount() {
-  const total = cart.reduce((sum, i) => sum + i.qty, 0);
-  document.getElementById('cc').textContent = total;
+function updateCount() {
+  document.getElementById('cc').textContent = cart.reduce((s, i) => s + i.qty, 0);
 }
 
 export function initCart() {
@@ -118,19 +105,17 @@ export function initCart() {
   document.getElementById('checkoutLogo').addEventListener('click', () => go('home'));
 
   document.getElementById('cartBody').addEventListener('click', e => {
-    const btn = e.target.closest('[data-cart-action]');
+    const btn    = e.target.closest('[data-cart-action]');
     if (!btn) return;
-
+    sounds.click();
     const id     = Number(btn.dataset.id);
     const action = btn.dataset.cartAction;
     const item   = cart.find(i => i.id === id);
     if (!item) return;
-
     if (action === 'inc')    { item.qty++; }
     if (action === 'dec')    { item.qty--; if (item.qty <= 0) cart = cart.filter(i => i.id !== id); }
     if (action === 'remove') { cart = cart.filter(i => i.id !== id); }
-
-    updateCartCount();
+    updateCount();
     renderCart();
   });
 }
