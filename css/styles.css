@@ -579,7 +579,7 @@ footer    { background:var(--black); color:var(--w); padding:80px 80px 56px; }
   .prod-layout { grid-template-columns:1fr; }
   .prod-imgs { position:relative; height:75vw; top:0; }
   .prod-dets { padding:40px 24px; }
-  .abt-img, .ap-img { height:70vw; }
+  .abt-img, .ap-img { height:85vh; background-position: center top; }
   .abt-text, .ap-text, .con-info, .con-form { padding:56px 24px; }
   .co-form, .co-order { padding:40px 24px; }
   .co-fg2 { grid-template-columns:1fr; }
