@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paivepo Art & Decor — Handmade Beaded Animal Sculptures by Tinashe Kachama</title>
+  <meta name="description" content="Paivepo Art & Decor — handmade beaded animal sculptures by Tinashe Kachama. Based at Old Nick Village, Plettenberg Bay, South Africa. Each piece is one of a kind.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
@@ -37,6 +38,7 @@
       <li><a data-page="contact">Contact</a></li>
     </ul>
     <div class="nav-right">
+      <button class="sound-btn" id="soundToggleBtn" title="Sound on">♪</button>
       <button class="cart-btn" id="cartToggleBtn">
         Bag <span class="c-count" id="cc">0</span>
       </button>
@@ -115,6 +117,9 @@
         </div>
         <span class="sec-link" data-page="gallery">View All →</span>
       </div>
+<<<<<<< HEAD
+      <div class="feat-grid" id="featGrid"></div>
+=======
       <div class="feat-grid" id="featGrid">
         <div class="feat-item" data-prod-id="0">
           <img class="feat-img" src="https://oldnickvillage.co.za/wp-content/uploads/2025/06/50.jpg" alt="The Rooster">
@@ -133,6 +138,7 @@
           <div class="feat-info"><div class="feat-name">The Elephant</div><div class="feat-price">R2,400</div></div>
         </div>
       </div>
+>>>>>>> 7ddd579691f09c232b02aca04d89e67962591eee
     </section>
 
     <div class="stats">
@@ -151,6 +157,36 @@
         <h2 class="ap-heading">Colour, pattern, <em>and rhythm</em> in every bead</h2>
         <p class="ap-body">Tinashe Kachama is the founder of Paivepo Art & Decor, based at Old Nick Village in Plettenberg Bay. Rooted in African heritage and inspired by nature, music, and tradition, his beaded sculptures carry memory, culture, and soul. Each piece is thoughtfully designed — a meditative act of creation that can take weeks to complete.</p>
         <span class="btn" data-page="about">Meet Tinashe</span>
+      </div>
+    </div>
+
+    <!-- VIDEO SECTION — ready and waiting for Tinashe's footage -->
+    <div class="video-section">
+      <div class="video-lbl-wrap">
+        <div class="sec-lbl" style="color:rgba(255,255,255,.35);">The Making</div>
+        <h2 class="sec-title" style="color:var(--w);margin-top:8px;">Bead by <em>bead</em></h2>
+      </div>
+      <div class="video-embed" id="videoEmbed">
+        <!--
+          WHEN TINASHE'S VIDEO IS READY:
+          1. Add the video file to the repo (e.g. /video/beading.mp4)
+          2. Replace the placeholder div below with:
+          <video autoplay muted loop playsinline>
+            <source src="video/beading.mp4" type="video/mp4">
+          </video>
+          The video should be: hands only, close up on the beads,
+          landscape orientation, no audio needed (muted autoplay).
+          Ideal length: 30–60 seconds, looped.
+        -->
+        <div class="video-embed-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <p>Video coming soon</p>
+        </div>
+      </div>
+      <div class="video-caption">
+        <p>"Each sculpture holds a heartbeat. The beading is a slow, meditative act — bead by bead, in quiet focus, traditional African rhythms playing in the background."</p>
       </div>
     </div>
 
@@ -220,7 +256,7 @@
   </div>
 
   <div id="page-gallery" class="page">
-    <div class="pg-hero">
+    <div class="pg-hero" data-label="Collection">
       <div class="pg-lbl">The Collection</div>
       <h1 class="pg-title">Every piece,<br><em>a story told</em></h1>
       <p class="pg-sub">Each Paivepo sculpture is entirely handmade and one of a kind. Once sold, it is gone — no two pieces are ever the same.</p>
