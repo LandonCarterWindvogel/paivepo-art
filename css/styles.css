@@ -343,7 +343,7 @@ nav.scrolled {
   position: fixed; top: 0; right: 0; bottom: 0;
   width: 400px; max-width: 100vw;
   background: var(--off);
-  z-index: 1200;
+  z-index: 11000;
   display: flex; flex-direction: column;
   transform: translateX(100%);
   transition: transform .4s var(--ease-out);
