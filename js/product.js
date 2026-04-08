@@ -1,17 +1,32 @@
+/**
+ * product.js — Product page rendering with WebP <picture> support
+ */
 import { products } from './data.js';
 import { addToCart } from './cart.js';
 import { openZoom, showToast } from './ui.js';
 import { go } from './router.js';
 import { sounds } from './sound.js';
+import { toggleWishlist, isWishlisted } from './wishlist.js';
 
 let currentProduct = null;
 
 export function getCurrentProduct() { return currentProduct; }
 
+/* Helper: emit a <picture> with WebP + JPG fallback */
+function pic(webpSrc, jpgSrc, alt, cls = '', w = '', h = '', lazy = true, extra = '') {
+  const dims   = (w && h) ? ` width="${w}" height="${h}"` : '';
+  const load   = lazy ? ' loading="lazy"' : '';
+  const clsStr = cls ? ` class="${cls}"` : '';
+  return `<picture>
+    <source srcset="${webpSrc}" type="image/webp">
+    <img src="${jpgSrc}" alt="${alt}"${clsStr}${dims}${load}${extra}>
+  </picture>`;
+}
+
 export function showProduct(id) {
-  currentProduct = products.find(p => p.id === id);
-  if (!currentProduct) return;
-  const p = currentProduct;
+  const p = products.find(x => x.id === id);
+  if (!p) { showToast('Product not found'); return; }
+  currentProduct = p;
 
   document.getElementById('prodBc').textContent    = p.name;
   document.getElementById('prodTitle').textContent = p.name;
@@ -22,7 +37,9 @@ export function showProduct(id) {
   renderSpecs(p);
   renderThumbnails(p);
   renderRelated(p);
+  renderWishlistState(p);
 
+  document.title = `${p.name} — Paivepo Art & Decor`;
   go('product');
 }
 
@@ -36,90 +53,173 @@ function renderSoldState(p) {
   const notice  = document.getElementById('prodSoldNotice');
   const atcBtn  = document.getElementById('atcBtn');
   const commBtn = document.getElementById('commissionBtn');
-  const mainImg = document.getElementById('prodMain');
+  const imgWrap = document.getElementById('prodMain').parentElement;
 
   notice.classList.toggle('show', p.sold);
-  mainImg.src = p.imgs[0];
-  mainImg.alt = p.name;
+
+  // Replace the main image with a proper picture element
+  const oldPic = imgWrap.querySelector('picture');
+  const oldImg = document.getElementById('prodMain');
+  const imgAlt = `${p.name} — handmade beaded ${p.cat ? p.cat.toLowerCase() : ''} sculpture by Tinashe Kachama`;
+
+  const soldClass = p.sold ? 'prod-main sold-img' : 'prod-main zoomable';
+  const pictureHTML = `<picture id="prodMainPicture">
+    <source srcset="${p.webp[0]}" type="image/webp">
+    <img id="prodMain" src="${p.imgs[0]}" alt="${imgAlt}" class="${soldClass}" width="800" height="1000" fetchpriority="low">
+  </picture>`;
+
+  if (oldPic) {
+    oldPic.outerHTML = pictureHTML;
+  } else if (oldImg) {
+    oldImg.outerHTML = pictureHTML;
+  }
+
+  const mainImg = document.getElementById('prodMain');
 
   if (p.sold) {
-    mainImg.className    = 'prod-main sold-img';
     atcBtn.style.display = 'none';
     commBtn.classList.add('show');
     sounds.sold();
   } else {
-    mainImg.className       = 'prod-main zoomable';
     atcBtn.style.display    = '';
     atcBtn.textContent      = 'Add to Bag';
     atcBtn.disabled         = false;
     atcBtn.style.background = '';
     commBtn.classList.remove('show');
+
+    // Re-bind ATC — clone to remove stale listeners
+    const newAtc = atcBtn.cloneNode(true);
+    atcBtn.parentNode.replaceChild(newAtc, atcBtn);
+    newAtc.addEventListener('click', () => {
+      addToCart(p);
+      newAtc.textContent = 'Added ✓';
+      newAtc.disabled    = true;
+      setTimeout(() => {
+        newAtc.textContent = 'Add to Bag';
+        newAtc.disabled    = false;
+      }, 2000);
+    });
+
+    // Zoom on main image click — remove first to prevent stacking listeners
+    mainImg.removeEventListener('click', openZoom);
+    mainImg.addEventListener('click', openZoom);
   }
 }
 
 function renderSpecs(p) {
-  document.getElementById('prodSpecs').innerHTML = `
-    <div class="spec"><div class="spec-l">Dimensions</div><div class="spec-v">${p.size}</div></div>
-    <div class="spec"><div class="spec-l">Materials</div><div class="spec-v">${p.mats}</div></div>
-    <div class="spec"><div class="spec-l">Bead Count</div><div class="spec-v">${p.beads}</div></div>
-    <div class="spec"><div class="spec-l">Time to Create</div><div class="spec-v">${p.time}</div></div>
-    <div class="spec"><div class="spec-l">Artist</div><div class="spec-v">Tinashe Kachama</div></div>
-    <div class="spec"><div class="spec-l">Edition</div><div class="spec-v">${p.sold ? 'Sold — One of a Kind' : 'One of a Kind'}</div></div>
-  `;
-}
+  const specs = [
+    { l: 'Dimensions',     v: p.size  },
+    { l: 'Materials',      v: p.mats  },
+    { l: 'Bead Count',     v: p.beads },
+    { l: 'Time to Create', v: p.time  },
+    { l: 'Artist',         v: 'Tinashe Kachama' },
+    { l: 'Edition',        v: p.sold ? 'Sold — One of a Kind' : 'One of a Kind' },
+  ].filter(s => s.v && s.v !== 'To be confirmed');
 
-function renderThumbnails(p) {
-  document.getElementById('prodThumbs').innerHTML = p.imgs.map((src, i) => `
-    <img class="thumb ${i === 0 ? 'on' : ''}" src="${src}" alt="View ${i + 1}" data-thumb-src="${src}">
-  `).join('');
-}
-
-function renderRelated(p) {
-  const related = products.filter(r => r.id !== p.id).slice(0, 4);
-  document.getElementById('relGrid').innerHTML = related.map(r => `
-    <div class="rel-card${r.sold ? ' is-sold' : ''}" ${r.sold ? '' : `data-prod-id="${r.id}"`}>
-      <div class="rel-img-wrap">
-        <img class="rel-img" src="${r.imgs[0]}" alt="${r.name}" loading="lazy">
-        ${r.sold ? '<div class="rel-sold-bar">Sold</div>' : ''}
-      </div>
-      <div class="rel-name">${r.name}</div>
-      <div class="rel-price${r.sold ? ' struck' : ''}">R${r.price.toLocaleString()}</div>
+  document.getElementById('prodSpecs').innerHTML = specs.map(s => `
+    <div class="spec">
+      <div class="spec-l">${s.l}</div>
+      <div class="spec-v">${s.v}</div>
     </div>
   `).join('');
 }
 
+function renderThumbnails(p) {
+  const container = document.getElementById('prodThumbs');
+
+  container.innerHTML = p.imgs.map((src, i) => {
+    const webpSrc = p.webp[i] || src;
+    return `<picture class="thumb-wrap">
+      <source srcset="${webpSrc}" type="image/webp">
+      <img class="thumb ${i === 0 ? 'on' : ''}"
+           src="${src}"
+           alt="View ${i + 1} of ${p.name}"
+           role="button" tabindex="0"
+           data-thumb-jpg="${src}"
+           data-thumb-webp="${webpSrc}"
+           width="72" height="90"
+           loading="lazy">
+    </picture>`;
+  }).join('');
+
+  // Bind click/keyboard once per render using cloneNode trick
+  const fresh = container.cloneNode(true);
+  container.parentNode.replaceChild(fresh, container);
+
+  fresh.addEventListener('click',   e => handleThumbClick(e, p));
+  fresh.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleThumbClick(e, p); }
+  });
+}
+
+function handleThumbClick(e, p) {
+  const thumb = e.target.closest('.thumb');
+  if (!thumb) return;
+
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('on'));
+  thumb.classList.add('on');
+
+  const jpgSrc  = thumb.dataset.thumbJpg;
+  const webpSrc = thumb.dataset.thumbWebp;
+  const idx     = [...document.querySelectorAll('.thumb')].indexOf(thumb);
+
+  // Update the main <picture> source and <img>
+  const mainPic = document.getElementById('prodMainPicture');
+  const mainImg = document.getElementById('prodMain');
+  if (mainPic) {
+    const src = mainPic.querySelector('source');
+    if (src) src.srcset = webpSrc;
+  }
+  if (mainImg) {
+    mainImg.src = jpgSrc;
+    mainImg.alt = `View ${idx + 1} of ${p ? p.name : ''}`;
+  }
+
+  sounds.click();
+}
+
+function renderRelated(p) {
+  const same   = products.filter(r => r.id !== p.id && r.cat === p.cat);
+  const others = products.filter(r => r.id !== p.id && r.cat !== p.cat);
+  const related = [...same, ...others].slice(0, 4);
+
+  document.getElementById('relGrid').innerHTML = related.map(r => {
+    const imgAlt = `${r.name} — handmade ${r.cat} sculpture by Tinashe Kachama`;
+    return `
+      <div class="rel-card${r.sold ? ' is-sold' : ''}"
+           ${r.sold ? '' : `data-prod-id="${r.id}" role="button" tabindex="0"`}
+           aria-label="${r.name}${r.sold ? ' — sold' : `, R${r.price.toLocaleString()}`}">
+        <picture>
+          <source srcset="${r.webp[0]}" type="image/webp">
+          <img class="rel-img" src="${r.imgs[0]}" alt="${imgAlt}" width="400" height="533" loading="lazy">
+        </picture>
+        <div class="rel-name">${r.name}</div>
+        <div class="rel-price${r.sold ? ' struck' : ''}">
+          ${r.sold
+            ? '<span style="text-decoration:line-through;opacity:.45">Sold</span>'
+            : `R${r.price.toLocaleString()}`}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderWishlistState(p) {
+  const btn = document.getElementById('wlBtn');
+  if (!btn) return;
+  const wishlisted = isWishlisted(p.id);
+  btn.setAttribute('aria-pressed', String(wishlisted));
+  btn.classList.toggle('wishlisted', wishlisted);
+
+  const newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+  newBtn.addEventListener('click', () => {
+    const on = toggleWishlist(p);
+    newBtn.setAttribute('aria-pressed', String(on));
+    newBtn.classList.toggle('wishlisted', on);
+  });
+}
+
 export function initProduct() {
-  document.getElementById('atcBtn').addEventListener('click', () => {
-    if (!currentProduct || currentProduct.sold) return;
-    addToCart(currentProduct);
-    const btn            = document.getElementById('atcBtn');
-    btn.textContent      = 'Added ✓';
-    btn.style.background = '#3a3632';
-    setTimeout(() => { btn.textContent = 'Add to Bag'; btn.style.background = ''; }, 2200);
-  });
-
-  document.getElementById('wlBtn').addEventListener('click', () => {
-    sounds.click();
-    showToast('Saved to your wishlist');
-  });
-
-  document.getElementById('prodMain').addEventListener('click', () => {
-    if (currentProduct && !currentProduct.sold) openZoom();
-  });
-
-  document.getElementById('prodThumbs').addEventListener('click', e => {
-    const thumb = e.target.closest('.thumb');
-    if (!thumb) return;
-    sounds.click();
-    document.getElementById('prodMain').src = thumb.dataset.thumbSrc;
-    document.querySelectorAll('.thumb').forEach(t => t.classList.remove('on'));
-    thumb.classList.add('on');
-  });
-
-  document.getElementById('relGrid').addEventListener('click', e => {
-    const card = e.target.closest('[data-prod-id]');
-    if (!card) return;
-    sounds.click();
-    showProduct(Number(card.dataset.prodId));
-  });
+  // All events are bound dynamically in showProduct()
 }

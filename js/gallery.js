@@ -1,13 +1,26 @@
+/**
+ * gallery.js — Gallery rendering with WebP picture elements + keyboard accessibility
+ */
 import { products } from './data.js';
 import { showProduct } from './product.js';
 import { sounds } from './sound.js';
 
 const FEATURED_IDS = [0, 3, 4, 1];
-
 let activeFilter = 'All';
 
 export function setFilter(filter) {
   activeFilter = filter;
+}
+
+/* Helper: emit a <picture> with WebP source + JPG fallback */
+function pic(webpSrc, jpgSrc, alt, cls = '', w = '', h = '', lazy = true) {
+  const dims   = (w && h) ? ` width="${w}" height="${h}"` : '';
+  const load   = lazy ? ' loading="lazy"' : '';
+  const clsAttr = cls ? ` class="${cls}"` : '';
+  return `<picture>
+    <source srcset="${webpSrc}" type="image/webp">
+    <img src="${jpgSrc}" alt="${alt}"${clsAttr}${dims}${load}>
+  </picture>`;
 }
 
 export function renderFeatured() {
@@ -21,17 +34,16 @@ export function renderFeatured() {
     const priceHTML = p.sold
       ? `<span style="text-decoration:line-through;opacity:.45">R${p.price.toLocaleString()}</span>`
       : `R${p.price.toLocaleString()}`;
-
-    const soldBadge = p.sold
-      ? '<div class="feat-sold-badge">Sold</div>'
-      : '';
+    const soldBadge = p.sold ? '<div class="feat-sold-badge">Sold</div>' : '';
+    const imgAlt = `${p.name} — handmade beaded sculpture by Tinashe Kachama`;
 
     return `
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
-           ${p.sold ? '' : `data-prod-id="${p.id}"`}>
-        <img class="feat-img" src="${p.imgs[0]}" alt="${p.name}">
+           ${p.sold ? '' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
+           aria-label="${p.name}${p.sold ? ' — sold' : `, R${p.price.toLocaleString()}`}">
+        ${pic(p.webp[0], p.imgs[0], imgAlt, 'feat-img', '800', '1000')}
         ${soldBadge}
-        <div class="feat-info">
+        <div class="feat-info" aria-hidden="true">
           <div class="feat-name">${p.name}</div>
           <div class="feat-price">${priceHTML}</div>
         </div>
@@ -55,17 +67,19 @@ export function renderGallery() {
 
 function buildCard(p) {
   const soldOverlay = p.sold ? `
-    <div class="sold-overlay">
+    <div class="sold-overlay" aria-hidden="true">
       <div class="sold-label">Sold</div>
       <div class="sold-sub">This piece has found its home</div>
     </div>` : '';
+  const imgAlt = `${p.name} — hand-beaded ${p.cat.toLowerCase()} sculpture by Tinashe Kachama, Plettenberg Bay`;
 
   return `
     <div class="gal-card${p.sold ? ' is-sold' : ''}"
-         ${p.sold ? '' : `data-prod-id="${p.id}"`}>
+         ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
+         aria-label="${p.name}, ${p.cat}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
       <div class="gal-img-wrap">
-        <img class="gal-img" src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
-        <div class="gal-ov">${p.sold ? '' : '<div class="gal-view">View Sculpture</div>'}</div>
+        ${pic(p.webp[0], p.imgs[0], imgAlt, 'gal-img', '600', '800')}
+        <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Sculpture</div>'}</div>
         ${soldOverlay}
       </div>
       <div class="gal-name">${p.name}</div>
@@ -79,13 +93,15 @@ function buildCard(p) {
 }
 
 function syncFilterButtons() {
-  document.querySelectorAll('#galFilters .f-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.filter === activeFilter);
+  document.querySelectorAll('.f-btn').forEach(btn => {
+    const active = btn.dataset.filter === activeFilter;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
   });
 }
 
 export function initGallery() {
-  document.getElementById('galFilters').addEventListener('click', e => {
+  document.getElementById('galFilters')?.addEventListener('click', e => {
     const btn = e.target.closest('.f-btn');
     if (!btn) return;
     sounds.click();
@@ -93,19 +109,22 @@ export function initGallery() {
     renderGallery();
   });
 
-  document.getElementById('availOnly').addEventListener('change', renderGallery);
+  document.getElementById('availOnly')?.addEventListener('change', renderGallery);
 
-  document.getElementById('galGrid').addEventListener('click', e => {
+  document.addEventListener('click', e => {
     const card = e.target.closest('[data-prod-id]');
     if (!card) return;
-    sounds.click();
-    showProduct(Number(card.dataset.prodId));
+    const id = Number(card.dataset.prodId);
+    // No sounds.click() here — router.go() → sounds.nav() is sufficient
+    if (!isNaN(id)) showProduct(id);
   });
 
-  document.getElementById('featGrid').addEventListener('click', e => {
-    const item = e.target.closest('[data-prod-id]');
-    if (!item) return;
-    sounds.click();
-    showProduct(Number(item.dataset.prodId));
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('[data-prod-id]');
+    if (!card) return;
+    e.preventDefault();
+    const id = Number(card.dataset.prodId);
+    if (!isNaN(id)) showProduct(id);
   });
 }

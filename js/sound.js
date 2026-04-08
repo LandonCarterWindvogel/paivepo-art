@@ -53,9 +53,6 @@ export function toggleSound() {
   return enabled;
 }
 
-export function isSoundEnabled() {
-  return enabled;
-}
 
 export function initSound() {
   document.addEventListener('click', () => {

@@ -1,4 +1,15 @@
-const PH = 'https://placehold.co/800x1000/EDEAE4/928D84?text=Photo+Coming+Soon';
+/**
+ * data.js — Single source of truth for all product data
+ *
+ * Each product has:
+ *   imgs[]   — array of JPG paths (primary source, always works)
+ *   webp[]   — matching WebP paths (served first where supported)
+ *
+ * Gallery/product renderers use webp[] with <picture> for optimal loading.
+ */
+
+const PH_JPG  = 'images/placeholder.jpg';
+const PH_WEBP = 'images/placeholder.jpg'; // placeholder has no webp version
 
 export const products = [
   {
@@ -8,11 +19,12 @@ export const products = [
     price: 9999,
     sold:  false,
     desc:  "A bold, colourful celebration of one of Africa's most recognised birds. The Rooster stands tall with an air of confidence — its comb and tail feathers rendered in vibrant reds, oranges, and golden yellows. A piece that commands attention from across a room.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 2–3 weeks',
-    imgs:  ['https://oldnickvillage.co.za/wp-content/uploads/2025/06/50.jpg', PH, PH, PH],
+    imgs:  ['images/product-rooster.jpg', PH_JPG, PH_JPG, PH_JPG],
+    webp:  ['images/product-rooster.webp', PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    1,
@@ -21,11 +33,12 @@ export const products = [
     price: 2400,
     sold:  false,
     desc:  "Africa's most beloved animal, reimagined in thousands of hand-placed glass beads. The Elephant stands with quiet dignity — a symbol of wisdom, strength, and memory. Rich earth tones and warm ambers give the surface a warmth that shifts beautifully in different lights.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 4–5 weeks',
-    imgs:  [PH, PH, PH, PH],
+    imgs:  [PH_JPG, PH_JPG, PH_JPG, PH_JPG],
+    webp:  [PH_WEBP, PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    2,
@@ -34,11 +47,12 @@ export const products = [
     price: 2200,
     sold:  false,
     desc:  'Proud, powerful, and present. The Lion is rendered in warm golden and amber beads, with a dark mane that frames a face of quiet authority. One of the most technically challenging pieces in the collection.',
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 3–4 weeks',
-    imgs:  [PH, PH, PH, PH],
+    imgs:  [PH_JPG, PH_JPG, PH_JPG, PH_JPG],
+    webp:  [PH_WEBP, PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    3,
@@ -47,11 +61,12 @@ export const products = [
     price: 1500,
     sold:  false,
     desc:  "The Protea — South Africa's national flower — interpreted through colour and bead. Layers of pale pinks, creamy whites, and blush tones build outward from a dense, textured centre.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire stem',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 1.5–2 weeks',
-    imgs:  ['https://oldnickvillage.co.za/wp-content/uploads/2025/06/51.jpg', PH, PH, PH],
+    imgs:  ['images/product-protea.jpg', PH_JPG, PH_JPG, PH_JPG],
+    webp:  ['images/product-protea.webp', PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    4,
@@ -60,11 +75,12 @@ export const products = [
     price: 980,
     sold:  false,
     desc:  "A whimsical display of delicate craftsmanship, the Wire Fairy captures a sense of weightless magic. Tinashe uses intricate wire-weaving techniques to create translucent-style wings and a graceful silhouette, accented with carefully placed beads that catch the light.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Decorative wire, beaded accents',
     beads: 'Accent beads',
     time:  'Approx. 1–2 weeks',
-    imgs:  ['https://oldnickvillage.co.za/wp-content/uploads/2025/06/48.jpg', PH, PH, PH],
+    imgs:  ['images/wire-art.jpg', PH_JPG, PH_JPG, PH_JPG],
+    webp:  ['images/wire-art.webp', PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    5,
@@ -73,11 +89,12 @@ export const products = [
     price: 2600,
     sold:  false,
     desc:  "The most elaborate bird in the collection. The Peacock's tail is a breathtaking spread of iridescent teals, deep blues, and electric greens — thousands of beads forming the signature eye pattern.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature, iridescent beads',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 5–6 weeks',
-    imgs:  [PH, PH, PH, PH],
+    imgs:  [PH_JPG, PH_JPG, PH_JPG, PH_JPG],
+    webp:  [PH_WEBP, PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    6,
@@ -86,11 +103,12 @@ export const products = [
     price: 1950,
     sold:  false,
     desc:  "Bold, graphic, and unmistakably African. The Zebra's black and white stripe pattern is rendered with extraordinary precision — each stripe individually beaded, creating a surface with subtle three-dimensionality.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 3 weeks',
-    imgs:  [PH, PH, PH, PH],
+    imgs:  [PH_JPG, PH_JPG, PH_JPG, PH_JPG],
+    webp:  [PH_WEBP, PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    7,
@@ -99,11 +117,12 @@ export const products = [
     price: 1750,
     sold:  false,
     desc:  'Graceful and otherworldly, the Flamingo stands on one leg in its characteristic pose — a pastel study in balance. Soft pinks deepen to rose and coral at the wing tips and beak.',
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 2.5 weeks',
-    imgs:  [PH, PH, PH, PH],
+    imgs:  [PH_JPG, PH_JPG, PH_JPG, PH_JPG],
+    webp:  [PH_WEBP, PH_WEBP, PH_WEBP, PH_WEBP],
   },
   {
     id:    8,
@@ -112,10 +131,11 @@ export const products = [
     price: 2800,
     sold:  false,
     desc:  "Powerful and textured, the Rhino carries a commanding presence. Its hide is suggested through layers of grey, stone, and warm brown beads. A piece that honours one of Africa's most threatened animals.",
-    size:  'To be confirmed',
+    size:  null,
     mats:  'Glass seed beads, wire armature',
-    beads: 'To be confirmed',
+    beads: null,
     time:  'Approx. 5 weeks',
-    imgs:  [PH, PH, PH, PH],
+    imgs:  [PH_JPG, PH_JPG, PH_JPG, PH_JPG],
+    webp:  [PH_WEBP, PH_WEBP, PH_WEBP, PH_WEBP],
   },
 ];

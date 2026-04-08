@@ -90,14 +90,24 @@ export function initCursor() {
     if (ring) { ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`; }
   }
 
+  let rafId = null;
   function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     beads = beads.filter(b => b.life > 0);
     beads.forEach(b => { b.update(); b.draw(ctx); });
     animateRing();
-    requestAnimationFrame(loop);
+    rafId = requestAnimationFrame(loop);
   }
   loop();
+
+  // Pause RAF when tab is hidden to save battery/CPU
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    } else {
+      if (!rafId) loop();
+    }
+  });
 
   document.addEventListener('mouseover', e => {
     if (!e.target.closest(INTERACTIVE)) return;
