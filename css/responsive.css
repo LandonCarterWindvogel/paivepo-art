@@ -333,3 +333,9 @@ footer { padding: 56px 20px 40px; }
   nav, .wa-float, .cart-sb, .cart-ov, .hamburger, .sound-btn, #cur, #cur-r { display: none !important; }
   body { cursor: auto; }
 }
+
+@media (max-width: 768px) {
+  .video-section {
+    padding: 72px var(--side);
+  }
+}

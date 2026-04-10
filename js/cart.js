@@ -133,9 +133,48 @@ export function goCheckout() {
   go('checkout');
 }
 
-export function placeOrder() {
+export async function placeOrder() {
+  const btn = document.getElementById('placeOrderBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+  }
+
+  const itemsSummary = cart
+    .map(i => `${i.name} ×${i.qty} — R${(i.price * i.qty).toLocaleString()}`)
+    .join(' | ');
+
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+  const body = new URLSearchParams({
+    'form-name': 'order-enquiry',
+    'customer-name':
+      (document.getElementById('co-fname')?.value || '') + ' ' +
+      (document.getElementById('co-lname')?.value || ''),
+    'customer-email': document.getElementById('co-email')?.value || '',
+    'customer-phone': document.getElementById('co-phone')?.value || '',
+    'address': document.getElementById('co-address')?.value || '',
+    'city': document.getElementById('co-city')?.value || '',
+    'country': document.getElementById('co-country')?.value || '',
+    'postal-code': document.getElementById('co-postal')?.value || '',
+    'items': itemsSummary,
+    'total': `R${total.toLocaleString()}`,
+    'notes': document.getElementById('co-notes')?.value || ''
+  });
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString()
+    });
+  } catch (err) {
+    console.error('Order submission failed', err);
+  }
+
   document.getElementById('coContent').style.display = 'none';
   document.getElementById('oSuccess').classList.add('show');
+
   sounds.addCart();
   cart = [];
   updateCount();

@@ -1139,3 +1139,55 @@ footer {
 .sc-s { font-size: 14px; line-height: 1.85; color: var(--muted); }
 
 /* SCROLL REVEAL — handled entirely via JS in animations.js (direct style assignment) */
+
+/* ── Video Section ── */
+.video-section {
+  background: var(--dark);
+  padding: 100px var(--side);
+  text-align: center;
+}
+.video-lbl-wrap { margin-bottom: 40px; }
+
+.video-embed {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #111;
+}
+
+.video-embed video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-embed-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  color: rgba(255,255,255,.25);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.video-embed-placeholder svg { opacity: .3; }
+
+.video-caption {
+  max-width: 640px;
+  margin: 36px auto 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: rgba(255,255,255,.45);
+  line-height: 1.8;
+}
