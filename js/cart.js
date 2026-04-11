@@ -136,7 +136,7 @@ export function goCheckout() {
 export async function placeOrder() {
   const btn = document.getElementById('placeOrderBtn');
   if (btn) {
-    btn.disabled = true;
+    btn.disabled    = true;
     btn.textContent = 'Submitting…';
   }
 
@@ -147,38 +147,46 @@ export async function placeOrder() {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
   const body = new URLSearchParams({
-    'form-name': 'order-enquiry',
+    'form-name':      'order-enquiry',
+    'bot-field':      '',
     'customer-name':
-      (document.getElementById('co-fname')?.value || '') + ' ' +
-      (document.getElementById('co-lname')?.value || ''),
-    'customer-email': document.getElementById('co-email')?.value || '',
-    'customer-phone': document.getElementById('co-phone')?.value || '',
-    'address': document.getElementById('co-address')?.value || '',
-    'city': document.getElementById('co-city')?.value || '',
-    'country': document.getElementById('co-country')?.value || '',
-    'postal-code': document.getElementById('co-postal')?.value || '',
-    'items': itemsSummary,
-    'total': `R${total.toLocaleString()}`,
-    'notes': document.getElementById('co-notes')?.value || ''
+      (document.getElementById('co-fname')?.value || '').trim() + ' ' +
+      (document.getElementById('co-lname')?.value || '').trim(),
+    'customer-email': document.getElementById('co-email')?.value   || '',
+    'customer-phone': document.getElementById('co-phone')?.value   || '',
+    'address':        document.getElementById('co-address')?.value || '',
+    'city':           document.getElementById('co-city')?.value    || '',
+    'country':        document.getElementById('co-country')?.value || '',
+    'postal-code':    document.getElementById('co-postal')?.value  || '',
+    'items':          itemsSummary,
+    'total':          `R${total.toLocaleString()}`,
+    'notes':          document.getElementById('co-notes')?.value   || '',
   });
 
   try {
-    await fetch('/', {
-      method: 'POST',
+    const response = await fetch('/', {
+      method:  'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString()
+      body:    body.toString(),
     });
+
+    if (!response.ok) throw new Error(`Status ${response.status}`);
+
+    document.getElementById('coContent').style.display = 'none';
+    document.getElementById('oSuccess').classList.add('show');
+    sounds.addCart();
+    cart = [];
+    updateCount();
+    saveCart();
+
   } catch (err) {
-    console.error('Order submission failed', err);
+    console.error('Order submission error:', err);
+    if (btn) {
+      btn.disabled    = false;
+      btn.textContent = 'Submit Order Enquiry';
+    }
+    showToast('Something went wrong — please contact Tinashe directly on WhatsApp');
   }
-
-  document.getElementById('coContent').style.display = 'none';
-  document.getElementById('oSuccess').classList.add('show');
-
-  sounds.addCart();
-  cart = [];
-  updateCount();
-  saveCart();
 }
 
 function updateCount() {

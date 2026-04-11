@@ -1,6 +1,3 @@
-/**
- * forms.js — Contact form with real Netlify Forms submission + validation
- */
 import { showToast } from './ui.js';
 import { sounds } from './sound.js';
 
@@ -16,36 +13,28 @@ export function initContactForm() {
 
     if (!validateForm(form)) return;
 
-    btn.disabled = true;
+    btn.disabled    = true;
     btn.textContent = 'Sending…';
 
     try {
-      const data = new FormData(form);
       const response = await fetch('/', {
-        method: 'POST',
+        method:  'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(data).toString(),
+        body:    new URLSearchParams(new FormData(form)).toString(),
       });
 
-      if (response.ok) {
-        sounds.addCart();
-        form.style.display = 'none';
-        success.style.display = 'block';
-        showToast('Message sent — Tinashe will reply within 48 hours');
-      } else {
-        throw new Error('Submission failed');
-      }
-    } catch {
-      // Fallback: show success anyway (Netlify sometimes redirects)
+      if (!response.ok) throw new Error(`Status ${response.status}`);
+
       sounds.addCart();
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = 'var(--dark)';
+      form.style.display    = 'none';
+      success.style.display = 'block';
       showToast('Message sent — Tinashe will reply within 48 hours');
-      setTimeout(() => {
-        btn.textContent = 'Send Message';
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 5000);
+
+    } catch (err) {
+      console.error('Contact form error:', err);
+      btn.disabled    = false;
+      btn.textContent = 'Send Message';
+      showToast('Something went wrong — please email or WhatsApp Tinashe directly');
     }
   });
 }
