@@ -27,6 +27,7 @@ address { font-style: normal; }
 
   --nav-h: 80px;
   --nav-h-mob: 64px;
+  --side: 80px;
 
   --ease-out: cubic-bezier(.16,1,.3,1);
   --ease-in-out: cubic-bezier(.76,0,.24,1);
