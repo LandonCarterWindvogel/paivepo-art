@@ -270,7 +270,7 @@ nav.scrolled {
 /* ══════════════════════════════════════════
    MOBILE MENU
 ══════════════════════════════════════════ */
-.mobile-menu { display: none; position: fixed; inset: 0; z-index: 11000; }
+.mobile-menu { display: none; position: fixed; inset: 0; z-index: 11500; }
 
 .mm-overlay {
   position: absolute; inset: 0;

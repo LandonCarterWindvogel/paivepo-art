@@ -336,6 +336,6 @@ footer { padding: 56px 20px 40px; }
 
 @media (max-width: 768px) {
   .video-section {
-    padding: 72px var(--side);
+    padding: 72px 20px;
   }
 }

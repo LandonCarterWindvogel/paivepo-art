@@ -265,14 +265,11 @@
           <h2 class="sec-title" style="color:var(--w);margin-top:8px">Bead by <em>bead</em></h2>
         </div>
         <div class="video-embed" id="videoEmbed">
-          <!--
-            WHEN TINASHE'S VIDEO IS READY — replace this block with:
             <video autoplay muted loop playsinline preload="none"
                    poster="images/hero.webp"
                    aria-label="Close-up footage of Tinashe beading a sculpture by hand">
               <source src="videos/beading.mp4" type="video/mp4">
             </video>
-          -->
           <div class="video-embed-placeholder">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -284,11 +281,6 @@
           <p>"Each sculpture holds a heartbeat. The beading is a slow, meditative act — bead by bead, in quiet focus, traditional African rhythms playing in the background."</p>
         </div>
       </div>
-        <section class="hero-video">
-          <video autoplay muted loop playsinline class="bg-video">
-            <source src="videos/intro.mp4" type="video/mp4" />
-          </video>
-        </section>
       <section class="testi" aria-labelledby="testi-heading">
         <p class="sec-lbl">Collectors Say</p>
         <h2 class="sec-title" id="testi-heading" style="margin-top:8px">Words from those <em>who collect</em></h2>
@@ -664,14 +656,14 @@
     </div>
 
   </main>
-  <!-- Hidden Netlify form for order enquiries — DO NOT REMOVE -->
-    <form name="order-enquiry" data-netlify="true" netlify-honeypot="bot-field" style="display:none" aria-hidden="true">
-      <input type="hidden" name="form-name" value="order-enquiry">
-      <input name="customer-name"><input name="customer-email">
-      <input name="customer-phone"><input name="address">
-      <input name="city"><input name="country"><input name="postal-code">
-      <input name="items"><input name="total"><textarea name="notes"></textarea>
-    </form>
+  <form name="order-enquiry" data-netlify="true" netlify-honeypot="bot-field" style="display:none" aria-hidden="true">
+    <input type="hidden" name="form-name" value="order-enquiry">
+    <input name="bot-field">
+    <input name="customer-name"><input name="customer-email">
+    <input name="customer-phone"><input name="address">
+    <input name="city"><input name="country"><input name="postal-code">
+    <input name="items"><input name="total"><textarea name="notes"></textarea>
+  </form>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

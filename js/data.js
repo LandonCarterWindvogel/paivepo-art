@@ -9,7 +9,7 @@
  */
 
 const PH_JPG  = 'images/placeholder.jpg';
-const PH_WEBP = 'images/placeholder.jpg'; // placeholder has no webp version
+const PH_WEBP = 'images/placeholder.jpg';
 
 export const products = [
   {

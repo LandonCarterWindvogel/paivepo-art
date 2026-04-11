@@ -3,16 +3,17 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options         = "DENY"
-    X-Content-Type-Options  = "nosniff"
-    Referrer-Policy         = "strict-origin-when-cross-origin"
-    Permissions-Policy      = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://placehold.co data: blob:; connect-src 'self'; media-src 'self' blob:; worker-src blob:;"
+    X-Frame-Options           = "DENY"
+    X-Content-Type-Options    = "nosniff"
+    Referrer-Policy           = "strict-origin-when-cross-origin"
+    Permissions-Policy        = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy   = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://placehold.co data: blob:; connect-src 'self'; media-src 'self' blob:; worker-src blob:; form-action 'self';"
 
 [[headers]]
   for = "/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=604800, must-revalidate"
 
 [[headers]]
   for = "/assets/*"
