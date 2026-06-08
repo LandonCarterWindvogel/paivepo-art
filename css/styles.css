@@ -95,7 +95,9 @@ body {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  body { cursor: none; }
+  * {
+    cursor: none !important;
+  }
 }
 
 /* ── Film grain ── */
