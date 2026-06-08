@@ -124,7 +124,7 @@ body::before {
   background: var(--black);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 12000;        /* or 11999 – either works as long as >11000 */
+  z-index: 13000;
   transform: translate(-50%,-50%);
   transition: width .25s, height .25s;
   mix-blend-mode: difference;
@@ -138,7 +138,7 @@ body::before {
   border: 1px solid var(--dark);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 11998;
+  z-index: 12999;
   transform: translate(-50%,-50%);
   transition: width .3s, height .3s;
   opacity: .55;
