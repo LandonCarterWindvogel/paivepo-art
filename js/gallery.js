@@ -1,5 +1,5 @@
 /**
- * gallery.js — Gallery rendering with WebP picture elements + keyboard accessibility
+ * gallery.js — Gallery rendering with WebP picture elements + single image per product
  */
 import { products } from './data.js';
 import { showProduct } from './product.js';
@@ -12,8 +12,8 @@ export function setFilter(filter) {
   activeFilter = filter;
 }
 
-/* Helper: emit a <picture> with WebP source + JPG fallback */
-function pic(webpSrc, jpgSrc, alt, cls = '', w = '', h = '', lazy = true) {
+/* Helper: emit a <picture> with single JPG and WebP */
+function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true) {
   const dims   = (w && h) ? ` width="${w}" height="${h}"` : '';
   const load   = lazy ? ' loading="lazy"' : '';
   const clsAttr = cls ? ` class="${cls}"` : '';
@@ -41,7 +41,7 @@ export function renderFeatured() {
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
            ${p.sold ? '' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
            aria-label="${p.name}${p.sold ? ' — sold' : `, R${p.price.toLocaleString()}`}">
-        ${pic(p.webp[0], p.imgs[0], imgAlt, 'feat-img', '800', '1000')}
+        ${pic(p.image, p.imageWebp, imgAlt, 'feat-img', '800', '1000')}
         ${soldBadge}
         <div class="feat-info" aria-hidden="true">
           <div class="feat-name">${p.name}</div>
@@ -78,7 +78,7 @@ function buildCard(p) {
          ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
          aria-label="${p.name}, ${p.cat}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
       <div class="gal-img-wrap">
-        ${pic(p.webp[0], p.imgs[0], imgAlt, 'gal-img', '600', '800')}
+        ${pic(p.image, p.imageWebp, imgAlt, 'gal-img', '600', '800')}
         <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Sculpture</div>'}</div>
         ${soldOverlay}
       </div>
@@ -115,7 +115,6 @@ export function initGallery() {
     const card = e.target.closest('[data-prod-id]');
     if (!card) return;
     const id = Number(card.dataset.prodId);
-    // No sounds.click() here — router.go() → sounds.nav() is sufficient
     if (!isNaN(id)) showProduct(id);
   });
 
