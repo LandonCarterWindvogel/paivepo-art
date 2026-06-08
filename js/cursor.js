@@ -17,6 +17,8 @@ let lastBeadY   = 0;
 let isHovering  = false;
 let lastHoverSound = 0;
 
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 class Bead {
   constructor(x, y) {
     this.x    = x;
@@ -72,15 +74,17 @@ export function initCursor() {
 
     if (dot) { dot.style.left = `${mouseX}px`; dot.style.top = `${mouseY}px`; }
 
-    const dx   = mouseX - lastBeadX;
-    const dy   = mouseY - lastBeadY;
-    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (!prefersReduced) {
+      const dx   = mouseX - lastBeadX;
+      const dy   = mouseY - lastBeadY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (dist > 18) {
-      beads.push(new Bead(mouseX, mouseY));
-      if (beads.length > 120) beads.shift();
-      lastBeadX = mouseX;
-      lastBeadY = mouseY;
+      if (dist > 18) {
+        beads.push(new Bead(mouseX, mouseY));
+        if (beads.length > 120) beads.shift();
+        lastBeadX = mouseX;
+        lastBeadY = mouseY;
+      }
     }
   });
 
@@ -92,6 +96,7 @@ export function initCursor() {
 
   let rafId = null;
   function loop() {
+    if (prefersReduced) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     beads = beads.filter(b => b.life > 0);
     beads.forEach(b => { b.update(); b.draw(ctx); });

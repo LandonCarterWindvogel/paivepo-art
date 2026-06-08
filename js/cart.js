@@ -1,5 +1,5 @@
 /**
- * cart.js — Shopping bag with localStorage persistence + WebP image support
+ * cart.js — Shopping bag with focus trap (no shipping selector)
  */
 import { showToast } from './ui.js';
 import { go } from './router.js';
@@ -7,6 +7,7 @@ import { sounds } from './sound.js';
 
 let cart     = loadCart();
 let cartOpen = false;
+let previousFocus = null;
 
 function loadCart() {
   try {
@@ -19,6 +20,32 @@ function saveCart() {
 }
 
 export function isCartOpen() { return cartOpen; }
+
+function trapFocus(element) {
+  const focusable = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  previousFocus = document.activeElement;
+
+  const handler = (e) => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+  element.addEventListener('keydown', handler);
+  element._trapHandler = handler;
+  first.focus();
+}
+
+function releaseFocus() {
+  if (previousFocus && previousFocus.focus) previousFocus.focus();
+}
 
 export function toggleCart() {
   cartOpen = !cartOpen;
@@ -34,18 +61,25 @@ export function toggleCart() {
   if (cartOpen) {
     sounds.cartOpen();
     renderCart();
-    setTimeout(() => document.getElementById('cartCloseBtn')?.focus(), 50);
+    setTimeout(() => trapFocus(sb), 50);
+  } else {
+    releaseFocus();
   }
 }
 
 export function closeCart() {
+  if (!cartOpen) return;
   cartOpen = false;
-  document.getElementById('cartSb')?.classList.remove('open');
-  document.getElementById('cartOv')?.classList.remove('open');
-  document.getElementById('cartSb')?.setAttribute('aria-hidden', 'true');
-  document.getElementById('cartOv')?.setAttribute('aria-hidden', 'true');
-  document.getElementById('cartToggleBtn')?.setAttribute('aria-expanded', 'false');
+  const sb = document.getElementById('cartSb');
+  const ov = document.getElementById('cartOv');
+  const btn = document.getElementById('cartToggleBtn');
+  sb.classList.remove('open');
+  ov.classList.remove('open');
+  sb.setAttribute('aria-hidden', 'true');
+  ov.setAttribute('aria-hidden', 'true');
+  btn.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
+  releaseFocus();
 }
 
 export function addToCart(product) {
@@ -58,8 +92,8 @@ export function addToCart(product) {
       name:  product.name,
       price: product.price,
       qty:   1,
-      jpg:   product.image,          // ← changed: was product.imgs[0]
-      webp:  product.imageWebp,      // ← changed: was product.webp[0]
+      jpg:   product.image,
+      webp:  product.imageWebp,
     });
   }
   updateCount();
@@ -101,6 +135,7 @@ export function renderCart() {
     </div>`;
   }).join('');
 
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   document.getElementById('cartTot').textContent = `R${total.toLocaleString()}`;
   updateCount();
 }

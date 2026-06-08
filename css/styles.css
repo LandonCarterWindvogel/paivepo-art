@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════════
-   PAIVEPO ART & DECOR — MAIN STYLESHEET
-   Rebuilt & optimised 2026
-═══════════════════════════════════════════════ */
-
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 img, video { max-width: 100%; height: auto; display: block; }
 button { font-family: inherit; cursor: pointer; }
@@ -11,7 +5,6 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 address { font-style: normal; }
 
-/* ── Design tokens ── */
 :root {
   --w:     #FFFFFF;
   --off:   #FAF9F7;
@@ -33,7 +26,6 @@ address { font-style: normal; }
   --ease-in-out: cubic-bezier(.76,0,.24,1);
 }
 
-/* ── Keyframes ── */
 @keyframes lineReveal { from { transform:translateY(110%); opacity:0; } to { transform:translateY(0); opacity:1; } }
 @keyframes fadeIn     { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 @keyframes hzoom      { from { transform:scale(1.1); } to { transform:scale(1.0); } }
@@ -56,7 +48,6 @@ address { font-style: normal; }
 @keyframes mmSlideOut { from { transform:translateX(0); } to { transform:translateX(100%); } }
 @keyframes mmFadeIn  { from { opacity:0; } to { opacity:1; } }
 
-/* ── Accessibility ── */
 .skip-link {
   position: absolute;
   top: -100px;
@@ -84,7 +75,6 @@ address { font-style: normal; }
   border: 0;
 }
 
-/* ── Base ── */
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
   font-family: var(--font-sans);
@@ -100,7 +90,6 @@ body {
   }
 }
 
-/* ── Film grain ── */
 body::before {
   content: '';
   position: fixed;
@@ -163,7 +152,28 @@ body::before {
   opacity: 0.9;
 }
 
-/* ── Toast ── */
+.gal-card:focus-visible,
+.feat-item:focus-visible,
+.rel-card:focus-visible,
+.thumb:focus-visible,
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--dark);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.cur-big *:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+#cur {
+  z-index: 13000 !important; 
+}
+#cur-r {
+  z-index: 12999 !important;
+}
 .toast {
   position: fixed; bottom: 32px; left: 50%;
   transform: translateX(-50%) translateY(20px);
@@ -178,16 +188,13 @@ body::before {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ══════════════════════════════════════════
-   NAVIGATION
-══════════════════════════════════════════ */
 #nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: var(--nav-h);
-  z-index: 11000; /* must be higher than everything */
+  z-index: 11000; 
 }
 nav.scrolled {
   padding: 16px 56px;
@@ -197,14 +204,12 @@ nav.scrolled {
   border-bottom: 1px solid var(--light);
 }
 
-/* Logo as button */
 .logo {
   font-family: var(--font-serif);
   font-size: 18px; font-weight: 400; letter-spacing: .08em;
   color: var(--black); background: none; border: none;
   cursor: pointer; user-select: none; line-height: 1.25;
   text-align: left; padding: 0;
-  /* Always stay above other nav children */
   position: relative;
   z-index: 2;
   flex-shrink: 0;
@@ -351,9 +356,6 @@ nav.scrolled {
 .mm-footer a { transition: color .2s; }
 .mm-footer a:hover { color: var(--dark); }
 
-/* ══════════════════════════════════════════
-   CART SIDEBAR
-══════════════════════════════════════════ */
 .cart-ov {
   position: fixed; inset: 0; background: rgba(16,15,13,.4);
   z-index: 1199; opacity: 0; pointer-events: none;
@@ -507,7 +509,7 @@ nav.scrolled {
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background-image: url('../images/hero.jpg'); /* JPG fallback */
+  background-image: url('../images/hero.jpg');
   background-image: -webkit-image-set(url('../images/hero.webp') 1x, url('../images/hero.jpg') 1x);
   background-image: image-set(url('../images/hero.webp') type('image/webp'), url('../images/hero.jpg') type('image/jpeg'));
   background-size: cover; background-position: center top;
