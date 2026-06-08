@@ -9,8 +9,10 @@
   --nav-h: var(--nav-h-mob);
 }
 
-body { cursor: auto; }
-#cur, #cur-r { display: none !important; }
+@media (max-width: 1023px) {
+  body { cursor: auto; }
+  #cur, #cur-r { display: none !important; }
+}
 
 .hamburger { display: flex; }
 .nav-links  { display: none; }
