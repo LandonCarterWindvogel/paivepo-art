@@ -58,8 +58,8 @@ export function addToCart(product) {
       name:  product.name,
       price: product.price,
       qty:   1,
-      jpg:   product.imgs[0],
-      webp:  product.webp ? product.webp[0] : product.imgs[0],
+      jpg:   product.image,          // ← changed: was product.imgs[0]
+      webp:  product.imageWebp,      // ← changed: was product.webp[0]
     });
   }
   updateCount();
