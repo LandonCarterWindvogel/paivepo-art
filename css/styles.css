@@ -117,20 +117,28 @@ body::before {
   body::before { animation: none; }
 }
 
-/* ── Custom cursor ── */
 #cur {
-  position: fixed; width: 7px; height: 7px;
-  background: var(--black); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  background: var(--black);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 12000;        /* or 11999 – either works as long as >11000 */
   transform: translate(-50%,-50%);
   transition: width .25s, height .25s;
   mix-blend-mode: difference;
   display: none;
 }
+
 #cur-r {
-  position: fixed; width: 30px; height: 30px;
-  border: 1px solid var(--dark); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--dark);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 11998;
   transform: translate(-50%,-50%);
   transition: width .3s, height .3s;
   opacity: .55;
@@ -141,8 +149,19 @@ body::before {
   #cur, #cur-r { display: block; }
 }
 
-.cur-big #cur   { width: 48px; height: 48px; background: var(--dark); opacity: .12; }
-.cur-big #cur-r { width: 48px; height: 48px; opacity: 0; }
+.cur-big #cur {
+  width: 7px;
+  height: 7px;
+  background: var(--black);
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+.cur-big #cur-r {
+  width: 46px;
+  height: 46px;
+  border-color: var(--accent);
+  opacity: 0.9;
+}
 
 /* ── Toast ── */
 .toast {
