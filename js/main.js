@@ -1,7 +1,3 @@
-/**
- * Paivepo Art & Decor — main.js
- * Entry point — imports and initialises all modules
- */
 import { initRouter, setTransition }                          from './router.js';
 import { initCursor }                                         from './cursor.js';
 import { initNav, initZoom, initKeyboard, initSoundToggle }  from './ui.js';
