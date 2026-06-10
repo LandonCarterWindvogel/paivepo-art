@@ -88,13 +88,11 @@
 
   <!-- Navigation -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
-    <!-- Logo — always left, always clickable, always above everything -->
     <button class="logo" id="navLogo" data-page="home" aria-label="Go to home page">
       Paivepo Art &amp; Decor
       <span>by Tinashe Kachama</span>
     </button>
 
-    <!-- Desktop nav links — hidden on mobile via CSS -->
     <ul class="nav-links" role="list">
       <li><button class="nav-link" data-page="gallery">Collection</button></li>
       <li><button class="nav-link" data-page="about">The Artist</button></li>
@@ -102,7 +100,6 @@
       <li><button class="nav-link nav-commission" data-page="contact">Commission a Piece</button></li>
     </ul>
 
-    <!-- Right controls — sound, bag, hamburger. NO social icons here. -->
     <div class="nav-right">
       <button class="sound-btn" id="soundToggleBtn" aria-label="Toggle ambient sound" aria-pressed="true">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
@@ -116,14 +113,12 @@
         <span aria-hidden="true">Bag</span>
         <span class="c-count" id="cc" aria-label="0 items in bag">0</span>
       </button>
-      <!-- Hamburger — mobile only, shown via CSS -->
       <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true" style="display:none">
     <div class="mm-overlay" id="mmOverlay"></div>
     <div class="mm-drawer">
@@ -152,7 +147,6 @@
     </div>
   </div>
 
-  <!-- Cart Sidebar -->
   <div class="cart-ov" id="cartOv" aria-hidden="true"></div>
   <aside class="cart-sb" id="cartSb" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true">
     <div class="cart-hd">
@@ -171,7 +165,6 @@
     </div>
   </aside>
 
-  <!-- Zoom Modal -->
   <div class="zoom-modal" id="zm" role="dialog" aria-modal="true" aria-label="Full size product image" aria-hidden="true">
     <button class="zoom-x" id="zoomClose" aria-label="Close image zoom">✕</button>
     <img id="zmImg" src="" alt="" loading="lazy">
@@ -179,11 +172,9 @@
 
   <main id="main-content">
 
-    <!-- ══ PAGE: HOME ══ -->
     <div id="page-home" class="page active" role="main" aria-label="Home">
 
       <section class="hero" aria-label="Hero">
-        <!-- Hero uses CSS background — WebP served by server content-negotiation via netlify.toml -->
         <div class="hero-bg" role="img" aria-label="Studio photograph of Paivepo beaded sculptures at Old Nick Village"></div>
         <div class="hero-ov" aria-hidden="true"></div>
         <div class="hero-cnt">
@@ -385,7 +376,6 @@
       </footer>
     </div>
 
-    <!-- ══ PAGE: PRODUCT ══ -->
     <div id="page-product" class="page" aria-label="Product detail" aria-hidden="true">
       <div class="prod-layout">
         <div class="prod-imgs">
@@ -430,7 +420,6 @@
       </section>
     </div>
 
-    <!-- ══ PAGE: ABOUT ══ -->
     <div id="page-about" class="page" aria-label="About Tinashe Kachama" aria-hidden="true">
       <header class="abt-hero">
         <picture>
@@ -530,7 +519,6 @@
       </footer>
     </div>
 
-    <!-- ══ PAGE: CONTACT ══ -->
     <div id="page-contact" class="page" aria-label="Contact" aria-hidden="true">
       <div class="con-layout">
         <div class="con-info">
@@ -605,7 +593,6 @@
       </div>
     </div>
 
-    <!-- ══ PAGE: CHECKOUT ══ -->
     <div id="page-checkout" class="page" aria-label="Checkout" aria-hidden="true">
       <div id="coContent">
         <div class="co-layout">
