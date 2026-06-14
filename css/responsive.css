@@ -36,7 +36,7 @@ nav, nav.scrolled {
   position: relative;
   z-index: 2;
 }
-.logo span { display: none; }   /* hide subtitle on small screens */
+.logo span { display: block; font-size: 8px; white-space: normal; }   /* hide subtitle on small screens */
 .cart-btn span:not(.c-count) { display: none; }
 .cart-btn { padding: 0 10px; gap: 6px; min-height: 44px; min-width: 44px; flex-shrink: 0; }
 .sound-btn { min-width: 44px; min-height: 44px; flex-shrink: 0; }
