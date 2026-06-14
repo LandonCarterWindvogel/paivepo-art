@@ -103,12 +103,15 @@ export function addToCart(product) {
 }
 
 export function renderCart() {
-  const body  = document.getElementById('cartBody');
+  const body = document.getElementById('cartBody');
+  if (!body) return;
+
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
   if (!cart.length) {
     body.innerHTML = '<div class="cart-empty">Your bag is empty</div>';
     document.getElementById('cartTot').textContent = 'R0';
+    updateCount();
     return;
   }
 
@@ -135,7 +138,7 @@ export function renderCart() {
     </div>`;
   }).join('');
 
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  // Recalculate total in case quantities changed (already have it, but use same variable)
   document.getElementById('cartTot').textContent = `R${total.toLocaleString()}`;
   updateCount();
 }
