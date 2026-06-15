@@ -2,7 +2,7 @@
  * router.js — SPA page-swap router with hash-based URLs
  * Updated: adds artists, journal page routes
  */
-import { renderGallery, setFilter } from './gallery.js';
+import { renderGallery } from './gallery.js';
 import { sounds } from './sound.js';
 
 let currentPage  = 'home';
@@ -26,6 +26,9 @@ function _swap(pageId) {
     p.classList.remove('active');
     p.setAttribute('aria-hidden', 'true');
     if (document.activeElement) document.activeElement.blur();
+    if (pageId === 'gallery') {
+    renderGallery();
+}
   });
 
   const next = document.getElementById(`page-${pageId}`);
