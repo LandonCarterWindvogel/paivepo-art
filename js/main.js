@@ -49,6 +49,11 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
   }
 });
 
+// If the initial page is gallery (hash), ensure it renders again after a tiny delay
+if (window.location.hash === '#gallery') {
+  setTimeout(() => renderGallery(), 100);
+}
+
 // ── Deferred heavy work ──
 setTimeout(initScrollReveal, 120);
 setTimeout(initCounters, 200);

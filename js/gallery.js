@@ -1,165 +1,136 @@
-import { products, FEATURED_IDS } from './data.js';
-import { showProduct } from './product.js';
+/**
+ * router.js — SPA page-swap router with hash-based URLs
+ * FIXED: Force gallery render on every navigation to gallery page
+ */
+import { renderGallery, setFilter } from './gallery.js';
 import { sounds } from './sound.js';
 
-let activeFilter = 'All';
+let currentPage  = 'home';
+let transitionFn = null;
 
-export function setFilter(filter) {
-  activeFilter = filter;
+export function setTransition(fn) {
+  transitionFn = fn;
 }
 
-export function refreshGallery() {
-  // Re-render the gallery with current filter settings
-  renderGallery();
+export function go(pageId, skipTransition = false, force = false) {
+  if (pageId === currentPage && !force) return;
+  if (skipTransition || !transitionFn) {
+    _swap(pageId);
+  } else {
+    transitionFn(() => _swap(pageId));
+  }
 }
 
-/* ── Picture element helper ── */
-function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true) {
-  const dims    = (w && h) ? ` width="${w}" height="${h}"` : '';
-  const load    = lazy ? ' loading="lazy"' : '';
-  const clsAttr = cls ? ` class="${cls}"` : '';
-  return `<picture>
-    <source srcset="${webpSrc}" type="image/webp">
-    <img src="${jpgSrc}" alt="${alt}"${clsAttr}${dims}${load}>
-  </picture>`;
-}
+function _swap(pageId) {
+  // Remove focus from any element before hiding the page
+  if (document.activeElement && document.activeElement !== document.body) {
+    document.activeElement.blur();
+  }
 
-/* ── Artist label for gallery cards ── */
-function artistLabel(p) {
-  if (!p.artist || p.artist === 'Paivepo Studio') return '';
-  return `<span class="gal-artist">${p.artist}</span>`;
-}
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.setAttribute('aria-hidden', 'true');
+  });
 
-/* ── Render homepage featured / signature pieces ── */
-export function renderFeatured() {
-  const grid = document.getElementById('featGrid');
-  if (!grid) return;
+  const next = document.getElementById(`page-${pageId}`);
+  if (!next) return;
+  next.classList.add('active');
+  next.removeAttribute('aria-hidden');
 
-  grid.innerHTML = FEATURED_IDS.map(id => {
-    const p = products.find(x => x.id === id);
-    if (!p) return '';
+  // Force reflow to ensure the page is fully visible
+  next.offsetHeight; // eslint-disable-line no-unused-expressions
 
-    const priceHTML = p.sold
-      ? `<span style="text-decoration:line-through;opacity:.4">R${p.price.toLocaleString()}</span>`
-      : `R${p.price.toLocaleString()}`;
-    const soldBadge = p.sold
-      ? '<div class="feat-sold-badge" aria-label="Sold">Sold</div>'
-      : '';
-    const imgAlt = `${p.name}${p.artist ? ` by ${p.artist}` : ''} — Paivepo Art & Decor`;
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  currentPage = pageId;
 
-    return `
-      <div class="feat-item${p.sold ? ' is-sold' : ''}"
-           ${p.sold ? '' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
-           aria-label="${p.name}${p.sold ? ' — sold' : `, R${p.price.toLocaleString()}`}">
-        <div class="feat-img-wrap">
-          ${pic(p.image, p.imageWebp, imgAlt, 'feat-img', '800', '1000')}
-        </div>
-        ${soldBadge}
-        <div class="feat-info" aria-hidden="true">
-          <div class="feat-name">${p.name}</div>
-          <div class="feat-meta">
-            ${p.artist ? `<span class="feat-artist">${p.artist}</span>` : ''}
-            <div class="feat-price">${priceHTML}</div>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-/* ── Render gallery page grid ── */
-export function renderGallery() {
-  const availOnly = document.getElementById('availOnly')?.checked ?? false;
-
-  let list = activeFilter === 'All'
-    ? products
-    : products.filter(p => p.cat === activeFilter);
-
-  if (availOnly) list = list.filter(p => !p.sold);
-
-  const grid = document.getElementById('galGrid');
-  if (!grid) return;
-  grid.innerHTML = list.map(buildCard).join('');
-  syncFilterButtons();
-}
-
-function buildCard(p) {
-  const soldOverlay = p.sold ? `
-    <div class="sold-overlay" aria-hidden="true">
-      <div class="sold-label">Sold</div>
-      <div class="sold-sub">This piece has found its home</div>
-    </div>` : '';
-
-  const imgAlt = `${p.name}${p.artist ? ` by ${p.artist}` : ''} — ${p.cat}, Paivepo Art & Decor`;
-  const categoryLabel = getCategoryLabel(p.cat);
-
-  return `
-    <div class="gal-card${p.sold ? ' is-sold' : ''}"
-         ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
-         aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
-      <div class="gal-img-wrap">
-        ${pic(p.image, p.imageWebp, imgAlt, 'gal-img', '600', '800')}
-        <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Details</div>'}</div>
-        ${soldOverlay}
-      </div>
-      <div class="gal-name">${p.name}</div>
-      <div class="gal-meta">
-        <div>
-          ${p.artist && p.artist !== 'Paivepo Studio' ? `<div class="gal-artist">${p.artist}</div>` : ''}
-          <span class="gal-cat-tag">${categoryLabel}</span>
-        </div>
-        <span class="gal-price${p.sold ? ' struck' : ''}">R${p.price.toLocaleString()}</span>
-        ${p.sold ? '<span class="gal-sold-tag">Sold</span>' : ''}
-      </div>
-    </div>
-  `;
-}
-
-function getCategoryLabel(cat) {
-  const map = {
-    Birds: 'Beaded Sculpture',
-    Wild: 'Beaded Sculpture',
-    Floral: 'Beaded Sculpture',
-    Wire: 'Wire Art',
-    Paintings: 'Painting',
-    Furniture: 'Furniture'
+  // Page titles
+  const titles = {
+    home:     'Paivepo Art & Decor — Luxury African Art, Design & Storytelling | Plettenberg Bay',
+    gallery:  'The Collection — Paivepo Art & Decor',
+    artists:  'The Artists — Paivepo Art & Decor',
+    about:    'Our Story — Paivepo Art & Decor',
+    journal:  'Stories of Becoming — Paivepo Journal',
+    contact:  'Contact & Commissions — Paivepo Art & Decor',
+    checkout: 'Checkout — Paivepo Art & Decor',
+    product:  document.getElementById('prodTitle')?.textContent
+              ? `${document.getElementById('prodTitle').textContent} — Paivepo Art & Decor`
+              : 'Work — Paivepo Art & Decor',
   };
-  return map[cat] || cat;
+  document.title = titles[pageId] || titles.home;
+
+  // URL hashes
+  const hashes = {
+    home: '', gallery: 'gallery', artists: 'artists',
+    about: 'story', journal: 'journal',
+    contact: 'contact', product: 'product', checkout: 'checkout'
+  };
+  const hash = hashes[pageId];
+  history.replaceState(null, '', hash ? `#${hash}` : window.location.pathname);
+
+  // Screen reader announcement
+  const announcer = document.getElementById('page-announcer');
+  if (announcer) {
+    announcer.textContent = '';
+    requestAnimationFrame(() => {
+      announcer.textContent = `Navigated to ${pageId} page`;
+    });
+  }
+
+  // 🎯 CRITICAL FIX: Re-render gallery when gallery page becomes active
+  if (pageId === 'gallery') {
+    // Small delay to ensure the DOM is ready and the page is visible
+    setTimeout(() => {
+      renderGallery();
+    }, 50);
+  }
 }
 
-function syncFilterButtons() {
-  document.querySelectorAll('.f-btn').forEach(btn => {
-    const active = btn.dataset.filter === activeFilter;
-    btn.classList.toggle('active', active);
-    btn.setAttribute('aria-pressed', String(active));
-  });
+export function getCurrentPage() {
+  return currentPage;
 }
 
-/* ── Init gallery interactions ── */
-export function initGallery() {
-  document.getElementById('galFilters')?.addEventListener('click', e => {
-    const btn = e.target.closest('.f-btn');
-    if (!btn) return;
-    sounds.click();
-    activeFilter = btn.dataset.filter;
-    renderGallery();
+export function initRouter() {
+  // SR announcer
+  const ann = document.createElement('div');
+  ann.id = 'page-announcer';
+  ann.setAttribute('aria-live', 'polite');
+  ann.setAttribute('aria-atomic', 'true');
+  ann.className = 'sr-only';
+  document.body.appendChild(ann);
+
+  // Handle hash on load
+  const hash = window.location.hash.replace('#', '');
+  const validPages = ['gallery', 'artists', 'story', 'journal', 'contact'];
+  if (validPages.includes(hash)) {
+    _swap(hash === 'story' ? 'about' : hash);
+  } else {
+    // Ensure home page is active if no hash
+    _swap('home');
+  }
+
+  // Delegate all data-page clicks
+  document.body.addEventListener('click', e => {
+    const target = e.target.closest('[data-page]');
+    if (!target) return;
+
+    const page   = target.dataset.page;
+    const filter = target.dataset.filter;
+
+    try { sounds.nav(); } catch (_) {}
+
+    if (filter) setFilter(filter);
+
+    if (page === currentPage) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    go(page);
   });
 
-  document.getElementById('availOnly')?.addEventListener('change', renderGallery);
-
-  document.addEventListener('click', e => {
-    const card = e.target.closest('[data-prod-id]');
-    if (!card) return;
-    const id = Number(card.dataset.prodId);
-    if (!isNaN(id)) showProduct(id);
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key !== 'Enter' && e.key !== ' ') return;
-    const card = e.target.closest('[data-prod-id]');
-    if (!card) return;
-    e.preventDefault();
-    const id = Number(card.dataset.prodId);
-    if (!isNaN(id)) showProduct(id);
+  // Browser back/forward
+  window.addEventListener('popstate', () => {
+    const hash = window.location.hash.replace('#', '');
+    _swap(hash === 'story' ? 'about' : (hash || 'home'));
   });
 }
