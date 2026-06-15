@@ -1,8 +1,8 @@
 /**
  * router.js — SPA page-swap router with hash-based URLs
- * Updated: adds artists, journal page routes
+ * FIXED: Force gallery render on every navigation to gallery page
  */
-import { renderGallery } from './gallery.js';
+import { renderGallery, setFilter } from './gallery.js';
 import { sounds } from './sound.js';
 
 let currentPage  = 'home';
@@ -22,13 +22,14 @@ export function go(pageId, skipTransition = false, force = false) {
 }
 
 function _swap(pageId) {
+  // Remove focus from any element before hiding the page
+  if (document.activeElement && document.activeElement !== document.body) {
+    document.activeElement.blur();
+  }
+
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active');
     p.setAttribute('aria-hidden', 'true');
-    if (document.activeElement) document.activeElement.blur();
-    if (pageId === 'gallery') {
-    renderGallery();
-}
   });
 
   const next = document.getElementById(`page-${pageId}`);
@@ -36,17 +37,11 @@ function _swap(pageId) {
   next.classList.add('active');
   next.removeAttribute('aria-hidden');
 
-  next.offsetHeight;
+  // Force reflow to ensure the page is fully visible
+  next.offsetHeight; // eslint-disable-line no-unused-expressions
 
   window.scrollTo({ top: 0, behavior: 'instant' });
   currentPage = pageId;
-
-   if (pageId === 'gallery') {
-    // Force gallery to re-render now that the container is visible
-    import('./gallery.js').then(module => {
-      module.refreshGallery();
-    });
-  }
 
   // Page titles
   const titles = {
@@ -81,7 +76,13 @@ function _swap(pageId) {
     });
   }
 
-  if (pageId === 'gallery') renderGallery();
+  // 🎯 CRITICAL FIX: Re-render gallery when gallery page becomes active
+  if (pageId === 'gallery') {
+    // Small delay to ensure the DOM is ready and the page is visible
+    setTimeout(() => {
+      renderGallery();
+    }, 50);
+  }
 }
 
 export function getCurrentPage() {
@@ -101,8 +102,10 @@ export function initRouter() {
   const hash = window.location.hash.replace('#', '');
   const validPages = ['gallery', 'artists', 'story', 'journal', 'contact'];
   if (validPages.includes(hash)) {
-    // 'story' hash maps to 'about' page
     _swap(hash === 'story' ? 'about' : hash);
+  } else {
+    // Ensure home page is active if no hash
+    _swap('home');
   }
 
   // Delegate all data-page clicks
