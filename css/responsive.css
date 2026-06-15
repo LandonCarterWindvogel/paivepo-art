@@ -214,3 +214,23 @@ select:focus-visible, textarea:focus-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ── Mobile navbar improvements ── */
+@media (max-width: 768px) {
+  #nav {
+    padding: 0 16px;
+  }
+  .nav-right {
+    gap: 12px;
+  }
+  .cart-btn {
+    gap: 4px;
+  }
+  .cart-btn span:not(.c-count) {
+    display: none; /* Hide "Bag" text, keep icon and count */
+  }
+  .hamburger {
+    margin-left: 4px;
+  }
+  /* Optional: If you want sound button on mobile, remove its display:none in styles.css */
+}

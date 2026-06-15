@@ -1884,6 +1884,27 @@ footer {
   .gal-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; padding: 0 0 var(--side-mob); }
   .pg-hero { padding: 100px var(--side-mob) 40px; }
   .related { padding: 60px var(--side-mob); }
+  #nav {
+    padding: 0 16px;
+  }
+  .nav-right {
+    gap: 12px;
+  }
+  .cart-btn {
+    gap: 4px;
+    font-size: 10px;
+  }
+  .cart-btn span:not(.c-count) {
+    display: none; /* Hide the word "Bag" on very small screens, keep only icon + count */
+  }
+  .hamburger {
+    margin-left: 4px;
+  }
+  .c-count {
+    min-width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 480px) {
