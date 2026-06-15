@@ -1,0 +1,225 @@
+@media (max-width: 900px) {
+  .proc-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  .ft-grid:not(.ft-grid--slim) {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 32px;
+  }
+  .sig-sect .sig-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .journal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Mobile nav extras ── */
+@media (max-width: 768px) {
+  #nav { padding: 0 20px; }
+
+  .hero-sc { display: none; }
+
+  .hero-cta {
+    font-size: 10px;
+    padding: 13px 24px;
+  }
+
+  .story-kicker { font-size: 40px; opacity: .18; }
+
+  .coll-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sig-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .artists-cta-wrap { margin-top: 40px; }
+
+  .comm-inner { max-width: 100%; }
+
+  .con-info .sec-lbl { margin-top: 0; }
+
+  .ft-social { flex-wrap: wrap; gap: 14px; }
+}
+
+/* ── Small mobile (max 380px) ── */
+@media (max-width: 380px) {
+  .hero-brand-name {
+    font-size: 40px;
+    letter-spacing: .08em;
+  }
+  .mm-link { font-size: 24px; }
+  .mm-drawer { padding: 36px 24px; }
+}
+
+/* ── Landscape phones ── */
+@media (max-height: 600px) and (max-width: 900px) {
+  .hero { min-height: 100svh; }
+  .hero-cnt { gap: 16px; }
+  .hero-brand-name { font-size: 52px; }
+}
+
+/* ── Reduce motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-bg { animation: none; }
+  .mq-track { animation: none; }
+}
+
+/* ── Print ── */
+@media print {
+  #nav, .wa-float, #cur, #cur-r, .mobile-menu,
+  .cart-ov, .cart-sb, .zoom-modal, .toast,
+  .hero-sc, .mq-wrap, .sound-btn, .hamburger { display: none !important; }
+
+  body { background: white; color: black; font-size: 11pt; }
+  .hero { height: auto; min-height: auto; padding: 40pt 0; }
+  .hero-ov { display: none; }
+  .hero-brand-name { color: black; }
+  footer { background: white; color: black; }
+  .ft-logo, .ft-sub, .ft-col-t { color: black; }
+  .ft-links li button, .ft-links li a { color: #333; }
+}
+
+/* ── High contrast ── */
+@media (forced-colors: active) {
+  .hero-cta, .story-cta, .comm-cta, .btn, .nl-btn, .fsub, .po-btn {
+    border: 2px solid ButtonText;
+  }
+  .nav-link::after, .artist-cta::after { background: ButtonText; }
+}
+
+/* ── Gallery card artist label ── */
+.gal-artist {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.gal-cat-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--muted-lt);
+}
+
+/* ── Featured grid artist label ── */
+.feat-img-wrap {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  position: relative;
+}
+.feat-img-wrap picture {
+  position: absolute; inset: 0;
+}
+.feat-img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block;
+}
+.feat-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.feat-artist {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--gold);
+}
+
+/* ── Sound button states ── */
+.sound-btn svg path {
+  transition: opacity .3s;
+}
+.sound-btn.sound-off { opacity: .35; }
+
+/* ── Cart item ── */
+.ci-qty {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans); font-size: 13px;
+  color: var(--muted);
+}
+
+/* ── Checkout order summary styles ── */
+.co-item {
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--ivory-border);
+  font-family: var(--font-sans); font-size: 14px;
+  font-weight: 300; color: var(--charcoal);
+}
+.co-item-img {
+  width: 60px; height: 76px; object-fit: cover;
+  border-radius: 1px; flex-shrink: 0;
+}
+.co-item-name { font-weight: 400; margin-bottom: 4px; }
+.co-item-price { color: var(--muted); font-size: 13px; }
+.co-sum-row {
+  display: flex; justify-content: space-between;
+  padding: 10px 0;
+  font-family: var(--font-sans); font-size: 14px;
+  font-weight: 300; color: var(--charcoal);
+}
+.co-sum-row.total {
+  font-weight: 500; font-size: 16px;
+  border-top: 1px solid var(--ivory-border);
+  padding-top: 16px; margin-top: 8px;
+}
+
+/* ── Wishlist heart active ── */
+.wl[aria-pressed="true"] svg { fill: var(--charcoal); }
+
+/* ── Focus-visible outlines for accessibility ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Lazy image fade-in ── */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ── Page transition overlay ── */
+.pt-overlay {
+  position: fixed; inset: 0; z-index: 11500;
+  background: var(--ivory);
+  pointer-events: none; opacity: 0;
+  transition: opacity .3s;
+}
+.pt-overlay.active { opacity: 1; pointer-events: all; }
+
+/* ── Section-level scroll reveal classes ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .75s var(--ease-out), transform .75s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
