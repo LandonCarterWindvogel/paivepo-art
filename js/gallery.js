@@ -1,7 +1,3 @@
-/**
- * gallery.js — Gallery rendering with WebP picture elements
- * Updated: uses FEATURED_IDS from data.js, supports Paintings & Furniture
- */
 import { products, FEATURED_IDS } from './data.js';
 import { showProduct } from './product.js';
 import { sounds } from './sound.js';
@@ -10,6 +6,11 @@ let activeFilter = 'All';
 
 export function setFilter(filter) {
   activeFilter = filter;
+}
+
+export function refreshGallery() {
+  // Re-render the gallery with current filter settings
+  renderGallery();
 }
 
 /* ── Picture element helper ── */

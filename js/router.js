@@ -33,8 +33,17 @@ function _swap(pageId) {
   next.classList.add('active');
   next.removeAttribute('aria-hidden');
 
+  next.offsetHeight;
+
   window.scrollTo({ top: 0, behavior: 'instant' });
   currentPage = pageId;
+
+   if (pageId === 'gallery') {
+    // Force gallery to re-render now that the container is visible
+    import('./gallery.js').then(module => {
+      module.refreshGallery();
+    });
+  }
 
   // Page titles
   const titles = {
