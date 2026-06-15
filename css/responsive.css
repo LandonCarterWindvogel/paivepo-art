@@ -195,15 +195,6 @@ select:focus-visible, textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* ── Lazy image fade-in ── */
-img[loading="lazy"] {
-  opacity: 0;
-  transition: opacity .5s ease;
-}
-img[loading="lazy"].loaded {
-  opacity: 1;
-}
-
 /* ── Page transition overlay ── */
 .pt-overlay {
   position: fixed; inset: 0; z-index: 11500;

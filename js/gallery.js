@@ -98,7 +98,7 @@ function buildCard(p) {
          ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
          aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
       <div class="gal-img-wrap">
-        ${pic(p.image, p.imageWebp, imgAlt, 'gal-img', '600', '800')}
+        ${pic(p.image, p.imageWebp, imgAlt, 'gal-img', '600', '800', false)}
         <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Details</div>'}</div>
         ${soldOverlay}
       </div>

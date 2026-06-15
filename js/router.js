@@ -1,6 +1,6 @@
 /**
  * router.js — SPA page-swap router with hash-based URLs
- * FIXED: Force gallery render on every navigation to gallery page
+ * FIXED: Re-render gallery when gallery page becomes active
  */
 import { renderGallery, setFilter } from './gallery.js';
 import { sounds } from './sound.js';
@@ -22,11 +22,6 @@ export function go(pageId, skipTransition = false, force = false) {
 }
 
 function _swap(pageId) {
-  // Remove focus from any element before hiding the page
-  if (document.activeElement && document.activeElement !== document.body) {
-    document.activeElement.blur();
-  }
-
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active');
     p.setAttribute('aria-hidden', 'true');
@@ -36,9 +31,6 @@ function _swap(pageId) {
   if (!next) return;
   next.classList.add('active');
   next.removeAttribute('aria-hidden');
-
-  // Force reflow to ensure the page is fully visible
-  next.offsetHeight; // eslint-disable-line no-unused-expressions
 
   window.scrollTo({ top: 0, behavior: 'instant' });
   currentPage = pageId;
@@ -76,12 +68,10 @@ function _swap(pageId) {
     });
   }
 
-  // 🎯 CRITICAL FIX: Re-render gallery when gallery page becomes active
+  // 🔧 FIX: Re-render gallery when gallery page becomes active
   if (pageId === 'gallery') {
-    // Small delay to ensure the DOM is ready and the page is visible
-    setTimeout(() => {
-      renderGallery();
-    }, 50);
+    // Small delay to ensure the page is fully visible and DOM ready
+    setTimeout(() => renderGallery(), 50);
   }
 }
 
@@ -104,8 +94,8 @@ export function initRouter() {
   if (validPages.includes(hash)) {
     _swap(hash === 'story' ? 'about' : hash);
   } else {
-    // Ensure home page is active if no hash
-    _swap('home');
+    // If no valid hash, ensure home page is active (optional)
+    // _swap('home'); // uncomment if needed
   }
 
   // Delegate all data-page clicks
