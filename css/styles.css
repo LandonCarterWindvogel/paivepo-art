@@ -1865,13 +1865,10 @@ footer {
   .artist-page-card--rev { direction: ltr; }
   .co-layout { grid-template-columns: 1fr; }
   .co-fg2 { grid-template-columns: 1fr; }
-  .story-sect { padding: 60px var(--side-mob); }
-  .coll-sect { padding: 60px var(--side-mob); }
-  .artists-sect { padding: 60px var(--side-mob); }
-  .sig-sect { padding: 60px var(--side-mob); }
-  .journal-sect { padding: 60px var(--side-mob); }
-  .comm-sect { padding: 60px var(--side-mob); }
-  .nl-sect { padding: 60px var(--side-mob); }
+  .story-sect, .coll-sect, .artists-sect, .sig-sect,
+  .journal-sect, .comm-sect, .nl-sect {
+    padding: 60px var(--side-mob);
+  }
   footer { padding: 60px var(--side-mob) 32px; }
   .artists-page-grid { padding: 0 var(--side-mob); }
   .journal-page-grid { padding: 0 var(--side-mob) var(--side-mob); }
@@ -1884,26 +1881,60 @@ footer {
   .gal-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; padding: 0 0 var(--side-mob); }
   .pg-hero { padding: 100px var(--side-mob) 40px; }
   .related { padding: 60px var(--side-mob); }
+
+  /* Mobile navbar fixes – right alignment */
   #nav {
     padding: 0 16px;
+    justify-content: space-between;
+  }
+  .logo {
+    flex-shrink: 0;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .logo span {
+    font-size: 7px;
   }
   .nav-right {
-    gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    flex-shrink: 0;
   }
   .cart-btn {
+    display: flex;
+    align-items: center;
     gap: 4px;
     font-size: 10px;
+    padding: 6px 0;
   }
   .cart-btn span:not(.c-count) {
-    display: none; /* Hide the word "Bag" on very small screens, keep only icon + count */
+    display: none;
   }
-  .hamburger {
-    margin-left: 4px;
+  .cart-btn svg {
+    width: 16px;
+    height: 16px;
   }
   .c-count {
     min-width: 18px;
     height: 18px;
     font-size: 10px;
+    line-height: 1;
+  }
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    margin-left: 4px;
+  }
+  .hamburger span {
+    width: 20px;
+    height: 2px;
+    margin: 2px 0;
   }
 }
 
