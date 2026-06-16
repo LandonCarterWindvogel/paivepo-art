@@ -1944,3 +1944,161 @@ footer {
   .hero-brand-name { font-size: 48px; }
   .story-kicker { font-size: 52px; }
 }
+
+/* ── NEW: Featured Artist section ── */
+.featured-artist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: clamp(60px, 10vw, 120px) var(--side);
+  background: var(--ivory);
+  align-items: center;
+}
+.fa-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fa-content .sec-lbl {
+  color: var(--gold);
+}
+.fa-content h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--charcoal);
+}
+.fa-content h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.fa-content p {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 460px;
+}
+.fa-portrait {
+  overflow: hidden;
+  border-radius: 2px;
+}
+.fa-portrait img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  transition: transform .7s var(--ease-luxury);
+}
+.fa-portrait:hover img {
+  transform: scale(1.03);
+}
+
+/* ── NEW: Footer 3-column layout ── */
+.ft-grid--three {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+.ft-tagline {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 8px;
+}
+
+/* ── Responsive for Featured Artist ── */
+@media (max-width: 768px) {
+  .featured-artist {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .ft-grid--three {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Footer shipping notice ── */
+.ft-btm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;      /* centers everything horizontally */
+  align-items: center;
+  gap: 12px 24px;               /* row-gap and column-gap */
+}
+.ft-shipping {
+  width: 100%;                  /* forces it onto its own row */
+  text-align: center;           /* centers the text inside */
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 8px;
+}
+.ft-shipping a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  transition: color 0.25s;
+}
+.ft-shipping a:hover {
+  color: var(--white);
+}
+
+/* ── Commission steps ── */
+.comm-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px 40px;
+  margin: 36px 0 44px;
+}
+.comm-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.comm-step-num {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold-light);
+  opacity: 0.6;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 40px;
+}
+.comm-step-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.comm-step-desc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .comm-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .comm-step {
+    gap: 12px;
+  }
+  .comm-step-num {
+    font-size: 28px;
+    min-width: 32px;
+  }
+}
+
+/* ── Journal page – fix portrait cropping ── */
+.journal-page-img--1 picture img,
+.journal-page-img--3 picture img {
+  object-position: 50% 20%;
+}

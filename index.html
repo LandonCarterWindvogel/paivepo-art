@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/artist-allick.webp" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -180,7 +180,11 @@
 
       <!-- S1: HERO -->
       <section class="hero" aria-label="Paivepo — Luxury African Art, Design and Storytelling">
-        <div class="hero-bg" role="img" aria-label="Paivepo studio at Old Nick Village — where African art, sculpture and design meet"></div>
+        <!-- Updated hero image to artist at work -->
+        <div class="hero-bg" 
+             style="background-image: url('images/hero-bg.webp'); background-position: center 40%;"
+             role="img" 
+             aria-label="Allick painting in his studio at Old Nick Village — where African art comes to life"></div>
         <div class="hero-ov" aria-hidden="true"></div>
         <div class="hero-cnt">
           <p class="hero-pre" aria-label="Plettenberg Bay, Old Nick Village, Established 2021">Plettenberg Bay &nbsp;·&nbsp; Old Nick Village &nbsp;·&nbsp; Est. 2021</p>
@@ -189,7 +193,8 @@
             <span class="hero-brand-divider" aria-hidden="true"></span>
             <span class="hero-brand-sub">Art &amp; Decor</span>
           </h1>
-          <p class="hero-tagline">Luxury African Art, Design &amp; Storytelling</p>
+          <!-- New tagline -->
+          <p class="hero-tagline">Discover artists before the world does</p>
           <button class="hero-cta" data-page="gallery" aria-label="Explore the Paivepo Collection">
             Explore the Collection
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -203,7 +208,36 @@
         </div>
       </section>
 
-      <!-- MARQUEE TICKER -->
+      <!-- S2: THE STORY (moved right after hero) -->
+      <section class="story-sect" aria-labelledby="story-h">
+        <div class="story-inner">
+          <p class="story-kicker" aria-hidden="true">THERE WAS…</p>
+          <h2 class="story-headline" id="story-h">
+            Paivepo means<br>
+            <em>"There Was."</em>
+          </h2>
+          <div class="story-body">
+            <p>A word inherited from my grandmother's stories in Zimbabwe. Today, it has become a home for artists, makers and creators whose work deserves to be seen by the world.</p>
+            <p>From wildlife paintings and beaded sculpture to handcrafted furniture, every piece carries a story of becoming.</p>
+          </div>
+          <button class="story-cta" data-page="about" aria-label="Read the Paivepo story">Read Our Story</button>
+        </div>
+      </section>
+
+      <!-- S3: FEATURED ARTIST (new section) -->
+      <section class="featured-artist" aria-labelledby="fa-h">
+        <div class="fa-content">
+          <p class="sec-lbl">Featured Artist</p>
+          <h2 id="fa-h">Meet <em>Allick</em></h2>
+          <p>A Malawian artist creating expressive contemporary works from a small studio in the Garden Route. His paintings capture the raw beauty of African wildlife and everyday life with bold colour and quiet emotion.</p>
+          <button class="btn" data-page="gallery" data-filter="Paintings">Discover his collection →</button>
+        </div>
+        <div class="fa-portrait">
+          <img src="images/artist-allick.webp" alt="Allick painting in his studio at Old Nick Village" loading="lazy" style="object-position: 50% 15%;">
+        </div>
+      </section>
+
+      <!-- MARQUEE TICKER (now after story and featured artist) -->
       <div class="mq-wrap" aria-hidden="true">
         <div class="mq-track">
           <span class="mq-item">Paintings</span><span class="mq-dot">·</span>
@@ -225,23 +259,7 @@
         </div>
       </div>
 
-      <!-- S2: THE STORY -->
-      <section class="story-sect" aria-labelledby="story-h">
-        <div class="story-inner">
-          <p class="story-kicker" aria-hidden="true">THERE WAS…</p>
-          <h2 class="story-headline" id="story-h">
-            Paivepo means<br>
-            <em>"There Was."</em>
-          </h2>
-          <div class="story-body">
-            <p>A word inherited from my grandmother's stories in Zimbabwe. Today, it has become a home for artists, makers and creators whose work deserves to be seen by the world.</p>
-            <p>From wildlife paintings and beaded sculpture to handcrafted furniture, every piece carries a story of becoming.</p>
-          </div>
-          <button class="story-cta" data-page="about" aria-label="Read the Paivepo story">Read Our Story</button>
-        </div>
-      </section>
-
-      <!-- S3: FEATURED COLLECTIONS -->
+      <!-- S4: FEATURED COLLECTIONS -->
       <section class="coll-sect" aria-labelledby="coll-h">
         <div class="coll-header">
           <p class="sec-lbl">What We Create</p>
@@ -320,7 +338,7 @@
         </div>
       </section>
 
-      <!-- S4: MEET THE ARTISTS -->
+      <!-- S5: MEET THE ARTISTS -->
       <section class="artists-sect" aria-labelledby="artists-h">
         <div class="artists-header">
           <p class="sec-lbl">The Creators</p>
@@ -387,7 +405,7 @@
         </div>
       </section>
 
-      <!-- S5: SIGNATURE PIECES -->
+      <!-- S6: SIGNATURE PIECES -->
       <section class="sig-sect" aria-labelledby="sig-h">
         <div class="sig-header">
           <div>
@@ -399,7 +417,7 @@
         <div class="feat-grid sig-grid" id="featGrid" role="list" aria-label="Signature pieces from the collection"></div>
       </section>
 
-      <!-- S6: PAIVEPO JOURNAL -->
+      <!-- S7: PAIVEPO JOURNAL -->
       <section class="journal-sect" aria-labelledby="journal-h">
         <div class="journal-header">
           <p class="sec-lbl">Paivepo Journal</p>
@@ -461,7 +479,7 @@
         </div>
       </section>
 
-      <!-- S7: COMMISSION A PIECE -->
+      <!-- S8: COMMISSION A PIECE -->
       <section class="comm-sect" aria-labelledby="comm-h">
         <div class="comm-inner">
           <p class="sec-lbl sec-lbl--light">Bespoke</p>
@@ -470,11 +488,37 @@
             <em>unique?</em>
           </h2>
           <p class="comm-body">Whether it's a painting, sculpture or furniture piece, we work directly with our artists and makers to create one-of-a-kind works for homes, lodges and collectors across the world.</p>
+
+          <!-- Commission Steps -->
+          <div class="comm-steps">
+            <div class="comm-step">
+              <span class="comm-step-num">01</span>
+              <div>
+                <h4 class="comm-step-title">Tell us your vision</h4>
+                <p class="comm-step-desc">Share your ideas – size, colour palette, subject, or a reference image. We’ll match you with the right artist.</p>
+              </div>
+            </div>
+            <div class="comm-step">
+              <span class="comm-step-num">02</span>
+              <div>
+                <h4 class="comm-step-title">We bring it to life</h4>
+                <p class="comm-step-desc">Our artist creates a unique piece, sending you progress updates and photos along the way.</p>
+              </div>
+            </div>
+            <div class="comm-step">
+              <span class="comm-step-num">03</span>
+              <div>
+                <h4 class="comm-step-title">Yours, forever</h4>
+                <p class="comm-step-desc">Once complete, we arrange shipping or invite you to collect it from our Plettenberg Bay studio.</p>
+              </div>
+            </div>
+          </div>
+
           <button class="comm-cta" data-page="contact" aria-label="Start a commission with Paivepo">Start a Commission</button>
         </div>
       </section>
 
-      <!-- S8: NEWSLETTER -->
+      <!-- S9: NEWSLETTER -->
       <section class="nl-sect" aria-labelledby="nl-h">
         <div class="nl-inner">
           <p class="sec-lbl">Stay Connected</p>
@@ -491,57 +535,49 @@
         </div>
       </section>
 
-      <!-- FOOTER -->
+      <!-- FOOTER (updated) -->
       <footer role="contentinfo">
-        <div class="ft-grid">
+        <div class="ft-grid ft-grid--three">
+          <!-- Left: Brand -->
           <div class="ft-brand-col">
             <div class="ft-logo">PAIVEPO</div>
-            <div class="ft-sub">Art &amp; Decor</div>
-            <p class="ft-tag">Plettenberg Bay<br>Old Nick Village<br>South Africa</p>
+            <div class="ft-sub">Luxury African Art, Design &amp; Storytelling</div>
+            <p class="ft-tag">Old Nick Village, Plettenberg Bay</p>
             <p class="ft-hours">Open daily · 9am – 5pm</p>
             <nav class="ft-social" aria-label="Paivepo on social media">
               <a class="ft-soc-a" href="https://www.instagram.com/paivepo_art_decor/" target="_blank" rel="noopener noreferrer" aria-label="Paivepo on Instagram">Instagram</a>
               <a class="ft-soc-a" href="https://www.facebook.com/p/Paivepo-100083193819296/" target="_blank" rel="noopener noreferrer" aria-label="Paivepo on Facebook">Facebook</a>
+              <a class="ft-soc-a" href="https://www.youtube.com/@paivepo" target="_blank" rel="noopener noreferrer" aria-label="Paivepo on YouTube">YouTube</a>
             </nav>
           </div>
+
+          <!-- Middle: Explore -->
           <div>
-            <div class="ft-col-t">Shop</div>
+            <div class="ft-col-t">Explore</div>
             <ul class="ft-links">
-              <li><button data-page="gallery">All Works</button></li>
-              <li><button data-page="gallery" data-filter="Paintings">Paintings</button></li>
-              <li><button data-page="gallery" data-filter="Birds">Beaded Sculpture</button></li>
-              <li><button data-page="gallery" data-filter="Furniture">Furniture</button></li>
-            </ul>
-          </div>
-          <div>
-            <div class="ft-col-t">Artists</div>
-            <ul class="ft-links">
-              <li><button data-page="artists">William Mwale</button></li>
-              <li><button data-page="artists">Allick</button></li>
-              <li><button data-page="about">Tinashe Kachama</button></li>
-            </ul>
-          </div>
-          <div>
-            <div class="ft-col-t">Studio</div>
-            <ul class="ft-links">
-              <li><button data-page="about">Our Story</button></li>
+              <li><button data-page="gallery">Collection</button></li>
+              <li><button data-page="artists">Artists</button></li>
               <li><button data-page="journal">Journal</button></li>
-              <li><button data-page="contact">Commission a Piece</button></li>
-              <li><button data-page="contact">Contact</button></li>
+              <li><button data-page="contact">Commissions</button></li>
             </ul>
           </div>
+
+          <!-- Right: Contact -->
           <div>
-            <div class="ft-col-t">Visit</div>
+            <div class="ft-col-t">Contact</div>
             <ul class="ft-links">
-              <li><a href="https://maps.google.com/?q=Old+Nick+Village+Plettenberg+Bay" target="_blank" rel="noopener">Old Nick Village, Plett</a></li>
-              <li><a href="tel:+27629131440">062 913 1440</a></li>
-              <li><a href="mailto:paivepoart@gmail.com">paivepoart@gmail.com</a></li>
+              <li><a href="https://wa.me/27629131440" target="_blank" rel="noopener">WhatsApp</a></li>
+              <li><a href="mailto:paivepoart@gmail.com">Email</a></li>
+              <li><a href="tel:+27629131440">Phone</a></li>
             </ul>
           </div>
         </div>
+
         <div class="ft-btm">
           <span class="ft-copy">© <span id="footerYear">2026</span> Paivepo Art &amp; Decor. All rights reserved.</span>
-          <span class="ft-copy">Old Nick Village, Plettenberg Bay, South Africa</span>
+          <span class="ft-tagline">Handmade in Southern Africa. Collected worldwide.</span>
+          <span class="ft-copy">Old Nick Village, Plettenberg Bay</span>
+          <div class="ft-shipping">Worldwide shipping available – <a href="mailto:paivepoart@gmail.com">enquire for a quote</a></div>
         </div>
       </footer>
 
@@ -744,7 +780,7 @@
         <div class="abt-text">
           <p class="sec-lbl">Our Story</p>
           <h1 class="abt-big">Paivepo —<br><em>"There Was"</em></h1>
-          <p class="abt-bio">The name comes from a Shona word Tinashe Kachama's late grandmother would use to begin her stories. "Paivepo…" — the moment she said it, eyes would widen and everyone would brace for whatever tale was coming next.<br><br>Today, Paivepo has become something larger than one story. It is a home — for artists, makers and creators whose work deserves to be seen by the world. Based at Old Nick Village in Plettenberg Bay, we bring together African art, sculpture, furniture and storytelling under one roof.</p>
+          <p class="abt-bio">The name comes from a Shona word Tinashe Kachama's late grandmother would use to begin her stories. "Paivepo…" — the moment she said it, eyes would widen and everyone would brace for whatever tale was coming next.<br><br>Today, Paivepo has become something larger than one story. It is a home — for artists, makers and creators whose work deserves to be seen by the world. Based at Old Nick Village in Plettenberg Bay, we bring together African art, sculpture, furniture and storytelling under one roof.<br><br><strong>Paivepo is a bridge – connecting collectors around the world with overlooked African artists whose work deserves to be seen.</strong></p>
         </div>
       </header>
 
@@ -843,47 +879,50 @@
       <div class="journal-page-grid">
 
         <article class="journal-page-card">
-          <div class="journal-page-img journal-page-img--1" role="img" aria-label="William Mwale in his studio">
+          <div class="journal-page-img journal-page-img--1" role="img" aria-label="Allick painting in his studio">
             <picture>
-              <source srcset="images/journal-1.webp" type="image/webp">
-              <img src="images/journal-1.jpg" alt="" aria-hidden="true" loading="lazy" width="800" height="500" onerror="this.parentElement.classList.add('no-img')">
+              <source srcset="images/artist-allick.webp" type="image/webp">
+              <img src="images/artist-allick.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="500">
+            </picture>
+          </div>
+          <div class="journal-page-body">
+            <p class="journal-cat">Artist Story</p>
+            <h2 class="journal-page-title">Allick – From Zimbabwe to the Garden Route</h2>
+            <p class="journal-page-excerpt">How a Zimbabwean artist found his voice in Plettenberg Bay, painting the stories of his homeland and the wild beauty of the South African coast.</p>
+            <p class="journal-page-excerpt" style="margin-top:12px"><strong>Read the full story →</strong> Allick grew up in Zimbabwe, surrounded by the vibrant colours of Shona art and the rhythms of everyday life. After moving to South Africa, he settled in the Garden Route, where the landscape and light transformed his work. Today, his canvases are a conversation between memory and place – bold, expressive, and deeply African. His paintings are collected by art lovers who recognise the soul in every brushstroke.</p>
+            <p class="journal-page-meta" style="margin-top:8px;color:var(--gold)">Published 16 June 2026</p>
+          </div>
+        </article>
+
+        <article class="journal-page-card">
+          <div class="journal-page-img journal-page-img--2" role="img" aria-label="William Mwale painting in his studio">
+            <picture>
+              <source srcset="images/artist-william.webp" type="image/webp">
+              <img src="images/artist-william.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="500">
             </picture>
           </div>
           <div class="journal-page-body">
             <p class="journal-cat">Artist Story</p>
             <h2 class="journal-page-title">William's Journey from Malawi</h2>
             <p class="journal-page-excerpt">How one painter crossed borders to find his canvas in the Garden Route of South Africa. The landscapes that shaped him. The colours he found waiting here.</p>
-            <p class="journal-page-meta">Coming Soon</p>
+            <p class="journal-page-excerpt" style="margin-top:12px"><strong>Read the full story →</strong> William Mwale left Malawi with little more than a paintbrush and a dream. He settled in Plettenberg Bay, where the dramatic skies and wild coastline reminded him of home. Today, his oils capture the soul of African wildlife – each stroke a memory of the vast plains he left behind. His work has been collected from Cape Town to London, but he remains rooted in the Garden Route, painting the Africa he carries inside him.</p>
+            <p class="journal-page-meta" style="margin-top:8px;color:var(--gold)">Published 16 June 2026</p>
           </div>
         </article>
 
         <article class="journal-page-card">
-          <div class="journal-page-img journal-page-img--2" role="img" aria-label="A painting in progress">
+          <div class="journal-page-img journal-page-img--3" role="img" aria-label="Tinashe Kachama in his studio, surrounded by beaded sculptures">
             <picture>
-              <source srcset="images/journal-2.webp" type="image/webp">
-              <img src="images/journal-2.jpg" alt="" aria-hidden="true" loading="lazy" width="800" height="500" onerror="this.parentElement.classList.add('no-img')">
-            </picture>
-          </div>
-          <div class="journal-page-body">
-            <p class="journal-cat">Process</p>
-            <h2 class="journal-page-title">How a Painting Begins</h2>
-            <p class="journal-page-excerpt">The quiet rituals, the chosen colours, the first deliberate mark on an empty canvas. An inside look at the creative process of the Paivepo artists.</p>
-            <p class="journal-page-meta">Coming Soon</p>
-          </div>
-        </article>
-
-        <article class="journal-page-card">
-          <div class="journal-page-img journal-page-img--3" role="img" aria-label="The Paivepo studio">
-            <picture>
-              <source srcset="images/journal-3.webp" type="image/webp">
-              <img src="images/og-image.jpg" alt="" aria-hidden="true" loading="lazy" width="800" height="500" onerror="this.parentElement.classList.add('no-img')">
+              <source srcset="images/artist-studio.webp" type="image/webp">
+              <img src="images/artist-studio.jpg" alt="" aria-hidden="true" loading="lazy" width="800" height="500">
             </picture>
           </div>
           <div class="journal-page-body">
             <p class="journal-cat">Heritage</p>
-            <h2 class="journal-page-title">The Story Behind Paivepo</h2>
-            <p class="journal-page-excerpt">A grandmother's word. A name that carries the weight of memory, story and a world that once was. How "Paivepo" became a home for African art and design.</p>
-            <p class="journal-page-meta">Coming Soon</p>
+            <h2 class="journal-page-title">The Story Behind Paivepo – A Grandmother's Word</h2>
+            <p class="journal-page-excerpt">A Shona word passed down through generations. The weight of memory, story, and a world that once was.</p>
+            <p class="journal-page-excerpt" style="margin-top:12px"><strong>Read the full story →</strong> "Paivepo" – the word Tinashe Kachama's grandmother used to begin her tales. It means "There was..." and carried the promise of something profound about to unfold. When she spoke it, the room fell silent, eyes widened, and the story took hold.<br><br>Tinashe carries that same power into every piece at Paivepo. It's not just a name – it's an invitation. An invitation to listen, to wonder, and to become part of a story that began long before we arrived, and will continue long after we're gone. Every sculpture, every painting, every handcrafted object carries that same quiet power – the power of a story waiting to be told.</p>
+            <p class="journal-page-meta" style="margin-top:8px;color:var(--gold)">Published 16 June 2026</p>
           </div>
         </article>
 
