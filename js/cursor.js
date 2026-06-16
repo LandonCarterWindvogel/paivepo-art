@@ -89,6 +89,7 @@ export function initCursor() {
   });
 
   function animateRing() {
+    // FIX: instant follow – no trailing interpolation
     ringX = mouseX;
     ringY = mouseY;
     if (ring) { ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`; }
