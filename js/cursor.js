@@ -89,8 +89,8 @@ export function initCursor() {
   });
 
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
+    ringX = mouseX;
+    ringY = mouseY;
     if (ring) { ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`; }
   }
 
