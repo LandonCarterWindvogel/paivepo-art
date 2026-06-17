@@ -1,7 +1,4 @@
-/**
- * product.js — Product page with single main image (no thumbnails)
- * FIXED: Use WebP for both <source> and <img src> to avoid 404 on zoom
- */
+// product.js — Product detail page with schema
 import { products } from './data.js';
 import { addToCart } from './cart.js';
 import { openZoom, showToast } from './ui.js';
@@ -14,7 +11,6 @@ let currentProduct = null;
 export function getCurrentProduct() { return currentProduct; }
 
 function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true, extra = '') {
-  // Note: this function is not used in product page directly, but kept for consistency
   const dims   = (w && h) ? ` width="${w}" height="${h}"` : '';
   const load   = lazy ? ' loading="lazy"' : '';
   const clsStr = cls ? ` class="${cls}"` : '';
@@ -22,6 +18,65 @@ function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true, extra 
     <source srcset="${webpSrc}" type="image/webp">
     <img src="${webpSrc}" alt="${alt}"${clsStr}${dims}${load}${extra}>
   </picture>`;
+}
+
+function renderProductSchema(p) {
+  const existing = document.querySelector('script[data-product-schema]');
+  if (existing) existing.remove();
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": p.name,
+    "description": p.desc,
+    "image": `https://paivepo.co.za/${p.imageWebp}`,
+    "sku": `PAIVEPO-${p.id}`,
+    "offers": {
+      "@type": "Offer",
+      "price": p.price,
+      "priceCurrency": "ZAR",
+      "availability": p.sold ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Paivepo Art & Decor"
+      }
+    },
+    "brand": {
+      "@type": "Brand",
+      "name": "Paivepo"
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": p.artist || "Paivepo Studio"
+    }
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.dataset.productSchema = 'true';
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
+}
+
+function renderBreadcrumbSchema(p) {
+  const existing = document.querySelector('script[data-breadcrumb-schema]');
+  if (existing) existing.remove();
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://paivepo.co.za/" },
+      { "@type": "ListItem", "position": 2, "name": "Collection", "item": "https://paivepo.co.za/#gallery" },
+      { "@type": "ListItem", "position": 3, "name": p.name, "item": `https://paivepo.co.za/#product` }
+    ]
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.dataset.breadcrumbSchema = 'true';
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
 }
 
 export function showProduct(id) {
@@ -39,7 +94,10 @@ export function showProduct(id) {
   renderRelated(p);
   renderWishlistState(p);
 
-  document.title = `${p.name} — Paivepo Art & Decor`;
+  renderProductSchema(p);
+  renderBreadcrumbSchema(p);
+
+  document.title = `${p.name} — African Art from Paivepo, Plettenberg Bay`;
   go('product');
 }
 
@@ -56,11 +114,9 @@ function renderSoldState(p) {
 
   notice.classList.toggle('show', p.sold);
 
-  const imgAlt = `${p.name} — handmade ${p.cat ? p.cat.toLowerCase() : ''} artwork by ${p.artist || 'Paivepo'}`;
+  const imgAlt = p.alt || `${p.name} — handmade ${p.cat ? p.cat.toLowerCase() : ''} artwork by ${p.artist || 'Paivepo'}`;
   const soldClass = p.sold ? 'prod-main sold-img' : 'prod-main zoomable';
 
-  // IMPORTANT FIX: Use the WebP file for both <source> and the fallback <img> src
-  // This ensures the zoom modal copies a valid URL (the WebP that actually exists)
   const pictureHTML = `<picture id="prodMainPicture">
     <source srcset="${p.imageWebp}" type="image/webp">
     <img id="prodMain" src="${p.imageWebp}" alt="${imgAlt}" class="${soldClass}" width="800" height="1000" fetchpriority="low">
@@ -89,7 +145,6 @@ function renderSoldState(p) {
     atcBtn.style.background = '';
     commBtn.classList.remove('show');
 
-    // Re-bind ATC without stale listeners
     const newAtc = atcBtn.cloneNode(true);
     atcBtn.parentNode.replaceChild(newAtc, atcBtn);
     newAtc.addEventListener('click', () => {
@@ -102,7 +157,6 @@ function renderSoldState(p) {
       }, 2000);
     });
 
-    // Zoom on main image click – now the src points to a valid WebP
     if (mainImg) {
       mainImg.removeEventListener('click', openZoom);
       mainImg.addEventListener('click', openZoom);
@@ -134,7 +188,7 @@ function renderRelated(p) {
   const related = [...same, ...others].slice(0, 4);
 
   document.getElementById('relGrid').innerHTML = related.map(r => {
-    const imgAlt = `${r.name} — handmade ${r.cat} artwork by ${r.artist || 'Paivepo'}`;
+    const imgAlt = r.alt || `${r.name} — handmade ${r.cat} artwork by ${r.artist || 'Paivepo'}`;
     return `
       <div class="rel-card${r.sold ? ' is-sold' : ''}"
            ${r.sold ? '' : `data-prod-id="${r.id}" role="button" tabindex="0"`}
@@ -171,5 +225,5 @@ function renderWishlistState(p) {
 }
 
 export function initProduct() {
-  // All events are bound dynamically in showProduct()
+  // Events bound dynamically in showProduct()
 }

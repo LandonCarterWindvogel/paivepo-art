@@ -1,3 +1,4 @@
+// gallery.js — Renders gallery and featured works
 import { products, FEATURED_IDS } from './data.js';
 import { showProduct } from './product.js';
 import { sounds } from './sound.js';
@@ -9,14 +10,12 @@ export function setFilter(filter) {
 }
 
 export function refreshGallery() {
-  // Re-render the gallery with current filter settings
   renderGallery();
 }
 
-/* ── Picture element helper ── */
 function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true) {
-  const dims    = (w && h) ? ` width="${w}" height="${h}"` : '';
-  const load    = lazy ? ' loading="lazy"' : '';
+  const dims = (w && h) ? ` width="${w}" height="${h}"` : '';
+  const load = lazy ? ' loading="lazy"' : '';
   const clsAttr = cls ? ` class="${cls}"` : '';
   return `<picture>
     <source srcset="${webpSrc}" type="image/webp">
@@ -24,13 +23,11 @@ function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true) {
   </picture>`;
 }
 
-/* ── Artist label for gallery cards ── */
 function artistLabel(p) {
   if (!p.artist || p.artist === 'Paivepo Studio') return '';
   return `<span class="gal-artist">${p.artist}</span>`;
 }
 
-/* ── Render homepage featured / signature pieces ── */
 export function renderFeatured() {
   const grid = document.getElementById('featGrid');
   if (!grid) return;
@@ -45,7 +42,7 @@ export function renderFeatured() {
     const soldBadge = p.sold
       ? '<div class="feat-sold-badge" aria-label="Sold">Sold</div>'
       : '';
-    const imgAlt = `${p.name}${p.artist ? ` by ${p.artist}` : ''} — Paivepo Art & Decor`;
+    const imgAlt = p.alt || `${p.name}${p.artist ? ` by ${p.artist}` : ''} — Paivepo Art & Decor`;
 
     return `
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
@@ -67,7 +64,6 @@ export function renderFeatured() {
   }).join('');
 }
 
-/* ── Render gallery page grid ── */
 export function renderGallery() {
   const availOnly = document.getElementById('availOnly')?.checked ?? false;
 
@@ -90,7 +86,7 @@ function buildCard(p) {
       <div class="sold-sub">This piece has found its home</div>
     </div>` : '';
 
-  const imgAlt = `${p.name}${p.artist ? ` by ${p.artist}` : ''} — ${p.cat}, Paivepo Art & Decor`;
+  const imgAlt = p.alt || `${p.name}${p.artist ? ` by ${p.artist}` : ''} — ${p.cat}, Paivepo Art & Decor`;
   const categoryLabel = getCategoryLabel(p.cat);
 
   return `
@@ -135,7 +131,6 @@ function syncFilterButtons() {
   });
 }
 
-/* ── Init gallery interactions ── */
 export function initGallery() {
   document.getElementById('galFilters')?.addEventListener('click', e => {
     const btn = e.target.closest('.f-btn');

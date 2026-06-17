@@ -103,6 +103,18 @@ body::before {
   body::before { animation: none; }
 }
 
+.hero-brand-tagline {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(10px, 1.2vw, 14px);
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 16px;
+  animation: fadeUp 1.2s var(--ease-out) .35s both;
+}
+
 /* ── ACCESSIBILITY ── */
 .skip-link {
   position: absolute;

@@ -1,12 +1,51 @@
-/**
- * router.js — SPA page-swap router with hash-based URLs
- * FIXED: Re-render gallery when gallery page becomes active
- */
+// router.js — SPA router with dynamic meta
 import { renderGallery, setFilter } from './gallery.js';
 import { sounds } from './sound.js';
 
 let currentPage  = 'home';
 let transitionFn = null;
+
+const pageTitles = {
+  home:     'Paivepo Art & Decor — Premier African Art Gallery in Plettenberg Bay',
+  gallery:  'African Art Gallery — Browse Paintings & Sculptures in Plettenberg Bay',
+  artists:  'African Artists in Plettenberg Bay — Meet the Makers at Paivepo',
+  about:    'Our Story — How Paivepo Became Plettenberg Bay\'s Premier African Art Gallery',
+  journal:  'African Art Stories — Journal from Paivepo Art & Decor, Plettenberg Bay',
+  contact:  'Contact Paivepo — African Art Gallery in Plettenberg Bay, Old Nick Village',
+  checkout: 'Checkout — Secure Art Order | Paivepo, Plettenberg Bay',
+  product:  'Work — Paivepo Art & Decor'
+};
+
+const pageDescriptions = {
+  home:     'Discover African art at Paivepo, Plettenberg Bay\'s premier gallery. View wildlife paintings, handmade beaded sculptures & furniture. Visit Old Nick Village.',
+  gallery:  'Shop African art at Paivepo: wildlife paintings, beaded sculptures, wire art & furniture. Handmade in South Africa. Visit our Plettenberg Bay gallery.',
+  artists:  'Meet the African artists behind Paivepo: William Mwale, Allick & Tinashe Kachama. Based at Old Nick Village, Plettenberg Bay. Visit the studio.',
+  about:    'From a grandmother\'s Shona word to Plettenberg Bay\'s premier African art gallery. Discover the story behind Paivepo Art & Decor at Old Nick Village.',
+  journal:  'Read stories from African artists at Paivepo. Behind-the-scenes, artist journeys, and the inspiration behind our Plettenberg Bay gallery\'s works.',
+  contact:  'Visit Paivepo Art & Decor at Old Nick Village, Plettenberg Bay. Commission custom African art, inquire about pieces, or just say hello. Open daily 9am-5pm.',
+  checkout: 'Complete your order for African art from Paivepo, Plettenberg Bay. We\'ll confirm your purchase and arrange shipping within 24 hours.',
+  product:  'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings, beaded sculptures, and furniture. Visit our gallery.'
+};
+
+function getProductTitle() {
+  const el = document.getElementById('prodTitle');
+  return el && el.textContent ? `${el.textContent} — Handmade African Art | Paivepo, Plettenberg Bay` : pageTitles.product;
+}
+
+function getProductDescription() {
+  const el = document.getElementById('prodDesc');
+  if (el && el.textContent) {
+    const desc = el.textContent.slice(0, 120);
+    return `${desc}... Browse more African art at Paivepo, Plettenberg Bay.`;
+  }
+  return pageDescriptions.product;
+}
+
+function updateMeta(title, description) {
+  document.title = title;
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.content = description;
+}
 
 export function setTransition(fn) {
   transitionFn = fn;
@@ -35,22 +74,18 @@ function _swap(pageId) {
   window.scrollTo({ top: 0, behavior: 'instant' });
   currentPage = pageId;
 
-  // Page titles
-  const titles = {
-    home:     'Paivepo Art & Decor — Luxury African Art, Design & Storytelling | Plettenberg Bay',
-    gallery:  'The Collection — Paivepo Art & Decor',
-    artists:  'The Artists — Paivepo Art & Decor',
-    about:    'Our Story — Paivepo Art & Decor',
-    journal:  'Stories of Becoming — Paivepo Journal',
-    contact:  'Contact & Commissions — Paivepo Art & Decor',
-    checkout: 'Checkout — Paivepo Art & Decor',
-    product:  document.getElementById('prodTitle')?.textContent
-              ? `${document.getElementById('prodTitle').textContent} — Paivepo Art & Decor`
-              : 'Work — Paivepo Art & Decor',
-  };
-  document.title = titles[pageId] || titles.home;
+  // Set title and description
+  let title = pageTitles[pageId] || pageTitles.home;
+  let desc  = pageDescriptions[pageId] || pageDescriptions.home;
 
-  // URL hashes
+  if (pageId === 'product') {
+    title = getProductTitle();
+    desc  = getProductDescription();
+  }
+
+  updateMeta(title, desc);
+
+  // URL hash
   const hashes = {
     home: '', gallery: 'gallery', artists: 'artists',
     about: 'story', journal: 'journal',
@@ -59,7 +94,7 @@ function _swap(pageId) {
   const hash = hashes[pageId];
   history.replaceState(null, '', hash ? `#${hash}` : window.location.pathname);
 
-  // Screen reader announcement
+  // Screen reader announcer
   const announcer = document.getElementById('page-announcer');
   if (announcer) {
     announcer.textContent = '';
@@ -68,9 +103,7 @@ function _swap(pageId) {
     });
   }
 
-  // 🔧 FIX: Re-render gallery when gallery page becomes active
   if (pageId === 'gallery') {
-    // Small delay to ensure the page is fully visible and DOM ready
     setTimeout(() => renderGallery(), 50);
   }
 }
@@ -80,7 +113,6 @@ export function getCurrentPage() {
 }
 
 export function initRouter() {
-  // SR announcer
   const ann = document.createElement('div');
   ann.id = 'page-announcer';
   ann.setAttribute('aria-live', 'polite');
@@ -88,17 +120,12 @@ export function initRouter() {
   ann.className = 'sr-only';
   document.body.appendChild(ann);
 
-  // Handle hash on load
   const hash = window.location.hash.replace('#', '');
   const validPages = ['gallery', 'artists', 'story', 'journal', 'contact'];
   if (validPages.includes(hash)) {
     _swap(hash === 'story' ? 'about' : hash);
-  } else {
-    // If no valid hash, ensure home page is active (optional)
-    // _swap('home'); // uncomment if needed
   }
 
-  // Delegate all data-page clicks
   document.body.addEventListener('click', e => {
     const target = e.target.closest('[data-page]');
     if (!target) return;
@@ -118,7 +145,6 @@ export function initRouter() {
     go(page);
   });
 
-  // Browser back/forward
   window.addEventListener('popstate', () => {
     const hash = window.location.hash.replace('#', '');
     _swap(hash === 'story' ? 'about' : (hash || 'home'));

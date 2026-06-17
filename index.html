@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Paivepo Art & Decor — Luxury African Art, Design & Storytelling | Plettenberg Bay</title>
-  <meta name="description" content="Paivepo Art & Decor — a home for African artists, makers and creators. Wildlife paintings, handmade beaded sculptures, furniture and custom commissions. Old Nick Village, Plettenberg Bay.">
+  <title>Paivepo Art & Decor — Premier African Art Gallery in Plettenberg Bay</title>
+  <meta name="description" content="Discover African art at Paivepo, Plettenberg Bay's premier gallery. View wildlife paintings, handmade beaded sculptures & furniture. Visit Old Nick Village.">
   <meta name="keywords" content="African art, luxury art, beaded sculptures, wildlife paintings, African design, Plettenberg Bay, Old Nick Village, Tinashe Kachama, William Mwale, handmade, commissions">
   <link rel="canonical" href="https://paivepo.co.za/">
+  <meta name="robots" content="index, follow">
 
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://paivepo.co.za/">
-  <meta property="og:title"       content="Paivepo Art & Decor — Luxury African Art, Design & Storytelling">
-  <meta property="og:description" content="A home for African artists, makers and creators. Wildlife paintings, beaded sculpture, furniture and commissions. Old Nick Village, Plettenberg Bay.">
+  <meta property="og:title"       content="Paivepo Art & Decor — Premier African Art Gallery in Plettenberg Bay">
+  <meta property="og:description" content="Discover African art at Paivepo, Plettenberg Bay's premier gallery. Wildlife paintings, beaded sculptures & more. Visit Old Nick Village.">
   <meta property="og:image"       content="https://paivepo.co.za/images/og-image.jpg">
   <meta property="og:locale"      content="en_ZA">
   <meta property="og:site_name"   content="Paivepo Art & Decor">
 
   <meta name="twitter:card"        content="summary_large_image">
-  <meta name="twitter:title"       content="Paivepo Art & Decor — Luxury African Art, Design & Storytelling">
-  <meta name="twitter:description" content="A home for African artists, makers and creators. Plettenberg Bay, South Africa.">
+  <meta name="twitter:title"       content="Paivepo Art & Decor — Premier African Art Gallery in Plettenberg Bay">
+  <meta name="twitter:description" content="Discover African art at Paivepo, Plettenberg Bay's premier gallery.">
   <meta name="twitter:image"       content="https://paivepo.co.za/images/og-image.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +56,13 @@
           "https://www.instagram.com/paivepo_art_decor/",
           "https://www.facebook.com/p/Paivepo-100083193819296/"
         ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://paivepo.co.za/" },
+          { "@type": "ListItem", "position": 2, "name": "African Art Gallery", "item": "https://paivepo.co.za/#gallery" }
+        ]
       }
     ]
   }
@@ -67,7 +75,6 @@
   <div id="cur-r" aria-hidden="true"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- WhatsApp float -->
   <div class="wa-float">
     <div class="wa-tooltip">Chat on WhatsApp</div>
     <a class="wa-btn"
@@ -80,7 +87,7 @@
     </a>
   </div>
 
-  <!-- Navigation -->
+  <!-- NAVIGATION -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <button class="logo" id="navLogo" data-page="home" aria-label="Go to Paivepo home page">
       PAIVEPO
@@ -115,7 +122,7 @@
     </div>
   </nav>
 
-  <!-- Mobile menu -->
+  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true" style="display:none">
     <div class="mm-overlay" id="mmOverlay"></div>
     <div class="mm-drawer">
@@ -146,7 +153,7 @@
     </div>
   </div>
 
-  <!-- Cart sidebar -->
+  <!-- CART SIDEBAR -->
   <div class="cart-ov" id="cartOv" aria-hidden="true"></div>
   <aside class="cart-sb" id="cartSb" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true">
     <div class="cart-hd">
@@ -165,7 +172,7 @@
     </div>
   </aside>
 
-  <!-- Zoom modal -->
+  <!-- ZOOM MODAL -->
   <div class="zoom-modal" id="zm" role="dialog" aria-modal="true" aria-label="Full size product image" aria-hidden="true">
     <button class="zoom-x" id="zoomClose" aria-label="Close image zoom">✕</button>
     <img id="zmImg" src="" alt="" loading="lazy">
@@ -173,14 +180,11 @@
 
   <main id="main-content">
 
-    <!-- ══════════════════════════════════════════════
-         PAGE: HOME
-    ══════════════════════════════════════════════ -->
+    <!-- PAGE: HOME -->
     <div id="page-home" class="page active" role="main" aria-label="Home">
 
-      <!-- S1: HERO -->
+      <!-- HERO -->
       <section class="hero" aria-label="Paivepo — Luxury African Art, Design and Storytelling">
-        <!-- Updated hero image to artist at work -->
         <div class="hero-bg" 
              style="background-image: url('images/hero-bg.webp'); background-position: center 40%;"
              role="img" 
@@ -189,11 +193,11 @@
         <div class="hero-cnt">
           <p class="hero-pre" aria-label="Plettenberg Bay, Old Nick Village, Established 2021">Plettenberg Bay &nbsp;·&nbsp; Old Nick Village &nbsp;·&nbsp; Est. 2021</p>
           <h1 class="hero-brand">
+            <span class="hero-brand-tagline">African Art &amp; Decor in Plettenberg Bay</span>
             <span class="hero-brand-name">PAIVEPO</span>
             <span class="hero-brand-divider" aria-hidden="true"></span>
             <span class="hero-brand-sub">Art &amp; Decor</span>
           </h1>
-          <!-- New tagline -->
           <p class="hero-tagline">Discover artists before the world does</p>
           <button class="hero-cta" data-page="gallery" aria-label="Explore the Paivepo Collection">
             Explore the Collection
@@ -208,7 +212,7 @@
         </div>
       </section>
 
-      <!-- S2: THE STORY (moved right after hero) -->
+      <!-- STORY -->
       <section class="story-sect" aria-labelledby="story-h">
         <div class="story-inner">
           <p class="story-kicker" aria-hidden="true">THERE WAS…</p>
@@ -219,12 +223,14 @@
           <div class="story-body">
             <p>A word inherited from my grandmother's stories in Zimbabwe. Today, it has become a home for artists, makers and creators whose work deserves to be seen by the world.</p>
             <p>From wildlife paintings and beaded sculpture to handcrafted furniture, every piece carries a story of becoming.</p>
+            <p>Located at Old Nick Village in Plettenberg Bay, Paivepo Art &amp; Decor is the premier destination for authentic African art on the Garden Route. From William Mwale's expressive wildlife paintings to Tinashe Kachama's intricate beaded sculptures, every piece tells a story of African heritage and artistry.</p>
+            <p>Whether you're a collector, interior designer, or simply love African art, visit our Plettenberg Bay gallery to discover unique works that transform spaces and connect hearts. We welcome commissions, shipping worldwide.</p>
           </div>
           <button class="story-cta" data-page="about" aria-label="Read the Paivepo story">Read Our Story</button>
         </div>
       </section>
 
-      <!-- S3: FEATURED ARTIST (new section) -->
+      <!-- FEATURED ARTIST -->
       <section class="featured-artist" aria-labelledby="fa-h">
         <div class="fa-content">
           <p class="sec-lbl">Featured Artist</p>
@@ -237,7 +243,7 @@
         </div>
       </section>
 
-      <!-- MARQUEE TICKER (now after story and featured artist) -->
+      <!-- MARQUEE -->
       <div class="mq-wrap" aria-hidden="true">
         <div class="mq-track">
           <span class="mq-item">Paintings</span><span class="mq-dot">·</span>
@@ -259,20 +265,19 @@
         </div>
       </div>
 
-      <!-- S4: FEATURED COLLECTIONS -->
+      <!-- COLLECTIONS -->
       <section class="coll-sect" aria-labelledby="coll-h">
         <div class="coll-header">
           <p class="sec-lbl">What We Create</p>
           <h2 class="sec-title" id="coll-h">Featured<br><em>Collections</em></h2>
         </div>
         <div class="coll-grid" role="list">
-
           <div class="coll-item" role="listitem">
             <button class="coll-btn" data-page="gallery" data-filter="Paintings" aria-label="View the Paintings collection">
               <div class="coll-img coll-img--paintings" role="img" aria-label="Wildlife and portrait paintings by African artists">
                 <picture>
                   <source srcset="images/coll-paintings.webp" type="image/webp">
-                  <img src="images/coll-paintings.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/coll-paintings.webp" alt="African wildlife paintings collection at Paivepo Art & Decor, Plettenberg Bay" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
               <div class="coll-ov" aria-hidden="true"></div>
@@ -283,13 +288,12 @@
               </div>
             </button>
           </div>
-
           <div class="coll-item" role="listitem">
             <button class="coll-btn" data-page="gallery" data-filter="Birds" aria-label="View Beaded and Wire Sculpture collection">
               <div class="coll-img coll-img--sculpture" role="img" aria-label="Handcrafted African beadwork and wire sculptures">
                 <picture>
                   <source srcset="images/coll-sculpture.webp" type="image/webp">
-                  <img src="images/artist-rooster.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/artist-rooster.webp" alt="Beaded and wire sculpture collection at Paivepo African art gallery" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
               <div class="coll-ov" aria-hidden="true"></div>
@@ -300,13 +304,12 @@
               </div>
             </button>
           </div>
-
           <div class="coll-item" role="listitem">
             <button class="coll-btn" data-page="gallery" data-filter="Furniture" aria-label="View the Furniture collection">
               <div class="coll-img coll-img--furniture" role="img" aria-label="Wine barrel furniture and handcrafted statement pieces">
                 <picture>
                   <source srcset="images/furniture-swing-chair.webp" type="image/webp">
-                  <img src="images/furniture-swing-chair.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/furniture-swing-chair.webp" alt="Wine barrel swing chair furniture from Paivepo, Plettenberg Bay" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
               <div class="coll-ov" aria-hidden="true"></div>
@@ -317,13 +320,12 @@
               </div>
             </button>
           </div>
-
           <div class="coll-item" role="listitem">
             <button class="coll-btn" data-page="contact" aria-label="Start a custom commission">
               <div class="coll-img coll-img--commissions" role="img" aria-label="Custom commissioned artwork and sculpture">
                 <picture>
                   <source srcset="images/coll-commissions.webp" type="image/webp">
-                  <img src="images/coll-commissions.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/coll-commissions.webp" alt="Custom African art commissions at Paivepo Art & Decor, Plettenberg Bay" aria-hidden="true" loading="lazy" width="800" height="1000" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
               <div class="coll-ov" aria-hidden="true"></div>
@@ -334,18 +336,16 @@
               </div>
             </button>
           </div>
-
         </div>
       </section>
 
-      <!-- S5: MEET THE ARTISTS -->
+      <!-- ARTISTS -->
       <section class="artists-sect" aria-labelledby="artists-h">
         <div class="artists-header">
           <p class="sec-lbl">The Creators</p>
           <h2 class="sec-title" id="artists-h">Meet the<br><em>Artists</em></h2>
         </div>
         <div class="artists-grid">
-
           <article class="artist-card">
             <div class="artist-portrait artist-portrait--william">
               <picture>
@@ -363,7 +363,6 @@
               <button class="artist-cta" data-page="gallery" data-filter="Paintings">View Collection →</button>
             </div>
           </article>
-
           <article class="artist-card">
             <div class="artist-portrait artist-portrait--allick">
               <picture>
@@ -398,14 +397,13 @@
               <button class="artist-cta" data-page="about">View Collection →</button>
             </div>
           </article>
-
         </div>
         <div class="artists-cta-wrap">
           <button class="btn btn-outline" data-page="artists" aria-label="Meet all Paivepo artists">Meet All Artists</button>
         </div>
       </section>
 
-      <!-- S6: SIGNATURE PIECES -->
+      <!-- SIGNATURE PIECES -->
       <section class="sig-sect" aria-labelledby="sig-h">
         <div class="sig-header">
           <div>
@@ -417,20 +415,19 @@
         <div class="feat-grid sig-grid" id="featGrid" role="list" aria-label="Signature pieces from the collection"></div>
       </section>
 
-      <!-- S7: PAIVEPO JOURNAL -->
+      <!-- JOURNAL -->
       <section class="journal-sect" aria-labelledby="journal-h">
         <div class="journal-header">
           <p class="sec-lbl">Paivepo Journal</p>
           <h2 class="sec-title" id="journal-h">Stories of<br><em>Becoming</em></h2>
         </div>
         <div class="journal-grid">
-
           <article class="journal-card">
             <div class="journal-img-wrap">
               <div class="journal-img journal-img--1" role="img" aria-label="William Mwale in his studio, painting">
                 <picture>
                   <source srcset="images/journal-1.webp" type="image/webp">
-                  <img src="images/journal-1.jpg" alt="" aria-hidden="true" loading="lazy" width="600" height="400" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/journal-1.jpg" alt="William Mwale painting in his studio at Paivepo, Plettenberg Bay" aria-hidden="true" loading="lazy" width="600" height="400" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
             </div>
@@ -441,13 +438,12 @@
               <button class="journal-read" data-page="journal" aria-label="Read: William's Journey from Malawi">Read →</button>
             </div>
           </article>
-
           <article class="journal-card">
             <div class="journal-img-wrap">
               <div class="journal-img journal-img--2" role="img" aria-label="Close-up of a painting in progress">
                 <picture>
                   <source srcset="images/journal-2.webp" type="image/webp">
-                  <img src="images/journal-2.webp" alt="" aria-hidden="true" loading="lazy" width="600" height="400" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/journal-2.webp" alt="Close-up of a painting in progress at Paivepo" aria-hidden="true" loading="lazy" width="600" height="400" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
             </div>
@@ -458,13 +454,12 @@
               <button class="journal-read" data-page="journal" aria-label="Read: How a Painting Begins">Read →</button>
             </div>
           </article>
-
           <article class="journal-card">
             <div class="journal-img-wrap">
               <div class="journal-img journal-img--3" role="img" aria-label="The Paivepo studio at Old Nick Village">
                 <picture>
                   <source srcset="images/journal-3.webp" type="image/webp">
-                  <img src="images/artist-protea.jpg" alt="" aria-hidden="true" loading="lazy" width="600" height="400" onerror="this.parentElement.classList.add('no-img')">
+                  <img src="images/artist-protea.jpg" alt="Tinashe Kachama in his studio at Old Nick Village, Plettenberg Bay" aria-hidden="true" loading="lazy" width="600" height="400" onerror="this.parentElement.classList.add('no-img')">
                 </picture>
               </div>
             </div>
@@ -475,11 +470,10 @@
               <button class="journal-read" data-page="journal" aria-label="Read: The Story Behind Paivepo">Read →</button>
             </div>
           </article>
-
         </div>
       </section>
 
-      <!-- S8: COMMISSION A PIECE -->
+      <!-- COMMISSION -->
       <section class="comm-sect" aria-labelledby="comm-h">
         <div class="comm-inner">
           <p class="sec-lbl sec-lbl--light">Bespoke</p>
@@ -488,8 +482,6 @@
             <em>unique?</em>
           </h2>
           <p class="comm-body">Whether it's a painting, sculpture or furniture piece, we work directly with our artists and makers to create one-of-a-kind works for homes, lodges and collectors across the world.</p>
-
-          <!-- Commission Steps -->
           <div class="comm-steps">
             <div class="comm-step">
               <span class="comm-step-num">01</span>
@@ -513,12 +505,11 @@
               </div>
             </div>
           </div>
-
           <button class="comm-cta" data-page="contact" aria-label="Start a commission with Paivepo">Start a Commission</button>
         </div>
       </section>
 
-      <!-- S9: NEWSLETTER -->
+      <!-- NEWSLETTER -->
       <section class="nl-sect" aria-labelledby="nl-h">
         <div class="nl-inner">
           <p class="sec-lbl">Stay Connected</p>
@@ -535,11 +526,9 @@
         </div>
       </section>
 
-      <!-- FOOTER (updated) -->
-      <!-- FOOTER (updated) -->
+      <!-- FOOTER -->
       <footer role="contentinfo">
         <div class="ft-grid ft-grid--three">
-          <!-- Left: Brand -->
           <div class="ft-brand-col">
             <div class="ft-logo">PAIVEPO</div>
             <div class="ft-sub">Luxury African Art, Design &amp; Storytelling</div>
@@ -550,8 +539,6 @@
               <a class="ft-soc-a" href="https://www.facebook.com/p/Paivepo-100083193819296/" target="_blank" rel="noopener noreferrer" aria-label="Paivepo on Facebook">Facebook</a>
             </nav>
           </div>
-
-          <!-- Middle: Explore -->
           <div class="ft-col-center">
             <div class="ft-col-t">Explore</div>
             <ul class="ft-links">
@@ -561,8 +548,6 @@
               <li><button data-page="contact">Commissions</button></li>
             </ul>
           </div>
-
-          <!-- Right: Contact -->
           <div class="ft-col-right">
             <div class="ft-col-t">Contact</div>
             <ul class="ft-links">
@@ -572,7 +557,6 @@
             </ul>
           </div>
         </div>
-
         <div class="ft-btm">
           <span class="ft-copy">© <span id="footerYear">2026</span> Paivepo Art &amp; Decor. All rights reserved.</span>
           <span class="ft-tagline">Handmade in Southern Africa. Collected worldwide.</span>
@@ -581,9 +565,9 @@
         </div>
       </footer>
 
-    </div><!-- /page-home -->
+    </div>
 
-    <!-- ══ PAGE: GALLERY ══ -->
+    <!-- PAGE: GALLERY -->
     <div id="page-gallery" class="page" aria-label="Collection gallery" aria-hidden="true">
       <header class="pg-hero">
         <p class="pg-lbl">The Collection</p>
@@ -627,7 +611,7 @@
       </footer>
     </div>
 
-    <!-- ══ PAGE: PRODUCT ══ -->
+    <!-- PAGE: PRODUCT -->
     <div id="page-product" class="page" aria-label="Product detail" aria-hidden="true">
       <div class="prod-layout">
         <div class="prod-imgs">
@@ -672,21 +656,19 @@
       </section>
     </div>
 
-    <!-- ══ PAGE: ARTISTS ══ -->
+    <!-- PAGE: ARTISTS -->
     <div id="page-artists" class="page" aria-label="Paivepo Artists" aria-hidden="true">
       <header class="pg-hero">
         <p class="pg-lbl">The Creators</p>
         <h1 class="pg-title">The Artists<br><em>Behind Paivepo</em></h1>
         <p class="pg-sub">A collective of African artists and makers based at Old Nick Village, Plettenberg Bay. Each one bringing a distinct voice, technique and story.</p>
       </header>
-
       <div class="artists-page-grid">
-
         <article class="artist-page-card">
           <div class="artist-page-portrait">
             <picture>
               <source srcset="images/artist-william.webp" type="image/webp">
-              <img src="images/artist-william.webp" alt="William Mwale, painter" width="700" height="900" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+              <img src="images/artist-william.webp" alt="William Mwale, painter from Malawi based at Paivepo, Plettenberg Bay" width="700" height="900" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </picture>
             <div class="artist-page-fallback" aria-hidden="true"></div>
           </div>
@@ -699,12 +681,11 @@
             <button class="btn" data-page="gallery" data-filter="Paintings">View William's Collection</button>
           </div>
         </article>
-
         <article class="artist-page-card artist-page-card--rev">
           <div class="artist-page-portrait">
             <picture>
               <source srcset="images/artist-allick.webp" type="image/webp">
-              <img src="images/artist-allick.webp" alt="Allick, painter and artist" width="700" height="900" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+              <img src="images/artist-allick.webp" alt="Allick, painter and artist at Paivepo, Plettenberg Bay" width="700" height="900" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
             </picture>
             <div class="artist-page-fallback" aria-hidden="true"></div>
           </div>
@@ -716,12 +697,11 @@
             <button class="btn" data-page="gallery" data-filter="Paintings">View Allick's Collection</button>
           </div>
         </article>
-
         <article class="artist-page-card">
           <div class="artist-page-portrait">
             <picture>
               <source srcset="images/artist-portrait.webp" type="image/webp">
-              <img src="images/artist-portrait.webp" alt="Tinashe Kachama, founder and beadwork sculptor" width="700" height="900" loading="lazy">
+              <img src="images/artist-portrait.webp" alt="Tinashe Kachama, founder of Paivepo and beadwork sculptor, Plettenberg Bay" width="700" height="900" loading="lazy">
             </picture>
           </div>
           <div class="artist-page-body">
@@ -733,9 +713,7 @@
             <button class="btn" data-page="about">Tinashe's Full Story</button>
           </div>
         </article>
-
       </div>
-
       <section class="comm-sect" aria-labelledby="comm-artists-h">
         <div class="comm-inner">
           <p class="sec-lbl sec-lbl--light">Bespoke</p>
@@ -744,7 +722,6 @@
           <button class="comm-cta" data-page="contact">Start a Commission</button>
         </div>
       </section>
-
       <footer role="contentinfo">
         <div class="ft-grid ft-grid--slim">
           <div>
@@ -768,7 +745,7 @@
       </footer>
     </div>
 
-    <!-- ══ PAGE: ABOUT / STORY ══ -->
+    <!-- PAGE: ABOUT / STORY -->
     <div id="page-about" class="page" aria-label="The Paivepo Story" aria-hidden="true">
       <header class="abt-hero">
         <picture>
@@ -783,7 +760,6 @@
           <p class="abt-bio">The name comes from a Shona word Tinashe Kachama's late grandmother would use to begin her stories. "Paivepo…" — the moment she said it, eyes would widen and everyone would brace for whatever tale was coming next.<br><br>Today, Paivepo has become something larger than one story. It is a home — for artists, makers and creators whose work deserves to be seen by the world. Based at Old Nick Village in Plettenberg Bay, we bring together African art, sculpture, furniture and storytelling under one roof.<br><br><strong>Paivepo is a bridge – connecting collectors around the world with overlooked African artists whose work deserves to be seen.</strong></p>
         </div>
       </header>
-
       <section class="proc" aria-labelledby="process-heading">
         <p class="sec-lbl">The Founder</p>
         <h2 class="sec-title" id="process-heading" style="margin-top:8px">Tinashe Kachama —<br><em>a story of becoming</em></h2>
@@ -805,7 +781,6 @@
           </div>
         </div>
       </section>
-
       <div class="abt-photos" aria-label="Studio and artwork photographs">
         <div class="abt-photo">
           <picture>
@@ -816,7 +791,7 @@
         <div class="abt-photo">
           <picture>
             <source srcset="images/wire-art.webp" type="image/webp">
-            <img src="images/wire-art.jpg" alt="Paivepo wire sculpture — an intricate wire fairy with beaded accents" width="600" height="750" loading="lazy">
+            <img src="images/wire-art.jpg" alt="Paivepo wire fairy sculpture with beaded accents" width="600" height="750" loading="lazy">
           </picture>
         </div>
         <div class="abt-photo">
@@ -826,7 +801,6 @@
           </picture>
         </div>
       </div>
-
       <div class="commission-panel">
         <div class="commission-text">
           <p class="sec-lbl">Commission</p>
@@ -844,7 +818,6 @@
           </picture>
         </div>
       </div>
-
       <footer role="contentinfo">
         <div class="ft-grid ft-grid--slim">
           <div>
@@ -868,21 +841,19 @@
       </footer>
     </div>
 
-    <!-- ══ PAGE: JOURNAL ══ -->
+    <!-- PAGE: JOURNAL -->
     <div id="page-journal" class="page" aria-label="Paivepo Journal" aria-hidden="true">
       <header class="pg-hero">
         <p class="pg-lbl">Paivepo Journal</p>
         <h1 class="pg-title">Stories of<br><em>Becoming</em></h1>
         <p class="pg-sub">Conversations with creators. The stories behind the work. The journeys that shaped the artists.</p>
       </header>
-
       <div class="journal-page-grid">
-
         <article class="journal-page-card">
           <div class="journal-page-img journal-page-img--1" role="img" aria-label="Allick painting in his studio">
             <picture>
               <source srcset="images/artist-allick.webp" type="image/webp">
-              <img src="images/artist-allick.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="500">
+              <img src="images/artist-allick.webp" alt="Allick painting in his studio at Paivepo, Plettenberg Bay" aria-hidden="true" loading="lazy" width="800" height="500">
             </picture>
           </div>
           <div class="journal-page-body">
@@ -893,12 +864,11 @@
             <p class="journal-page-meta" style="margin-top:8px;color:var(--gold)">Published 16 June 2026</p>
           </div>
         </article>
-
         <article class="journal-page-card">
           <div class="journal-page-img journal-page-img--2" role="img" aria-label="William Mwale painting in his studio">
             <picture>
               <source srcset="images/artist-william.webp" type="image/webp">
-              <img src="images/artist-william.webp" alt="" aria-hidden="true" loading="lazy" width="800" height="500">
+              <img src="images/artist-william.webp" alt="William Mwale painting in his studio at Paivepo, Plettenberg Bay" aria-hidden="true" loading="lazy" width="800" height="500">
             </picture>
           </div>
           <div class="journal-page-body">
@@ -909,12 +879,11 @@
             <p class="journal-page-meta" style="margin-top:8px;color:var(--gold)">Published 16 June 2026</p>
           </div>
         </article>
-
         <article class="journal-page-card">
           <div class="journal-page-img journal-page-img--3" role="img" aria-label="Tinashe Kachama in his studio, surrounded by beaded sculptures">
             <picture>
               <source srcset="images/artist-studio.webp" type="image/webp">
-              <img src="images/artist-studio.jpg" alt="" aria-hidden="true" loading="lazy" width="800" height="500">
+              <img src="images/artist-studio.jpg" alt="Tinashe Kachama in his studio at Old Nick Village, Plettenberg Bay" aria-hidden="true" loading="lazy" width="800" height="500">
             </picture>
           </div>
           <div class="journal-page-body">
@@ -925,12 +894,11 @@
             <p class="journal-page-meta" style="margin-top:8px;color:var(--gold)">Published 16 June 2026</p>
           </div>
         </article>
-
         <article class="journal-page-card">
           <div class="journal-page-img journal-page-img--4" role="img" aria-label="Beaded sculpture in process">
             <picture>
               <source srcset="images/journal-4.webp" type="image/webp">
-              <img src="images/wire-art.jpg" alt="" aria-hidden="true" loading="lazy" width="800" height="500" onerror="this.parentElement.classList.add('no-img')">
+              <img src="images/wire-art.jpg" alt="Wire fairy sculpture in process at Paivepo" aria-hidden="true" loading="lazy" width="800" height="500" onerror="this.parentElement.classList.add('no-img')">
             </picture>
           </div>
           <div class="journal-page-body">
@@ -940,9 +908,7 @@
             <p class="journal-page-meta">Coming Soon</p>
           </div>
         </article>
-
       </div>
-
       <footer role="contentinfo">
         <div class="ft-grid ft-grid--slim">
           <div>
@@ -967,7 +933,7 @@
       </footer>
     </div>
 
-    <!-- ══ PAGE: CONTACT ══ -->
+    <!-- PAGE: CONTACT -->
     <div id="page-contact" class="page" aria-label="Contact" aria-hidden="true">
       <div class="con-layout">
         <div class="con-info">
@@ -997,7 +963,6 @@
             </div>
           </address>
         </div>
-
         <div class="con-form">
           <div class="form-t">Send a Message</div>
           <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm" novalidate aria-label="Contact form">
@@ -1039,9 +1004,27 @@
           </div>
         </div>
       </div>
+
+      <!-- GOOGLE MAPS -->
+      <section class="map-section" style="padding: 40px var(--side); background: var(--ivory-deep);">
+        <h2 style="font-family: var(--font-serif); font-size: 24px; font-weight: 300; margin-bottom: 16px;">Visit Paivepo at Old Nick Village, Plettenberg Bay</h2>
+        <div class="map-container" style="max-width: 100%; overflow: hidden; border-radius: 2px;">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5276.794201285709!2d23.37673425923268!3d-34.04648747330854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e3a94fe20d43b5b%3A0xb3baf5a4e3b4a0d1!2sOld%20Nick%20Village!5e0!3m2!1sen!2sza!4v1700000000000" 
+            width="100%" 
+            height="400" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Paivepo Art & Decor location at Old Nick Village, Plettenberg Bay">
+          </iframe>
+        </div>
+        <p style="font-family: var(--font-sans); font-size: 14px; color: var(--muted); margin-top: 12px;"><strong>Find us:</strong> Old Nick Village, just behind MakeAfrica and Moonstone. Free parking available.</p>
+      </section>
     </div>
 
-    <!-- ══ PAGE: CHECKOUT ══ -->
+    <!-- PAGE: CHECKOUT -->
     <div id="page-checkout" class="page" aria-label="Checkout" aria-hidden="true">
       <div id="coContent">
         <div class="co-layout">
@@ -1069,6 +1052,11 @@
               <label class="fl" for="co-notes">Notes</label>
               <textarea class="ft2" id="co-notes" name="notes" placeholder="Any special packaging requests, gift messages, or questions..." style="height:100px"></textarea>
             </div>
+            <div class="trust-badges" style="display: flex; gap: 20px; justify-content: center; margin: 24px 0 16px; font-size: 12px; color: var(--muted);">
+              <span>Secure Checkout</span>
+              <span>Worldwide Shipping</span>
+              <span>Personal Confirmation</span>
+            </div>
             <button class="po-btn" id="placeOrderBtn" type="button">Submit Order Enquiry</button>
             <p class="form-note" style="text-align:center;margin-top:18px">We'll personally confirm your order and arrange payment within 24 hours.</p>
           </div>
@@ -1089,7 +1077,6 @@
 
   </main>
 
-  <!-- Hidden Netlify forms -->
   <form name="order-enquiry" data-netlify="true" netlify-honeypot="bot-field" style="display:none" aria-hidden="true">
     <input type="hidden" name="form-name" value="order-enquiry">
     <input name="bot-field">
