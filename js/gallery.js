@@ -1,4 +1,4 @@
-// gallery.js — Renders gallery and featured works
+// gallery.js — Renders gallery with captions
 import { products, FEATURED_IDS } from './data.js';
 import { showProduct } from './product.js';
 import { sounds } from './sound.js';
@@ -11,6 +11,19 @@ export function setFilter(filter) {
 
 export function refreshGallery() {
   renderGallery();
+}
+
+function picWithCaption(jpgSrc, webpSrc, alt, caption, cls = '', w = '', h = '', lazy = true) {
+  const dims = (w && h) ? ` width="${w}" height="${h}"` : '';
+  const load = lazy ? ' loading="lazy"' : '';
+  const clsAttr = cls ? ` class="${cls}"` : '';
+  return `<figure class="gallery-figure">
+    <picture>
+      <source srcset="${webpSrc}" type="image/webp">
+      <img src="${jpgSrc}" alt="${alt}"${clsAttr}${dims}${load}>
+    </picture>
+    <figcaption>${caption}</figcaption>
+  </figure>`;
 }
 
 function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true) {
@@ -43,13 +56,14 @@ export function renderFeatured() {
       ? '<div class="feat-sold-badge" aria-label="Sold">Sold</div>'
       : '';
     const imgAlt = p.alt || `${p.name}${p.artist ? ` by ${p.artist}` : ''} — Paivepo Art & Decor`;
+    const caption = `${p.name}${p.artist ? ` by ${p.artist}` : ''}`;
 
     return `
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
            ${p.sold ? '' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
            aria-label="${p.name}${p.sold ? ' — sold' : `, R${p.price.toLocaleString()}`}">
         <div class="feat-img-wrap">
-          ${pic(p.image, p.imageWebp, imgAlt, 'feat-img', '800', '1000')}
+          ${picWithCaption(p.image, p.imageWebp, imgAlt, caption, 'feat-img', '800', '1000')}
         </div>
         ${soldBadge}
         <div class="feat-info" aria-hidden="true">
@@ -88,13 +102,14 @@ function buildCard(p) {
 
   const imgAlt = p.alt || `${p.name}${p.artist ? ` by ${p.artist}` : ''} — ${p.cat}, Paivepo Art & Decor`;
   const categoryLabel = getCategoryLabel(p.cat);
+  const caption = `${p.name}${p.artist ? ` by ${p.artist}` : ''}`;
 
   return `
     <div class="gal-card${p.sold ? ' is-sold' : ''}"
          ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
          aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
       <div class="gal-img-wrap">
-        ${pic(p.image, p.imageWebp, imgAlt, 'gal-img', '600', '800', false)}
+        ${picWithCaption(p.image, p.imageWebp, imgAlt, caption, 'gal-img', '600', '800', false)}
         <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Details</div>'}</div>
         ${soldOverlay}
       </div>

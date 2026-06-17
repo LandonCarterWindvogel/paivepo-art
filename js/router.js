@@ -1,4 +1,4 @@
-// router.js — SPA router with dynamic meta
+// router.js — SPA router with clean URLs and canonical tags
 import { renderGallery, setFilter } from './gallery.js';
 import { sounds } from './sound.js';
 
@@ -27,6 +27,28 @@ const pageDescriptions = {
   product:  'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings, beaded sculptures, and furniture. Visit our gallery.'
 };
 
+const canonicalUrls = {
+  home:     'https://paivepo.co.za/',
+  gallery:  'https://paivepo.co.za/gallery',
+  artists:  'https://paivepo.co.za/artists',
+  about:    'https://paivepo.co.za/story',
+  journal:  'https://paivepo.co.za/journal',
+  contact:  'https://paivepo.co.za/contact',
+  product:  'https://paivepo.co.za/product',
+  checkout: 'https://paivepo.co.za/checkout'
+};
+
+const cleanPaths = {
+  home:     '/',
+  gallery:  '/gallery',
+  artists:  '/artists',
+  about:    '/story',
+  journal:  '/journal',
+  contact:  '/contact',
+  product:  '/product',
+  checkout: '/checkout'
+};
+
 function getProductTitle() {
   const el = document.getElementById('prodTitle');
   return el && el.textContent ? `${el.textContent} — Handmade African Art | Paivepo, Plettenberg Bay` : pageTitles.product;
@@ -47,6 +69,16 @@ function updateMeta(title, description) {
   if (meta) meta.content = description;
 }
 
+function setCanonical(pageId) {
+  const existing = document.querySelector('link[rel="canonical"]');
+  if (existing) existing.remove();
+
+  const link = document.createElement('link');
+  link.rel = 'canonical';
+  link.href = canonicalUrls[pageId] || 'https://paivepo.co.za/';
+  document.head.appendChild(link);
+}
+
 export function setTransition(fn) {
   transitionFn = fn;
 }
@@ -61,9 +93,16 @@ export function go(pageId, skipTransition = false, force = false) {
 }
 
 function _swap(pageId) {
-  document.querySelectorAll('.page').forEach(p => {
+  const allPages = document.querySelectorAll('.page');
+  allPages.forEach(p => {
     p.classList.remove('active');
     p.setAttribute('aria-hidden', 'true');
+    const focusable = p.querySelectorAll('button, a, input, [tabindex]:not([tabindex="-1"])');
+    focusable.forEach(el => {
+      if (el === document.activeElement) {
+        el.blur();
+      }
+    });
   });
 
   const next = document.getElementById(`page-${pageId}`);
@@ -71,10 +110,25 @@ function _swap(pageId) {
   next.classList.add('active');
   next.removeAttribute('aria-hidden');
 
+  const focusTarget = next.querySelector('h1, h2, [data-page="home"], .pg-hero, .hero-cnt');
+  if (focusTarget && focusTarget !== document.activeElement) {
+    if (focusTarget.hasAttribute('tabindex') || focusTarget.tagName.match(/^H[1-6]$/)) {
+      focusTarget.focus({ preventScroll: true });
+    } else {
+      focusTarget.setAttribute('tabindex', '-1');
+      focusTarget.focus({ preventScroll: true });
+      setTimeout(() => {
+        focusTarget.removeAttribute('tabindex');
+      }, 100);
+    }
+  } else {
+    const logo = document.getElementById('navLogo');
+    if (logo) logo.focus({ preventScroll: true });
+  }
+
   window.scrollTo({ top: 0, behavior: 'instant' });
   currentPage = pageId;
 
-  // Set title and description
   let title = pageTitles[pageId] || pageTitles.home;
   let desc  = pageDescriptions[pageId] || pageDescriptions.home;
 
@@ -84,17 +138,11 @@ function _swap(pageId) {
   }
 
   updateMeta(title, desc);
+  setCanonical(pageId);
 
-  // URL hash
-  const hashes = {
-    home: '', gallery: 'gallery', artists: 'artists',
-    about: 'story', journal: 'journal',
-    contact: 'contact', product: 'product', checkout: 'checkout'
-  };
-  const hash = hashes[pageId];
-  history.replaceState(null, '', hash ? `#${hash}` : window.location.pathname);
+  const path = cleanPaths[pageId] || '/';
+  history.pushState(null, '', path);
 
-  // Screen reader announcer
   const announcer = document.getElementById('page-announcer');
   if (announcer) {
     announcer.textContent = '';
@@ -120,11 +168,19 @@ export function initRouter() {
   ann.className = 'sr-only';
   document.body.appendChild(ann);
 
-  const hash = window.location.hash.replace('#', '');
-  const validPages = ['gallery', 'artists', 'story', 'journal', 'contact'];
-  if (validPages.includes(hash)) {
-    _swap(hash === 'story' ? 'about' : hash);
-  }
+  const path = window.location.pathname;
+  const pageMap = {
+    '/': 'home',
+    '/gallery': 'gallery',
+    '/artists': 'artists',
+    '/story': 'about',
+    '/journal': 'journal',
+    '/contact': 'contact',
+    '/product': 'product',
+    '/checkout': 'checkout'
+  };
+  const initialPage = pageMap[path] || 'home';
+  _swap(initialPage);
 
   document.body.addEventListener('click', e => {
     const target = e.target.closest('[data-page]');
@@ -146,7 +202,17 @@ export function initRouter() {
   });
 
   window.addEventListener('popstate', () => {
-    const hash = window.location.hash.replace('#', '');
-    _swap(hash === 'story' ? 'about' : (hash || 'home'));
+    const path = window.location.pathname;
+    const pageMap = {
+      '/': 'home',
+      '/gallery': 'gallery',
+      '/artists': 'artists',
+      '/story': 'about',
+      '/journal': 'journal',
+      '/contact': 'contact',
+      '/product': 'product',
+      '/checkout': 'checkout'
+    };
+    _swap(pageMap[path] || 'home');
   });
 }
