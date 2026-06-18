@@ -15,10 +15,10 @@ export const products = [
     mats: "Glass seed beads, wire armature",
     beads: null,
     time: "Approx. 2–3 weeks",
-    image: "images/product-rooster.jpg",
+    image: "images/product-rooster.webp",
     imageWebp: "images/product-rooster.webp",
     alt: "Hand-beaded rooster sculpture by Tinashe Kachama, African bird art from Paivepo Plettenberg Bay",
-    shopifyVariantId: 46511416311997
+    shopifyVariantId: 8237570031805
   },
   {
     id: 5,
@@ -35,7 +35,7 @@ export const products = [
     image: "images/product-peacock.webp",
     imageWebp: "images/product-peacock.webp",
     alt: "Beaded peacock sculpture, intricate African bird art by Tinashe Kachama at Paivepo Plettenberg Bay",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
   {
     id: 7,
@@ -52,7 +52,7 @@ export const products = [
     image: "images/product-flamingo.webp",
     imageWebp: "images/product-flamingo.webp",
     alt: "Hand-beaded flamingo sculpture, African wildlife art by Tinashe Kachama at Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
 
   // BEADED SCULPTURE — WILD ANIMALS
@@ -71,7 +71,7 @@ export const products = [
     image: "images/product-elephant.webp",
     imageWebp: "images/product-elephant.webp",
     alt: "Beaded elephant sculpture, African wildlife art by Tinashe Kachama at Paivepo Plettenberg Bay",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
   {
     id: 2,
@@ -88,7 +88,7 @@ export const products = [
     image: "images/product-lion.webp",
     imageWebp: "images/product-lion.webp",
     alt: "African lion beaded sculpture, handmade wildlife art by Tinashe Kachama at Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
   {
     id: 6,
@@ -105,7 +105,7 @@ export const products = [
     image: "images/product-zebra.webp",
     imageWebp: "images/product-zebra.webp",
     alt: "Beaded zebra sculpture, African wildlife art from Paivepo Plettenberg Bay",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
   {
     id: 8,
@@ -122,7 +122,7 @@ export const products = [
     image: "images/product-rhino.webp",
     imageWebp: "images/product-rhino.webp",
     alt: "Beaded rhino sculpture, African wildlife art by Tinashe Kachama at Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
 
   // BEADED SCULPTURE — FLORAL
@@ -138,10 +138,10 @@ export const products = [
     mats: "Glass seed beads, wire stem",
     beads: null,
     time: "Approx. 1.5–2 weeks",
-    image: "images/product-protea.jpg",
+    image: "images/product-protea.webp",
     imageWebp: "images/product-protea.webp",
     alt: "Hand-beaded Protea sculpture, South African flower art by Tinashe Kachama at Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
 
   // WIRE ART
@@ -157,10 +157,10 @@ export const products = [
     mats: "Decorative wire, beaded accents",
     beads: "Accent beads",
     time: "Approx. 1–2 weeks",
-    image: "images/wire-art.jpg",
+    image: "images/wire-art.webp",
     imageWebp: "images/wire-art.webp",
     alt: "Wire fairy sculpture with beaded accents by Tinashe Kachama, African wire art from Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
 
   // PAINTINGS — WILLIAM MWALE
@@ -176,10 +176,10 @@ export const products = [
     mats: "Oil on canvas",
     beads: null,
     time: null,
-    image: "images/painting-elephant-dusk.jpg",
+    image: "images/painting-elephant-dusk.webp",
     imageWebp: "images/painting-elephant-dusk.webp",
     alt: "Elephant at dusk oil painting by William Mwale, African wildlife art from Paivepo Plettenberg Bay",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
   {
     id: 21,
@@ -193,10 +193,10 @@ export const products = [
     mats: "Oil on canvas",
     beads: null,
     time: null,
-    image: "images/painting-lion-portrait.jpg",
+    image: "images/painting-lion-portrait.webp",
     imageWebp: "images/painting-lion-portrait.webp",
     alt: "Lion portrait oil painting by William Mwale, African wildlife art from Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
 
   // PAINTINGS — ALLICK
@@ -212,10 +212,10 @@ export const products = [
     mats: "Acrylic on canvas",
     beads: null,
     time: null,
-    image: "images/painting-village-morning.jpg",
+    image: "images/painting-village-morning.webp",
     imageWebp: "images/painting-village-morning.webp",
     alt: "Village morning acrylic painting by Allick, contemporary African art from Paivepo",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
   {
     id: 32,
@@ -229,10 +229,10 @@ export const products = [
     mats: "Acrylic on canvas",
     beads: null,
     time: null,
-    image: "images/painting-women-zimbabwe.jpg",
+    image: "images/painting-women-zimbabwe.webp",
     imageWebp: "images/painting-women-zimbabwe.webp",
     alt: "Women of Zimbabwe painting by Allick, African portrait art from Paivepo Plettenberg Bay",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   },
 
   // FURNITURE
@@ -248,10 +248,10 @@ export const products = [
     mats: "Reclaimed wine barrel staves, steel suspension hardware, rope",
     beads: null,
     time: "Made to order — 4–6 weeks",
-    image: "images/furniture-swing-chair.jpg",
+    image: "images/furniture-swing-chair.webp",
     imageWebp: "images/furniture-swing-chair.webp",
     alt: "Wine barrel swing chair, reclaimed wood furniture by Paivepo Studio in Plettenberg Bay",
-    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
+    shopifyVariantId: 0
   }
 ];
 
@@ -266,7 +266,7 @@ export const artists = [
     origin: "Malawi → South Africa",
     role: "Painter",
     bio: "Telling stories through colour and canvas. Wildlife. Portraits. The African landscape alive in every brushstroke.",
-    image: "images/artist-william.jpg",
+    image: "images/artist-william.webp",
     imageWebp: "images/artist-william.webp",
     filter: "Paintings"
   },
@@ -276,7 +276,7 @@ export const artists = [
     origin: "Zimbabwe → South Africa",
     role: "Painter & Artist",
     bio: "Handcrafted African expression through paint and form. Each canvas is a conversation between culture and canvas.",
-    image: "images/artist-allick.jpg",
+    image: "images/artist-allick.webp",
     imageWebp: "images/artist-allick.webp",
     filter: "Paintings"
   },
@@ -286,7 +286,7 @@ export const artists = [
     origin: "Zimbabwe → South Africa",
     role: "Founder & Beadwork Sculptor",
     bio: "Founder of Paivepo. Beadwork sculptor rooted in Shona heritage — bead by bead, story by story.",
-    image: "images/artist-portrait.jpg",
+    image: "images/artist-portrait.webp",
     imageWebp: "images/artist-portrait.webp",
     page: "about"
   }
