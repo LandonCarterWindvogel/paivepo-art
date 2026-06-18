@@ -117,19 +117,13 @@ function renderSoldState(p) {
   const imgAlt = p.alt || `${p.name} — handmade ${p.cat ? p.cat.toLowerCase() : ''} artwork by ${p.artist || 'Paivepo'}`;
   const soldClass = p.sold ? 'prod-main sold-img' : 'prod-main zoomable';
 
-  const pictureHTML = `<picture id="prodMainPicture">
-    <source srcset="${p.imageWebp}" type="image/webp">
-    <img id="prodMain" src="${p.imageWebp}" alt="${imgAlt}" class="${soldClass}" width="800" height="1000" fetchpriority="low">
-  </picture>`;
-
-  const mainContainer = document.querySelector('.prod-imgs');
-  if (mainContainer) {
-    const existingPic = document.getElementById('prodMainPicture');
-    if (existingPic) existingPic.outerHTML = pictureHTML;
-    else {
-      const oldImg = document.getElementById('prodMain');
-      if (oldImg) oldImg.outerHTML = pictureHTML;
-    }
+  // ── FIX: Use container for stable image replacement ──
+  const container = document.querySelector('.prod-imgs');
+  if (container) {
+    container.innerHTML = `<picture id="prodMainPicture">
+      <source srcset="${p.imageWebp}" type="image/webp">
+      <img id="prodMain" src="${p.imageWebp}" alt="${imgAlt}" class="${soldClass}" width="800" height="1000" fetchpriority="low">
+    </picture>`;
   }
 
   const mainImg = document.getElementById('prodMain');
@@ -187,7 +181,15 @@ function renderRelated(p) {
   const others = products.filter(r => r.id !== p.id && r.cat !== p.cat);
   const related = [...same, ...others].slice(0, 4);
 
-  document.getElementById('relGrid').innerHTML = related.map(r => {
+  const grid = document.getElementById('relGrid');
+
+  // ── FIX: Show empty state message ──
+  if (!related.length) {
+    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-family:var(--font-sans);font-size:14px;padding:40px 0;">More pieces coming soon…</p>`;
+    return;
+  }
+
+  grid.innerHTML = related.map(r => {
     const imgAlt = r.alt || `${r.name} — handmade ${r.cat} artwork by ${r.artist || 'Paivepo'}`;
     return `
       <div class="rel-card${r.sold ? ' is-sold' : ''}"

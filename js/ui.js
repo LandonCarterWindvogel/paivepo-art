@@ -4,6 +4,7 @@
 import { sounds, toggleSound } from './sound.js';
 
 let toastTimer = null;
+let zoomPreviousFocus = null;
 
 export function showToast(message) {
   const toast = document.getElementById('toast');
@@ -12,6 +13,37 @@ export function showToast(message) {
   toast.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ── Focus trap for zoom modal ──
+function trapFocus(element) {
+  const focusable = element.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  zoomPreviousFocus = document.activeElement;
+
+  const handler = (e) => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+  element.addEventListener('keydown', handler);
+  element._trapHandler = handler;
+  first.focus();
+}
+
+function releaseFocus() {
+  if (zoomPreviousFocus && zoomPreviousFocus.focus) {
+    zoomPreviousFocus.focus();
+  }
 }
 
 export function openZoom() {
@@ -36,6 +68,7 @@ export function openZoom() {
   zm.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   document.getElementById('zoomClose')?.focus();
+  trapFocus(zm); // Trap focus inside the modal
   sounds.click();
 }
 
@@ -45,6 +78,7 @@ export function closeZoom() {
   zm.classList.remove('open');
   zm.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  releaseFocus(); // Return focus to where it was
 }
 
 export function initNav() {

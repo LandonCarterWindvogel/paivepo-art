@@ -81,7 +81,8 @@ export function initCursor() {
 
       if (dist > 18) {
         beads.push(new Bead(mouseX, mouseY));
-        if (beads.length > 120) beads.shift();
+        // ── FIX: Reduced max beads from 120 to 60 for performance ──
+        if (beads.length > 60) beads.shift();
         lastBeadX = mouseX;
         lastBeadY = mouseY;
       }
@@ -89,7 +90,6 @@ export function initCursor() {
   });
 
   function animateRing() {
-    // FIX: instant follow – no trailing interpolation
     ringX = mouseX;
     ringY = mouseY;
     if (ring) { ring.style.left = `${ringX}px`; ring.style.top = `${ringY}px`; }

@@ -1,5 +1,5 @@
 /**
- * cart.js — Shopping bag with focus trap (no shipping selector)
+ * cart.js — Shopping bag with Shopify redirect
  */
 import { showToast } from './ui.js';
 import { go } from './router.js';
@@ -94,6 +94,7 @@ export function addToCart(product) {
       qty:   1,
       jpg:   product.image,
       webp:  product.imageWebp,
+      shopifyVariantId: product.shopifyVariantId || null,
     });
   }
   updateCount();
@@ -138,96 +139,35 @@ export function renderCart() {
     </div>`;
   }).join('');
 
-  // Recalculate total in case quantities changed (already have it, but use same variable)
   document.getElementById('cartTot').textContent = `R${total.toLocaleString()}`;
   updateCount();
 }
 
+// ── Redirect to Shopify checkout ──
 export function goCheckout() {
-  if (!cart.length) { showToast('Your bag is empty'); return; }
+  if (!cart.length) { 
+    showToast('Your bag is empty');
+    return;
+  }
+
+  // Check if all items have a Shopify variant ID
+  const missingIds = cart.filter(item => !item.shopifyVariantId);
+  if (missingIds.length) {
+    console.warn('Missing Shopify variant IDs for:', missingIds.map(i => i.name).join(', '));
+    showToast('Some items cannot be checked out yet – please contact us directly');
+    return;
+  }
+
+  const items = cart.map(item => `${item.shopifyVariantId}:${item.qty}`).join(',');
+  const shopifyStoreUrl = 'https://paivepoart.myshopify.com';
+  const checkoutUrl = `${shopifyStoreUrl}/cart/${items}`;
+
   closeCart();
-  document.getElementById('coContent').style.display = '';
-  document.getElementById('oSuccess').classList.remove('show');
 
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  document.getElementById('coItems').innerHTML = cart.map(i => {
-    const jpg  = i.jpg || '';
-    const webp = i.webp || jpg;
-    return `<div class="oi">
-      <picture>
-        <source srcset="${webp}" type="image/webp">
-        <img class="oi-img" src="${jpg}" alt="${i.name}" width="60" height="76" loading="lazy">
-      </picture>
-      <div><div class="oi-name">${i.name}</div><div class="oi-qty">Qty: ${i.qty}</div></div>
-      <div class="oi-price">R${(i.price * i.qty).toLocaleString()}</div>
-    </div>`;
-  }).join('');
-
-  document.getElementById('coSummary').innerHTML = `
-    <div class="o-row"><span>Subtotal</span><span>R${total.toLocaleString()}</span></div>
-    <div class="o-row"><span>Shipping</span><span>To be arranged</span></div>
-    <div class="o-row tot"><span>Total</span><span>R${total.toLocaleString()}</span></div>
-  `;
-  go('checkout');
+  window.location.href = checkoutUrl;
 }
 
-export async function placeOrder() {
-  const btn = document.getElementById('placeOrderBtn');
-  if (btn) {
-    btn.disabled    = true;
-    btn.textContent = 'Submitting…';
-  }
-
-  const itemsSummary = cart
-    .map(i => `${i.name} ×${i.qty} — R${(i.price * i.qty).toLocaleString()}`)
-    .join(' | ');
-
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-
-  const body = new URLSearchParams({
-    'form-name':      'order-enquiry',
-    'bot-field':      '',
-    'customer-name':
-      (document.getElementById('co-fname')?.value || '').trim() + ' ' +
-      (document.getElementById('co-lname')?.value || '').trim(),
-    'customer-email': document.getElementById('co-email')?.value   || '',
-    'customer-phone': document.getElementById('co-phone')?.value   || '',
-    'address':        document.getElementById('co-address')?.value || '',
-    'city':           document.getElementById('co-city')?.value    || '',
-    'country':        document.getElementById('co-country')?.value || '',
-    'postal-code':    document.getElementById('co-postal')?.value  || '',
-    'items':          itemsSummary,
-    'total':          `R${total.toLocaleString()}`,
-    'notes':          document.getElementById('co-notes')?.value   || '',
-  });
-
-  try {
-    const response = await fetch('/', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body:    body.toString(),
-    });
-
-    if (!response.ok) throw new Error(`Status ${response.status}`);
-
-    document.getElementById('coContent').style.display = 'none';
-    document.getElementById('oSuccess').classList.add('show');
-    sounds.addCart();
-    cart = [];
-    updateCount();
-    saveCart();
-
-  } catch (err) {
-    console.error('Order submission error:', err);
-    if (btn) {
-      btn.disabled    = false;
-      btn.textContent = 'Submit Order Enquiry';
-    }
-    showToast('Something went wrong — please contact Tinashe directly on WhatsApp');
-  }
-}
-
-function updateCount() {
+export function updateCount() {
   const count = cart.reduce((s, i) => s + i.qty, 0);
   const el = document.getElementById('cc');
   if (el) {
@@ -241,8 +181,6 @@ export function initCart() {
   document.getElementById('cartCloseBtn')?.addEventListener('click', closeCart);
   document.getElementById('cartOv')?.addEventListener('click', closeCart);
   document.getElementById('checkoutBtn')?.addEventListener('click', goCheckout);
-  document.getElementById('placeOrderBtn')?.addEventListener('click', placeOrder);
-  document.getElementById('checkoutLogo')?.addEventListener('click', () => go('home'));
 
   document.getElementById('cartBody')?.addEventListener('click', e => {
     const btn = e.target.closest('[data-cart-action]');

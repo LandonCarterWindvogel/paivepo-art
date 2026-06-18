@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preload" as="image" href="images/artist-allick.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/hero-bg.webp" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -95,15 +95,15 @@
     </button>
 
     <ul class="nav-links" role="list">
-      <li><button class="nav-link" data-page="gallery">Browse African Art Gallery</button></li>
-      <li><button class="nav-link" data-page="artists">Meet Our African Artists</button></li>
+      <li><button class="nav-link" data-page="gallery">Collection</button></li>
+      <li><button class="nav-link" data-page="artists">Artists</button></li>
       <li><button class="nav-link" data-page="about">Our Story</button></li>
       <li><button class="nav-link" data-page="journal">Journal</button></li>
       <li><button class="nav-link" data-page="contact">Contact</button></li>
     </ul>
 
     <div class="nav-right">
-      <button class="nav-commission" data-page="contact" aria-label="Commission a custom piece">Commission a Piece</button>
+      <button class="nav-commission" data-page="contact" aria-label="Commission a custom piece">Commission</button>
       <button class="sound-btn" id="soundToggleBtn" aria-label="Toggle ambient sound" aria-pressed="true">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
           <path d="M9 18V5l12-2v13M6 15H3a1 1 0 01-1-1v-4a1 1 0 011-1h3l4-3v11l-4-3z"/>
@@ -135,15 +135,15 @@
       <nav aria-label="Mobile navigation">
         <ul class="mm-links" role="list">
           <li><button class="mm-link" data-page="home">Home</button></li>
-          <li><button class="mm-link" data-page="gallery">Browse African Art Gallery</button></li>
-          <li><button class="mm-link" data-page="artists">Meet Our African Artists</button></li>
+          <li><button class="mm-link" data-page="gallery">Collection</button></li>
+          <li><button class="mm-link" data-page="artists">Artists</button></li>
           <li><button class="mm-link" data-page="about">Our Story</button></li>
           <li><button class="mm-link" data-page="journal">Journal</button></li>
           <li><button class="mm-link" data-page="contact">Contact</button></li>
         </ul>
       </nav>
       <div class="mm-cta">
-        <button class="btn btn-dark" data-page="contact">Commission a Piece</button>
+        <button class="btn btn-dark" data-page="contact">Commission</button>
       </div>
       <div class="mm-footer">
         <a href="https://www.instagram.com/paivepo_art_decor/" target="_blank" rel="noopener" aria-label="Paivepo on Instagram">Instagram</a>
@@ -193,12 +193,12 @@
         <div class="hero-cnt">
           <p class="hero-pre" aria-label="Plettenberg Bay, Old Nick Village, Established 2021">Plettenberg Bay &nbsp;·&nbsp; Old Nick Village &nbsp;·&nbsp; Est. 2021</p>
           <h1 class="hero-brand">
-            <span class="hero-brand-tagline">African Art &amp; Decor in Plettenberg Bay</span>
+            <span class="hero-brand-tagline">CURATED AFRICAN ART &amp; DESIGN</span>
             <span class="hero-brand-name">PAIVEPO</span>
             <span class="hero-brand-divider" aria-hidden="true"></span>
-            <span class="hero-brand-sub">Art &amp; Decor</span>
+            <span class="hero-brand-sub">ART · DESIGN · STORYTELLING</span>
           </h1>
-          <p class="hero-tagline">Discover artists before the world does</p>
+          <p class="hero-tagline">Discover artists before the world does.</p>
           <button class="hero-cta" data-page="gallery" aria-label="Explore the Paivepo Collection">
             Explore the Collection
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -221,12 +221,25 @@
             <em>"There Was."</em>
           </h2>
           <div class="story-body">
-            <p>A word inherited from my grandmother's stories in Zimbabwe. Today, it has become a home for artists, makers and creators whose work deserves to be seen by the world.</p>
-            <p>From wildlife paintings and beaded sculpture to handcrafted furniture, every piece carries a story of becoming.</p>
-            <p>Located at Old Nick Village in Plettenberg Bay, Paivepo Art &amp; Decor is the premier destination for authentic African art on the Garden Route. From William Mwale's expressive wildlife paintings to Tinashe Kachama's intricate beaded sculptures, every piece tells a story of African heritage and artistry.</p>
-            <p>Whether you're a collector, interior designer, or simply love African art, visit our Plettenberg Bay gallery to discover unique works that transform spaces and connect hearts. We welcome commissions, shipping worldwide.</p>
+            <p>A phrase I inherited from my grandmother's storytelling in Zimbabwe. Every great story began the same way: "Paivepo…" — There was.</p>
+            <p>Today, Paivepo has become a home for artists, makers, and storytellers whose work deserves to be seen by the world. From wildlife paintings and beaded sculpture to handcrafted furniture, every piece carries a story of creativity, resilience, and becoming.</p>
+            <p>Based at Old Nick Village in Plettenberg Bay, we work with emerging and established African artists, connecting their work with collectors who value craftsmanship, authenticity, and story.</p>
+            <p>Because behind every remarkable piece of art, there <em>was</em> a person. There <em>was</em> a dream. There <em>was</em> a journey worth telling.</p>
           </div>
           <button class="story-cta" data-page="about" aria-label="Read the Paivepo story">Read Our Story</button>
+        </div>
+      </section>
+
+      <!-- MISSION STATEMENT -->
+      <section class="mission-sect" aria-labelledby="mission-h" style="padding: clamp(60px, 8vw, 100px) var(--side); background: var(--ivory-deep); border-top: 1px solid var(--ivory-border); border-bottom: 1px solid var(--ivory-border);">
+        <div class="mission-inner" style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <p style="font-family: var(--font-serif); font-size: clamp(22px, 3vw, 36px); font-weight: 300; line-height: 1.4; color: var(--charcoal);">
+            We believe extraordinary talent can come from anywhere.
+          </p>
+          <div style="width: 60px; height: 2px; background: var(--gold); margin: 24px auto;"></div>
+          <p style="font-family: var(--font-sans); font-size: clamp(15px, 1.6vw, 18px); font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 640px; margin: 0 auto;">
+            Paivepo exists to discover, support, and showcase remarkable African artists, connecting their work with collectors around the world.
+          </p>
         </div>
       </section>
 
@@ -490,7 +503,7 @@
               <span class="comm-step-num">01</span>
               <div>
                 <h4 class="comm-step-title">Tell us your vision</h4>
-                <p class="comm-step-desc">Share your ideas – size, colour palette, subject, or a reference image. We’ll match you with the right artist.</p>
+                <p class="comm-step-desc">Share your ideas – size, colour palette, subject, or a reference image. We'll match you with the right artist.</p>
               </div>
             </div>
             <div class="comm-step">
@@ -776,17 +789,17 @@
           <div class="proc-step">
             <div class="proc-n" aria-hidden="true">01</div>
             <h3 class="proc-t">The Beginning</h3>
-            <p class="proc-p">Tinashe Kachama arrived in South Africa carrying his grandmother's stories and an instinct for beauty. He founded Paivepo in 2021 at Old Nick Village — a creative hub in Plettenberg Bay that felt immediately like the right place for the work he was imagining.</p>
+            <p class="proc-p">Paivepo began with a simple idea inherited from my grandmother's storytelling in Zimbabwe: every meaningful journey starts with a story. When I arrived in South Africa, I wasn't looking to open a gallery. I was searching for a way to connect creativity, craftsmanship, and human stories. That search led me to Old Nick Village, where Paivepo was born.</p>
           </div>
           <div class="proc-step">
             <div class="proc-n" aria-hidden="true">02</div>
             <h3 class="proc-t">The Craft</h3>
-            <p class="proc-p">His beaded sculptures begin with an idea — inspired by African culture, nature, or memory. "Selecting the beads is an emotional part. Every colour tells something." The threading that follows is slow and meditative: bead by bead, in quiet focus, traditional African rhythms playing in the background.</p>
+            <p class="proc-p">Whether it is a wildlife painting, a beaded sculpture, or a handcrafted piece of furniture, we believe craftsmanship is a form of storytelling. Every piece begins with an idea, shaped by patience, skill, and countless hours of work. We celebrate the makers behind the work as much as the work itself.</p>
           </div>
           <div class="proc-step">
             <div class="proc-n" aria-hidden="true">03</div>
             <h3 class="proc-t">The Collective</h3>
-            <p class="proc-p">As Paivepo grew, Tinashe began inviting other artists into the space — painters like William Mwale and Allick, whose work shares the same commitment to craft, story and African expression. Today, Paivepo is not one artist. It is a home for many.</p>
+            <p class="proc-p">As Paivepo grew, it became clear that the mission was bigger than one artist. Today, Paivepo is a platform for painters, sculptors, designers, and makers whose work deserves to be discovered. We don't simply sell art. We tell stories, create opportunities, and connect remarkable artists with the world.</p>
           </div>
         </div>
       </section>
@@ -813,11 +826,11 @@
       <div class="commission-panel">
         <div class="commission-text">
           <p class="sec-lbl">Commission</p>
-          <h2 class="ap-heading" style="margin-top:16px">Create something <em>entirely yours</em></h2>
-          <p class="ap-body">"Commissions allow me to dig deeper — to make something that speaks directly to someone's journey." Every artist at Paivepo accepts commissions. Contact us to discuss your vision.</p>
+          <h2 class="ap-heading" style="margin-top:16px">Every story deserves its own <em>masterpiece</em></h2>
+          <p class="ap-body">At Paivepo, commissions are more than custom artwork. They are collaborations between collector and artist, resulting in pieces that carry personal meaning and lasting value. Tell us your vision, and we'll connect you with the artist best suited to bring it to life.</p>
           <div class="commission-btns">
-            <button class="btn" data-page="contact">Get in Touch</button>
-            <a class="btn" href="https://wa.me/27629131440" target="_blank" rel="noopener noreferrer" aria-label="Commission via WhatsApp">WhatsApp</a>
+            <button class="btn" data-page="contact">Start Your Story</button>
+            <a class="btn" href="https://wa.me/27629131440" target="_blank" rel="noopener noreferrer" aria-label="Commission via WhatsApp">WhatsApp Us</a>
           </div>
         </div>
         <div class="commission-img">
@@ -1033,67 +1046,7 @@
       </section>
     </div>
 
-    <!-- PAGE: CHECKOUT -->
-    <div id="page-checkout" class="page" aria-label="Checkout" aria-hidden="true">
-      <div id="coContent">
-        <div class="co-layout">
-          <div class="co-form">
-            <div class="co-logo-bar">
-              <button class="logo" id="checkoutLogo" data-page="home" aria-label="Return to home page">PAIVEPO<span>Art &amp; Decor</span></button>
-            </div>
-            <div class="checkout-notice" role="note">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
-              <p><strong>Enquiry-Based Checkout</strong> — After submitting, we will personally confirm your order and arrange secure payment via PayFast or direct bank transfer within 24 hours.</p>
-            </div>
-            <h2 class="co-st">Shipping Information</h2>
-            <div class="co-fg2">
-              <div class="fg"><label class="fl" for="co-fname">First Name</label><input class="fi" type="text" id="co-fname" name="firstName" autocomplete="given-name"></div>
-              <div class="fg"><label class="fl" for="co-lname">Last Name</label><input class="fi" type="text" id="co-lname" name="lastName" autocomplete="family-name"></div>
-              <div class="fg full"><label class="fl" for="co-email">Email</label><input class="fi" type="email" id="co-email" name="email" autocomplete="email"></div>
-              <div class="fg full"><label class="fl" for="co-address">Address</label><input class="fi" type="text" id="co-address" name="address" autocomplete="street-address"></div>
-              <div class="fg"><label class="fl" for="co-city">City</label><input class="fi" type="text" id="co-city" name="city" autocomplete="address-level2"></div>
-              <div class="fg"><label class="fl" for="co-country">Country</label><input class="fi" type="text" id="co-country" name="country" autocomplete="country-name" value="South Africa"></div>
-              <div class="fg"><label class="fl" for="co-postal">Postal Code</label><input class="fi" type="text" id="co-postal" name="postalCode" autocomplete="postal-code"></div>
-              <div class="fg"><label class="fl" for="co-phone">Phone / WhatsApp</label><input class="fi" type="tel" id="co-phone" name="phone" autocomplete="tel"></div>
-            </div>
-            <h2 class="co-st" style="margin-top:36px">Special Instructions</h2>
-            <div class="fg" style="margin-top:16px">
-              <label class="fl" for="co-notes">Notes</label>
-              <textarea class="ft2" id="co-notes" name="notes" placeholder="Any special packaging requests, gift messages, or questions..." style="height:100px"></textarea>
-            </div>
-            <div class="trust-badges" style="display: flex; gap: 20px; justify-content: center; margin: 24px 0 16px; font-size: 12px; color: var(--muted);">
-              <span>Secure Checkout</span>
-              <span>Worldwide Shipping</span>
-              <span>Personal Confirmation</span>
-            </div>
-            <button class="po-btn" id="placeOrderBtn" type="button">Submit Order Enquiry</button>
-            <p class="form-note" style="text-align:center;margin-top:18px">We'll personally confirm your order and arrange payment within 24 hours.</p>
-          </div>
-          <div class="co-order" aria-label="Order summary">
-            <h2 class="co-st">Order Summary</h2>
-            <div id="coItems"></div>
-            <div id="coSummary"></div>
-          </div>
-        </div>
-      </div>
-      <div class="o-success" id="oSuccess" role="status" aria-live="polite">
-        <div class="sc-icon" aria-hidden="true">✓</div>
-        <h2 class="sc-t">Order Enquiry Received</h2>
-        <p class="sc-s">Thank you. We'll be in touch within 24 hours to confirm your order and arrange payment. Your piece will be carefully packaged with a personal note from the artist.</p>
-        <button class="btn" data-page="gallery" style="margin-top:8px">Continue Browsing</button>
-      </div>
-    </div>
-
   </main>
-
-  <form name="order-enquiry" data-netlify="true" netlify-honeypot="bot-field" style="display:none" aria-hidden="true">
-    <input type="hidden" name="form-name" value="order-enquiry">
-    <input name="bot-field">
-    <input name="customer-name"><input name="customer-email">
-    <input name="customer-phone"><input name="address">
-    <input name="city"><input name="country"><input name="postal-code">
-    <input name="items"><input name="total"><textarea name="notes"></textarea>
-  </form>
 
   <script type="module" src="js/main.js"></script>
 </body>

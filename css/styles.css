@@ -18,8 +18,8 @@ address { font-style: normal; }
   --gold-light:   #CEAA7A;
   --gold-dim:     rgba(184,148,100,0.18);
   --white:        #FFFFFF;
-  --muted:        #7A756C;
-  --muted-lt:     #A09891;
+  --muted:        #6A655C;   /* slightly darker for better contrast */
+  --muted-lt:     #8F8880;   /* slightly darker for better contrast */
 
   /* Aliases for backwards-compat */
   --w:     var(--white);
@@ -2004,57 +2004,9 @@ footer {
 }
 
 /* ══════════════════════════════════════════════════════════
-   CHECKOUT
+   CHECKOUT (REMOVED – Shopify handles this)
 ══════════════════════════════════════════════════════════ */
-#coContent { padding-top: var(--nav-h); }
-.co-layout {
-  display: grid; grid-template-columns: 3fr 2fr;
-  min-height: calc(100vh - var(--nav-h));
-}
-.co-form { padding: 60px var(--side); }
-.co-logo-bar { margin-bottom: 40px; }
-.checkout-notice {
-  display: flex; gap: 12px; align-items: flex-start;
-  background: var(--ivory-deep); border-left: 3px solid var(--gold);
-  padding: 16px 20px; margin-bottom: 36px;
-  font-family: var(--font-sans); font-size: 13px;
-  font-weight: 300; line-height: 1.65; color: var(--muted);
-}
-.co-st {
-  font-family: var(--font-serif); font-size: 20px;
-  font-weight: 400; color: var(--charcoal);
-  margin-bottom: 20px;
-}
-.co-fg2 {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.co-fg2 .full { grid-column: 1 / -1; }
-.po-btn {
-  width: 100%; padding: 16px; margin-top: 24px;
-  background: var(--charcoal); color: var(--white);
-  font-family: var(--font-sans); font-size: 11px;
-  letter-spacing: .16em; text-transform: uppercase;
-  border-radius: 1px; transition: background .25s;
-}
-.po-btn:hover { background: var(--charcoal-lt); }
-.co-order {
-  padding: 60px 40px;
-  background: var(--ivory-deep);
-  border-left: 1px solid var(--ivory-border);
-}
-#coItems { margin-bottom: 24px; }
-#coSummary {
-  padding-top: 20px;
-  border-top: 1px solid var(--ivory-border);
-  font-family: var(--font-sans); font-size: 14px;
-  color: var(--charcoal);
-}
-.o-success {
-  display: none; text-align: center;
-  padding: 120px var(--side);
-}
-.o-success.show { display: block; }
+/* No checkout styles needed – all checkout logic is in cart.js */
 
 /* ══════════════════════════════════════════════════════════
    SECTION: STATS (legacy, preserved)
@@ -2304,4 +2256,20 @@ footer {
 }
 .gal-img-wrap .gallery-figure img {
   object-fit: cover;
+}
+
+/* ── NEW: Broken image fallback ── */
+.no-img {
+  background: var(--ivory-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--muted);
+  min-height: 80px;
+}
+.no-img::after {
+  content: "Image unavailable";
+  font-family: var(--font-sans);
+  letter-spacing: 0.06em;
 }

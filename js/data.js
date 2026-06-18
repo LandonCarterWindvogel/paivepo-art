@@ -1,4 +1,4 @@
-// data.js — Product catalog
+// data.js — Product catalog with Shopify variant IDs
 
 export const products = [
 
@@ -17,7 +17,8 @@ export const products = [
     time: "Approx. 2–3 weeks",
     image: "images/product-rooster.jpg",
     imageWebp: "images/product-rooster.webp",
-    alt: "Hand-beaded rooster sculpture by Tinashe Kachama, African bird art from Paivepo Plettenberg Bay"
+    alt: "Hand-beaded rooster sculpture by Tinashe Kachama, African bird art from Paivepo Plettenberg Bay",
+    shopifyVariantId: 46511416311997
   },
   {
     id: 5,
@@ -33,7 +34,8 @@ export const products = [
     time: "Approx. 5–6 weeks",
     image: "images/product-peacock.webp",
     imageWebp: "images/product-peacock.webp",
-    alt: "Beaded peacock sculpture, intricate African bird art by Tinashe Kachama at Paivepo Plettenberg Bay"
+    alt: "Beaded peacock sculpture, intricate African bird art by Tinashe Kachama at Paivepo Plettenberg Bay",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
   {
     id: 7,
@@ -49,7 +51,8 @@ export const products = [
     time: "Approx. 2.5 weeks",
     image: "images/product-flamingo.webp",
     imageWebp: "images/product-flamingo.webp",
-    alt: "Hand-beaded flamingo sculpture, African wildlife art by Tinashe Kachama at Paivepo"
+    alt: "Hand-beaded flamingo sculpture, African wildlife art by Tinashe Kachama at Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
 
   // BEADED SCULPTURE — WILD ANIMALS
@@ -67,7 +70,8 @@ export const products = [
     time: "Approx. 4–5 weeks",
     image: "images/product-elephant.webp",
     imageWebp: "images/product-elephant.webp",
-    alt: "Beaded elephant sculpture, African wildlife art by Tinashe Kachama at Paivepo Plettenberg Bay"
+    alt: "Beaded elephant sculpture, African wildlife art by Tinashe Kachama at Paivepo Plettenberg Bay",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
   {
     id: 2,
@@ -83,7 +87,8 @@ export const products = [
     time: "Approx. 3–4 weeks",
     image: "images/product-lion.webp",
     imageWebp: "images/product-lion.webp",
-    alt: "African lion beaded sculpture, handmade wildlife art by Tinashe Kachama at Paivepo"
+    alt: "African lion beaded sculpture, handmade wildlife art by Tinashe Kachama at Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
   {
     id: 6,
@@ -99,7 +104,8 @@ export const products = [
     time: "Approx. 3 weeks",
     image: "images/product-zebra.webp",
     imageWebp: "images/product-zebra.webp",
-    alt: "Beaded zebra sculpture, African wildlife art from Paivepo Plettenberg Bay"
+    alt: "Beaded zebra sculpture, African wildlife art from Paivepo Plettenberg Bay",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
   {
     id: 8,
@@ -115,7 +121,8 @@ export const products = [
     time: "Approx. 5 weeks",
     image: "images/product-rhino.webp",
     imageWebp: "images/product-rhino.webp",
-    alt: "Beaded rhino sculpture, African wildlife art by Tinashe Kachama at Paivepo"
+    alt: "Beaded rhino sculpture, African wildlife art by Tinashe Kachama at Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
 
   // BEADED SCULPTURE — FLORAL
@@ -133,7 +140,8 @@ export const products = [
     time: "Approx. 1.5–2 weeks",
     image: "images/product-protea.jpg",
     imageWebp: "images/product-protea.webp",
-    alt: "Hand-beaded Protea sculpture, South African flower art by Tinashe Kachama at Paivepo"
+    alt: "Hand-beaded Protea sculpture, South African flower art by Tinashe Kachama at Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
 
   // WIRE ART
@@ -151,7 +159,8 @@ export const products = [
     time: "Approx. 1–2 weeks",
     image: "images/wire-art.jpg",
     imageWebp: "images/wire-art.webp",
-    alt: "Wire fairy sculpture with beaded accents by Tinashe Kachama, African wire art from Paivepo"
+    alt: "Wire fairy sculpture with beaded accents by Tinashe Kachama, African wire art from Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
 
   // PAINTINGS — WILLIAM MWALE
@@ -169,7 +178,8 @@ export const products = [
     time: null,
     image: "images/painting-elephant-dusk.jpg",
     imageWebp: "images/painting-elephant-dusk.webp",
-    alt: "Elephant at dusk oil painting by William Mwale, African wildlife art from Paivepo Plettenberg Bay"
+    alt: "Elephant at dusk oil painting by William Mwale, African wildlife art from Paivepo Plettenberg Bay",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
   {
     id: 21,
@@ -185,7 +195,8 @@ export const products = [
     time: null,
     image: "images/painting-lion-portrait.jpg",
     imageWebp: "images/painting-lion-portrait.webp",
-    alt: "Lion portrait oil painting by William Mwale, African wildlife art from Paivepo"
+    alt: "Lion portrait oil painting by William Mwale, African wildlife art from Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
 
   // PAINTINGS — ALLICK
@@ -203,7 +214,8 @@ export const products = [
     time: null,
     image: "images/painting-village-morning.jpg",
     imageWebp: "images/painting-village-morning.webp",
-    alt: "Village morning acrylic painting by Allick, contemporary African art from Paivepo"
+    alt: "Village morning acrylic painting by Allick, contemporary African art from Paivepo",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
   {
     id: 32,
@@ -219,7 +231,8 @@ export const products = [
     time: null,
     image: "images/painting-women-zimbabwe.jpg",
     imageWebp: "images/painting-women-zimbabwe.webp",
-    alt: "Women of Zimbabwe painting by Allick, African portrait art from Paivepo Plettenberg Bay"
+    alt: "Women of Zimbabwe painting by Allick, African portrait art from Paivepo Plettenberg Bay",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   },
 
   // FURNITURE
@@ -237,7 +250,8 @@ export const products = [
     time: "Made to order — 4–6 weeks",
     image: "images/furniture-swing-chair.jpg",
     imageWebp: "images/furniture-swing-chair.webp",
-    alt: "Wine barrel swing chair, reclaimed wood furniture by Paivepo Studio in Plettenberg Bay"
+    alt: "Wine barrel swing chair, reclaimed wood furniture by Paivepo Studio in Plettenberg Bay",
+    shopifyVariantId: 0 // REPLACE with actual Shopify variant ID
   }
 ];
 

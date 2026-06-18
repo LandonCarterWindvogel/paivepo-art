@@ -115,23 +115,6 @@ export function initPageTransition() {
   };
 }
 
-export function initSplitText() {
-  if (prefersReduced) return;
-
-  const heroH = document.querySelector('.hero-h');
-  if (!heroH) return;
-
-  heroH.style.overflow = 'hidden';
-  const lines = heroH.innerHTML.split('<br>');
-  heroH.innerHTML = lines.map((line, i) => `
-    <span style="display:block;overflow:hidden;">
-      <span style="display:block;animation:lineReveal 1s ${0.3 + i * 0.18}s cubic-bezier(.16,1,.3,1) both;">
-        ${line}
-      </span>
-    </span>
-  `).join('');
-}
-
 export function initHorizontalMarquee() {
   const track = document.querySelector('.mq-track');
   if (!track || prefersReduced) return;

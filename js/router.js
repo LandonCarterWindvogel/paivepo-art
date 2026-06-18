@@ -12,7 +12,6 @@ const pageTitles = {
   about:    'Our Story — How Paivepo Became Plettenberg Bay\'s Premier African Art Gallery',
   journal:  'African Art Stories — Journal from Paivepo Art & Decor, Plettenberg Bay',
   contact:  'Contact Paivepo — African Art Gallery in Plettenberg Bay, Old Nick Village',
-  checkout: 'Checkout — Secure Art Order | Paivepo, Plettenberg Bay',
   product:  'Work — Paivepo Art & Decor'
 };
 
@@ -23,7 +22,6 @@ const pageDescriptions = {
   about:    'From a grandmother\'s Shona word to Plettenberg Bay\'s premier African art gallery. Discover the story behind Paivepo Art & Decor at Old Nick Village.',
   journal:  'Read stories from African artists at Paivepo. Behind-the-scenes, artist journeys, and the inspiration behind our Plettenberg Bay gallery\'s works.',
   contact:  'Visit Paivepo Art & Decor at Old Nick Village, Plettenberg Bay. Commission custom African art, inquire about pieces, or just say hello. Open daily 9am-5pm.',
-  checkout: 'Complete your order for African art from Paivepo, Plettenberg Bay. We\'ll confirm your purchase and arrange shipping within 24 hours.',
   product:  'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings, beaded sculptures, and furniture. Visit our gallery.'
 };
 
@@ -34,8 +32,7 @@ const canonicalUrls = {
   about:    'https://paivepo.co.za/story',
   journal:  'https://paivepo.co.za/journal',
   contact:  'https://paivepo.co.za/contact',
-  product:  'https://paivepo.co.za/product',
-  checkout: 'https://paivepo.co.za/checkout'
+  product:  'https://paivepo.co.za/product'
 };
 
 const cleanPaths = {
@@ -45,8 +42,7 @@ const cleanPaths = {
   about:    '/story',
   journal:  '/journal',
   contact:  '/contact',
-  product:  '/product',
-  checkout: '/checkout'
+  product:  '/product'
 };
 
 function getProductTitle() {
@@ -176,8 +172,7 @@ export function initRouter() {
     '/story': 'about',
     '/journal': 'journal',
     '/contact': 'contact',
-    '/product': 'product',
-    '/checkout': 'checkout'
+    '/product': 'product'
   };
   const initialPage = pageMap[path] || 'home';
   _swap(initialPage);
@@ -210,8 +205,7 @@ export function initRouter() {
       '/story': 'about',
       '/journal': 'journal',
       '/contact': 'contact',
-      '/product': 'product',
-      '/checkout': 'checkout'
+      '/product': 'product'
     };
     _swap(pageMap[path] || 'home');
   });

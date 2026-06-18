@@ -6,8 +6,7 @@ import { initCart, isCartOpen, closeCart }                   from './cart.js';
 import { initProduct }                                       from './product.js';
 import { sounds, initSound }                                 from './sound.js';
 import { initScrollReveal, initCounters, initParallax,
-         initPageTransition, initSplitText,
-         initHorizontalMarquee }                             from './animations.js';
+         initPageTransition, initHorizontalMarquee }         from './animations.js';
 import { initMobileMenu }                                    from './mobile-menu.js';
 import { initContactForm }                                   from './forms.js';
 import { initWishlist }                                      from './wishlist.js';
@@ -36,7 +35,6 @@ initKeyboard(isCartOpen, closeCart);
 renderGallery();
 renderFeatured();
 initContactForm();
-initSplitText();
 initHorizontalMarquee();
 
 // Make lazy-loaded images visible by adding .loaded class on load
@@ -45,7 +43,7 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
     img.classList.add('loaded');
   } else {
     img.addEventListener('load', () => img.classList.add('loaded'));
-    img.addEventListener('error', () => img.classList.add('loaded')); // optional: show broken image
+    img.addEventListener('error', () => img.classList.add('loaded'));
   }
 });
 
