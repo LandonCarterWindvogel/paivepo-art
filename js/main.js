@@ -257,7 +257,6 @@ setTimeout(() => {
   });
 })();
 
-// ── Footer year ──
 const year = new Date().getFullYear();
 document.querySelectorAll('#footerYear, .footerYear').forEach((el) => {
   el.textContent = year;
