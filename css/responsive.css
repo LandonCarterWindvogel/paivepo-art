@@ -234,3 +234,22 @@ select:focus-visible, textarea:focus-visible {
   }
   /* Optional: If you want sound button on mobile, remove its display:none in styles.css */
 }
+
+/* Load More button */
+.load-more-wrap {
+  grid-column: 1 / -1;
+}
+
+.load-more-btn {
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .load-more-wrap {
+    padding: 20px 0 10px;
+  }
+  .load-more-btn {
+    min-width: 150px;
+    font-size: 10px;
+  }
+}
