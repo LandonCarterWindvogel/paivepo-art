@@ -18,7 +18,7 @@ export const products = [
     image: "images/product-rooster.webp",
     imageWebp: "images/product-rooster.webp",
     alt: "Hand-beaded rooster sculpture by Tinashe Kachama, African bird art from Paivepo Plettenberg Bay",
-    shopifyVariantId: 8237570031805
+    shopifyVariantId: 46511416311997
   },
   {
     id: 5,
