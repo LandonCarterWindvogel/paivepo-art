@@ -10,8 +10,6 @@
   <link rel="canonical" href="https://paivepo.co.za/">
   <meta name="robots" content="index, follow">
 
-  <base href="/paivepo-art/">
-
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://paivepo.co.za/">
   <meta property="og:title"       content="Paivepo Art & Decor — Premier African Art Gallery in Plettenberg Bay">
@@ -174,13 +172,29 @@
     </div>
   </aside>
 
-  <!-- ZOOM MODAL -->
-  <div class="zoom-modal" id="zm" role="dialog" aria-modal="true" aria-label="Full size product image" aria-hidden="true">
-    <button class="zoom-x" id="zoomClose" aria-label="Close image zoom">✕</button>
-    <img id="zmImg" src="" alt="" loading="lazy">
-  </div>
-
-  <main id="main-content">
+    <!-- ZOOM MODAL -->
+    <div class="zoom-modal" id="zm" role="dialog" aria-modal="true" aria-label="Full size product image" aria-hidden="true">
+      <button class="zoom-x" id="zoomClose" aria-label="Close image zoom">✕</button>
+      
+      <!-- Navigation arrows -->
+      <button class="zoom-arrow zoom-arrow--prev" id="zoomPrev" aria-label="Previous image" style="display:none;">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="zoom-arrow zoom-arrow--next" id="zoomNext" aria-label="Next image" style="display:none;">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+      
+      <!-- Image counter -->
+      <div class="zoom-counter" id="zoomCounter" style="display:none;">
+        <span id="zoomCurrentIdx">1</span> / <span id="zoomTotalIdx">1</span>
+      </div>
+      
+      <img id="zmImg" src="" alt="" loading="lazy">
+    </div>
 
     <!-- PAGE: HOME -->
     <div id="page-home" class="page active" role="main" aria-label="Home">
@@ -634,7 +648,10 @@
     <div id="page-product" class="page" aria-label="Product detail" aria-hidden="true">
       <div class="prod-layout">
         <div class="prod-imgs">
-          <img id="prodMain" src="" alt="" width="800" height="1000" fetchpriority="low">
+          <div class="prod-main-wrap">
+            <img id="prodMain" src="" alt="" width="800" height="1000" fetchpriority="low">
+          </div>
+          <div class="prod-thumbs" id="prodThumbs"></div>
         </div>
         <div class="prod-dets">
           <nav class="breadcrumb" aria-label="Breadcrumb">

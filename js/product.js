@@ -89,6 +89,7 @@ export function showProduct(id) {
   document.getElementById('prodDesc').textContent = p.desc;
 
   renderPrice(p);
+  renderProductGallery(p);
   renderSoldState(p);
   renderSpecs(p);
   renderRelated(p);
@@ -107,6 +108,65 @@ function renderPrice(p) {
   el.className = `prod-price${p.sold ? ' sold-price' : ''}`;
 }
 
+export function renderProductGallery(p) {
+  const container = document.querySelector('.prod-imgs');
+  if (!container) return;
+
+  const hasGallery = p.images && p.images.length > 0;
+  const mainSrc = hasGallery ? p.images[0].src : p.imageWebp;
+  const mainAlt = hasGallery ? p.images[0].alt : (p.alt || p.name);
+
+  let thumbsHtml = '';
+  if (hasGallery) {
+    thumbsHtml = `
+      <div class="prod-thumbs" id="prodThumbs" role="group" aria-label="Product image thumbnails">
+        ${p.images.map((img, idx) => `
+          <button class="thumb-btn ${idx === 0 ? 'active' : ''}" data-index="${idx}" aria-label="View image ${idx+1} of ${p.images.length}">
+            <picture>
+              <source srcset="${img.src}" type="image/webp">
+              <img src="${img.src}" alt="${img.alt}" loading="lazy" width="80" height="100">
+            </picture>
+          </button>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  const guardianClass = p.id === 8 ? ' guardian-zoom' : '';
+  const guardianData = p.id === 8 ? ` data-product-id="${p.id}" data-image-index="0"` : '';
+
+  container.innerHTML = `
+    <div class="prod-main-wrap">
+      <img id="prodMain" src="${mainSrc}" alt="${mainAlt}" class="zoomable${guardianClass}" width="800" height="1000" fetchpriority="low"${guardianData}>
+    </div>
+    ${thumbsHtml}
+  `;
+
+  // ── Thumbnail click listeners ──
+  if (hasGallery) {
+    const thumbs = container.querySelectorAll('.thumb-btn');
+    const mainImg = document.getElementById('prodMain');
+    thumbs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.index);
+        const imgData = p.images[idx];
+        if (!imgData) return;
+        if (mainImg) {
+          mainImg.src = imgData.src;
+          mainImg.alt = imgData.alt;
+          // Update data attribute for zoom modal
+          if (p.id === 8) {
+            mainImg.dataset.imageIndex = idx;
+          }
+          thumbs.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          sounds.click();
+        }
+      });
+    });
+  }
+}
+
 function renderSoldState(p) {
   const notice = document.getElementById('prodSoldNotice');
   const atcBtn = document.getElementById('atcBtn');
@@ -114,19 +174,12 @@ function renderSoldState(p) {
 
   notice.classList.toggle('show', p.sold);
 
-  const imgAlt = p.alt || `${p.name} — handmade ${p.cat ? p.cat.toLowerCase() : ''} artwork by ${p.artist || 'Paivepo'}`;
-  const soldClass = p.sold ? 'prod-main sold-img' : 'prod-main zoomable';
-
-  // Use container for stable image replacement
-  const container = document.querySelector('.prod-imgs');
-  if (container) {
-    container.innerHTML = `<picture id="prodMainPicture">
-      <source srcset="${p.imageWebp}" type="image/webp">
-      <img id="prodMain" src="${p.imageWebp}" alt="${imgAlt}" class="${soldClass}" width="800" height="1000" fetchpriority="low">
-    </picture>`;
-  }
-
   const mainImg = document.getElementById('prodMain');
+  if (mainImg) {
+    mainImg.classList.toggle('sold-img', p.sold);
+    // Ensure zoomable class remains
+    mainImg.classList.add('zoomable');
+  }
 
   if (p.sold) {
     atcBtn.style.display = 'none';
@@ -146,7 +199,6 @@ function renderSoldState(p) {
       addToCart(p);
       newAtc.textContent = 'Added ✓';
       newAtc.disabled = true;
-      // subtle scale feedback
       newAtc.style.transform = 'scale(0.96)';
       setTimeout(() => {
         newAtc.style.transform = '';
@@ -190,7 +242,6 @@ function renderRelated(p) {
   const grid = document.getElementById('relGrid');
   if (!grid) return;
 
-  // Make grid full width by breaking out of parent padding
   grid.style.cssText = `
     width: 100vw;
     max-width: 100vw;
@@ -205,7 +256,6 @@ function renderRelated(p) {
     return;
   }
 
-  // Build carousel container
   const carousel = document.createElement('div');
   carousel.className = 'rel-carousel';
   carousel.style.cssText = `
@@ -245,14 +295,11 @@ function renderRelated(p) {
     `;
   }).join('');
 
-  // Wrap with relative container for arrows
   const wrapper = document.createElement('div');
   wrapper.style.cssText = 'position: relative; display: flex; align-items: center; width: 100%;';
   wrapper.appendChild(carousel);
 
-  // Arrows only if more than 4 items
   if (related.length > 4) {
-    // Left arrow
     const leftArrow = document.createElement('button');
     leftArrow.innerHTML = '‹';
     leftArrow.setAttribute('aria-label', 'Previous works');
@@ -278,7 +325,6 @@ function renderRelated(p) {
       opacity: 0;
       pointer-events: none;
     `;
-    // Show on hover
     wrapper.addEventListener('mouseenter', () => {
       leftArrow.style.opacity = '1';
       leftArrow.style.pointerEvents = 'auto';
@@ -304,7 +350,6 @@ function renderRelated(p) {
       sounds.click();
     });
 
-    // Right arrow
     const rightArrow = document.createElement('button');
     rightArrow.innerHTML = '›';
     rightArrow.setAttribute('aria-label', 'Next works');
@@ -347,17 +392,14 @@ function renderRelated(p) {
     wrapper.appendChild(rightArrow);
   }
 
-  // Clear grid and append wrapper
   grid.innerHTML = '';
   grid.appendChild(wrapper);
 
-  // Attach click listeners to all cards
   grid.querySelectorAll('[data-prod-id]').forEach(card => {
     card.addEventListener('click', () => {
       const id = Number(card.dataset.prodId);
       if (!isNaN(id)) showProduct(id);
     });
-    // Keyboard support
     card.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
