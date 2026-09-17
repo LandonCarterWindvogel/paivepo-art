@@ -1,56 +1,73 @@
 # Paivepo Art & Decor
 
-> A premium, image-led website for an African art and decor business based at Old Nick Village in Plettenberg Bay.
+This is the website I am building for **Paivepo Art & Decor**, a premium African art and decor business based at Old Nick Village in Plettenberg Bay.
 
-## Overview
+This project is deliberately image-led. The artwork is the star of the show; my job is to build the stage without accidentally becoming the star myself.
 
-Paivepo Art & Decor is a client website built to present handcrafted African art, decor and furniture through a polished digital experience.
+## Why I built it this way
 
-The project is currently being prepared for the client's final launch. The public GitHub Pages deployment currently shows the client's coming-soon state while the final business content is being completed.
+Paivepo has beautiful, handcrafted work, so I did not want the website to feel like a generic online shop with a grid of boxes and a "Buy Now" button slapped on everything.
 
-**Live preview:** https://landoncarterwindvogel.github.io/paivepo-art/
+I focused on large imagery, editorial spacing, restrained UI and a clear path from discovering the work to making an enquiry.
+
+The site needs to feel premium without becoming difficult to use.
 
 ## What I built
 
 - Custom responsive website design
-- Product and artist-focused presentation
-- Mobile-first responsive layouts
+- Mobile-first layouts
+- Artist and product-focused presentation
 - Interactive navigation and content sections
 - Client enquiry/contact flow
-- Image-focused visual system with performance-conscious assets
-- SEO foundations including structured content, robots.txt and sitemap.xml
-- Netlify deployment configuration for the production workflow
+- Image-led visual system
+- Performance-conscious image handling
+- Semantic HTML and responsive CSS
+- SEO foundations, including metadata, structured content, `robots.txt` and `sitemap.xml`
+- Netlify deployment configuration
+- GitHub Pages public preview
 - Vanilla HTML, CSS and JavaScript — no frontend framework
-
-## Design direction
-
-The site is designed around the artwork rather than the technology. Large imagery, editorial spacing and a restrained interface keep attention on the products and artists while still providing a clear path toward enquiry and purchase.
 
 ## Artists and work
 
-The project is structured to present multiple makers and disciplines, including:
+The site is structured to accommodate different makers and disciplines, including:
 
 - Beaded sculpture
 - Oil painting
 - Reclaimed barrel furniture
 
+The content can grow as the client adds more artists, products and information.
+
 ## Technology
+
+I kept the technology deliberately lightweight:
 
 - HTML5
 - CSS3
 - Modern JavaScript
-- Responsive design
 - Semantic markup
-- SEO / metadata
+- Responsive design
+- SEO and metadata
 - Netlify
 - GitHub Pages for the current public preview
 
-## Project status
+No framework was needed. This is a static website, so I built it like one.
 
-**Client work — pre-launch**
+## Current status
 
-The website itself is substantially built, but the final launch depends on the client completing and supplying the remaining business content and launch requirements.
+**Client work — pre-launch.**
 
-## Notes
+The website is substantially built, but the final public launch depends on the remaining business content and launch requirements being supplied and approved by the client.
 
-This repository contains the implementation of a real client-facing website. It is intentionally kept framework-free and organized as a lightweight static site so the client can maintain a fast, dependable web presence without a heavy application stack.
+The current GitHub Pages preview is available here:
+
+https://landoncarterwindvogel.github.io/paivepo-art/
+
+## A note to future me
+
+Do not replace beautiful client photography with random stock images because you are impatient.
+
+Do not add five JavaScript libraries to make a gallery slide left.
+
+And definitely do not forget that the whole point of this site is to make the artwork look incredible while keeping the actual website quiet, fast and easy to use.
+
+That is the job.
