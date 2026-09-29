@@ -2,7 +2,6 @@ import { initRouter, setTransition } from './router.js';
 import { initCursor } from './cursor.js';
 import { initNav, initZoom, initKeyboard, initSoundToggle, initBackToTop } from './ui.js';
 import { initGallery, renderGallery, renderFeatured } from './gallery.js';
-import { initCart, isCartOpen, closeCart } from './cart.js';
 import { initProduct } from './product.js';
 import { sounds, initSound } from './sound.js';
 import {
@@ -154,7 +153,6 @@ initCursor();
 initNav();
 initZoom();
 initGallery();
-initCart();
 initProduct();
 initSoundToggle();
 initMobileMenu();
@@ -166,7 +164,7 @@ const transitionTo = initPageTransition();
 setTransition(transitionTo);
 
 // ── Keyboard & focus ──
-initKeyboard(isCartOpen, closeCart);
+initKeyboard();
 
 // ── Render dynamic content ──
 renderGallery();
