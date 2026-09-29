@@ -1690,6 +1690,24 @@ footer {
   transition: background .25s;
 }
 .atc:hover { background: var(--charcoal-lt); }
+.atc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.atc--fallback {
+  background: var(--charcoal-lt);
+}
+.prod-order-note {
+  margin: -2px 0 18px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
 .atc:disabled { opacity: .4; cursor: not-allowed; }
 .atc-commission {
   width: 100%; padding: 14px;
