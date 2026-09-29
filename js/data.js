@@ -16,7 +16,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Barrel Swing by Paivepo Studio",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9021802674576203/272790754213933"
   },
   {
     id: 102,
@@ -33,7 +33,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Leo leopard painting by William Mwale",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9555683707812027/272790754213933"
   },
   {
     id: 103,
@@ -50,7 +50,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Beauty in Colour acrylic painting by William Mwale",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9993455604021108/272790754213933"
   },
   {
     id: 104,
@@ -67,7 +67,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Thinking Man sculpture from Paivepo",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9562012450503283/272790754213933"
   },
   {
     id: 105,
@@ -84,7 +84,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Changamire the Rooster sculpture by Tinashe Kachama",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9989517454428586/272790754213933"
   },
   {
     id: 106,
@@ -101,7 +101,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Midnight Ruby sculpture by Tinashe Kachama",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9923105047782513/272790754213933"
   },
   {
     id: 107,
@@ -118,7 +118,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Black handcrafted earrings from Paivepo",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9914895738606999/272790754213933"
   },
   {
     id: 108,
@@ -135,7 +135,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Multicolour handcrafted earrings from Paivepo",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9863370360381310/272790754213933"
   },
   {
     id: 109,
@@ -152,7 +152,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "White Protea beaded artwork by Tinashe Kachama",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/9155545147823927/272790754213933"
   },
   {
     id: 110,
@@ -169,7 +169,7 @@ export const products = [
     image: null,
     imageWebp: null,
     alt: "Handcrafted beaded keyring from Paivepo",
-    whatsappLink: ""
+    whatsappLink: "https://wa.me/p/8970746439615205/272790754213933"
   }
 ];
 
