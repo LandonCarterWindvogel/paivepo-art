@@ -258,6 +258,15 @@ body::before {
   color: var(--charcoal);
   border-color: var(--white);
 }
+#nav.nav-dark .nav-shop {
+  color: var(--white);
+  border-color: rgba(255,255,255,.45);
+}
+#nav.nav-dark .nav-shop:hover {
+  background: var(--white);
+  color: var(--charcoal);
+  border-color: var(--white);
+}
 
 .logo {
   font-family: var(--font-serif);
