@@ -1690,6 +1690,36 @@ footer {
 }
 .spec-row { display: flex; gap: 12px; }
 .spec-lbl { font-weight: 400; color: var(--charcoal); min-width: 90px; }
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 24px;
+  background: var(--ivory-deep);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.prod-placeholder {
+  width: 100%;
+  min-height: 560px;
+  aspect-ratio: auto;
+}
+.gal-img.image-placeholder,
+.feat-img.image-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.rel-img.image-placeholder {
+  width: 100%;
+  min-height: 0;
+}
 .atc {
   width: 100%; padding: 16px;
   background: var(--charcoal); color: var(--white);
