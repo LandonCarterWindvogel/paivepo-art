@@ -50,6 +50,7 @@ export function hasSpecificWhatsAppLink(product) {
 
 export function getWhatsAppLink(product) {
   if (!product) return WHATSAPP_CATALOG_URL;
+  if (product.whatsappLink) return product.whatsappLink;
   const itemLink = WHATSAPP_ITEM_LINKS[product.id];
   if (itemLink) return itemLink;
 
