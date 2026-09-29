@@ -174,7 +174,7 @@ export const products = [
 ];
 
 // FEATURED PIECE IDs (shown on homepage)
-export const FEATURED_IDS = [1, 2, 40];
+export const FEATURED_IDS = [101, 102, 103];
 
 // ARTISTS
 export const artists = [
