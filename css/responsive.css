@@ -223,6 +223,9 @@ select:focus-visible, textarea:focus-visible {
   .nav-right {
     gap: 12px;
   }
+  .nav-shop {
+    display: none;
+  }
   .cart-btn {
     gap: 4px;
   }
