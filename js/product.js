@@ -28,18 +28,7 @@ function renderProductSchema(p) {
     "@type": "Product",
     "name": p.name,
     "description": p.desc,
-    "image": `https://paivepo.co.za/${p.imageWebp}`,
-    "sku": `PAIVEPO-${p.id}`,
-    "offers": {
-      "@type": "Offer",
-      "price": p.price,
-      "priceCurrency": "ZAR",
-      "availability": p.sold ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Paivepo Art & Decor"
-      }
-    },
+    "sku": "PAIVEPO-" + p.id,
     "brand": {
       "@type": "Brand",
       "name": "Paivepo"
@@ -49,6 +38,23 @@ function renderProductSchema(p) {
       "name": p.artist || "Paivepo Studio"
     }
   };
+
+  if (p.imageWebp) {
+    schema.image = "https://paivepo.co.za/" + p.imageWebp;
+  }
+
+  if (p.price != null) {
+    schema.offers = {
+      "@type": "Offer",
+      "price": p.price,
+      "priceCurrency": "ZAR",
+      "availability": p.sold ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Paivepo Art & Decor"
+      }
+    };
+  }
 
   const script = document.createElement('script');
   script.type = 'application/ld+json';
@@ -103,35 +109,43 @@ export function showProduct(id) {
 
 function renderPrice(p) {
   const el = document.getElementById('prodPrice');
-  el.textContent = `R${p.price.toLocaleString()}`;
-  el.className = `prod-price${p.sold ? ' sold-price' : ''}`;
+  if (!el) return;
+  el.textContent = p.price == null ? 'Price on WhatsApp' : 'R' + p.price.toLocaleString();
+  el.className = 'prod-price' + (p.sold ? ' sold-price' : '');
 }
 
 export function renderProductGallery(p) {
   const container = document.querySelector('.prod-imgs');
   if (!container) return;
 
-  // The website owns the presentation image. WhatsApp is only the ordering channel.
-  // Keep product presentation deliberately single-image so the catalogue stays clean
-  // even when WhatsApp contains lower-quality or inconsistent source photos.
   const mainSrc = p.imageWebp || p.image;
   const mainAlt = p.alt || p.name;
 
-  container.innerHTML = `
-    <div class="prod-main-wrap">
-      <img id="prodMain"
-           src="${mainSrc}"
-           alt="${mainAlt}"
-           class="zoomable"
-           width="800"
-           height="1000"
-           fetchpriority="high"
-           decoding="async">
-    </div>
-  `;
+  if (mainSrc) {
+    container.innerHTML = `
+      <div class="prod-main-wrap">
+        <img id="prodMain"
+             src="${mainSrc}"
+             alt="${mainAlt}"
+             class="zoomable"
+             width="800"
+             height="1000"
+             fetchpriority="high"
+             decoding="async">
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="prod-main-wrap">
+        <div id="prodMain" class="image-placeholder prod-placeholder" role="img" aria-label="${mainAlt}">
+          Artwork image coming soon
+        </div>
+      </div>
+    `;
+  }
 
   const mainImg = document.getElementById('prodMain');
-  if (mainImg) {
+  if (mainImg && mainImg.tagName === 'IMG') {
     mainImg.addEventListener('click', openZoom);
   }
 }
@@ -263,7 +277,7 @@ function renderRelated(p) {
         <div class="rel-price${r.sold ? ' struck' : ''}" style="font-size:13px; color:var(--muted);">
           ${r.sold
             ? '<span style="text-decoration:line-through;opacity:.45">Sold</span>'
-            : `R${r.price.toLocaleString()}`}
+            : (r.price == null ? 'View on WhatsApp' : 'R' + r.price.toLocaleString())}
         </div>
       </div>
     `;
