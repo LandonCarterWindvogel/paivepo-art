@@ -303,17 +303,10 @@ export function initZoom() {
   });
 }
 
-export function initKeyboard(cartIsOpen, closeCart) {
+export function initKeyboard() {
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (isZoomOpen) {
-        closeZoom();
-        return;
-      }
-      if (cartIsOpen && cartIsOpen()) {
-        closeCart();
-        return;
-      }
+    if (e.key === 'Escape' && isZoomOpen) {
+      closeZoom();
     }
   });
 }
