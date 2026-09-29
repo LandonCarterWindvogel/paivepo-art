@@ -109,13 +109,7 @@
           <path d="M9 18V5l12-2v13M6 15H3a1 1 0 01-1-1v-4a1 1 0 011-1h3l4-3v11l-4-3z"/>
         </svg>
       </button>
-      <button class="cart-btn" id="cartToggleBtn" aria-label="Open shopping bag" aria-expanded="false">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <span aria-hidden="true">Bag</span>
-        <span class="c-count" id="cc" aria-label="0 items in bag">0</span>
-      </button>
+      <a class="nav-shop" href="https://wa.me/c/27629131440" target="_blank" rel="noopener noreferrer" aria-label="Open Paivepo WhatsApp catalogue">Shop on WhatsApp</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
@@ -152,25 +146,6 @@
       </div>
     </div>
   </div>
-
-  <!-- CART SIDEBAR -->
-  <div class="cart-ov" id="cartOv" aria-hidden="true"></div>
-  <aside class="cart-sb" id="cartSb" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true">
-    <div class="cart-hd">
-      <div class="cart-t">Your Bag</div>
-      <button class="cart-x" id="cartCloseBtn" aria-label="Close shopping bag">Close ✕</button>
-    </div>
-    <div class="cart-body" id="cartBody">
-      <div class="cart-empty">Your bag is empty</div>
-    </div>
-    <div class="cart-ft">
-      <div class="cart-tot">
-        <span class="ct-lbl">Total</span>
-        <span class="ct-val" id="cartTot">R0</span>
-      </div>
-      <button class="co-btn" id="checkoutBtn">Proceed to Checkout</button>
-    </div>
-  </aside>
 
     <!-- ZOOM MODAL -->
     <div class="zoom-modal" id="zm" role="dialog" aria-modal="true" aria-label="Full size product image" aria-hidden="true">
@@ -670,14 +645,9 @@
           </div>
           <p class="prod-desc" id="prodDesc"></p>
           <div class="prod-specs" id="prodSpecs" aria-label="Product specifications"></div>
-          <button class="atc" id="atcBtn" aria-label="Add to bag">Add to Bag</button>
+          <a class="atc" id="atcBtn" href="https://wa.me/c/27629131440" target="_blank" rel="noopener noreferrer" aria-label="Order this piece on WhatsApp">Order on WhatsApp</a>
+          <p class="prod-order-note" id="prodOrderNote" aria-live="polite"></p>
           <button class="atc-commission" id="commissionBtn" data-page="contact">Commission a Similar Piece</button>
-          <button class="wl" id="wlBtn" aria-label="Save to wishlist" aria-pressed="false">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-            </svg>
-            Save to Wishlist
-          </button>
             <div class="ship-info">
               <p><strong>Visit in person</strong> at Old Nick Village, Plettenberg Bay — open daily 9am–5pm.</p>
               <p><strong>Shipping available</strong> on request. Contact us at <a href="mailto:paivepoart@gmail.com"><strong>paivepoart@gmail.com</strong></a> or WhatsApp <a href="tel:+27629131440"><strong>062 913 1440</strong></a>.</p>
