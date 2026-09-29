@@ -18,6 +18,7 @@ export function refreshGallery() {
 }
 
 function picWithCaption(jpgSrc, webpSrc, alt, caption, cls = '', w = '', h = '', lazy = true) {
+  if (!webpSrc) return '<div class="image-placeholder ' + cls + '" role="img" aria-label="' + alt + '">Artwork image coming soon</div>';
   const dims = (w && h) ? ` width="${w}" height="${h}"` : '';
   const load = lazy ? ' loading="lazy"' : '';
   const clsAttr = cls ? ` class="${cls}"` : '';
@@ -53,6 +54,9 @@ function getCategoryLabel(cat) {
     Wire: 'Wire Art',
     Paintings: 'Painting',
     Furniture: 'Furniture',
+    Sculpture: 'Sculpture',
+    Jewellery: 'Jewellery',
+    Accessories: 'Accessories',
   };
   return map[cat] || cat;
 }
@@ -65,9 +69,11 @@ export function renderFeatured() {
     const p = products.find((x) => x.id === id);
     if (!p) return '';
 
-    const priceHTML = p.sold
-      ? `<span style="text-decoration:line-through;opacity:.4">R${p.price.toLocaleString()}</span>`
-      : `R${p.price.toLocaleString()}`;
+    const priceHTML = p.price == null
+      ? 'View on WhatsApp'
+      : (p.sold
+        ? '<span style="text-decoration:line-through;opacity:.4">R' + p.price.toLocaleString() + '</span>'
+        : 'R' + p.price.toLocaleString());
     const soldBadge = p.sold
       ? '<div class="feat-sold-badge" aria-label="Sold">Sold</div>'
       : '';
@@ -77,7 +83,7 @@ export function renderFeatured() {
     return `
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
            ${p.sold ? '' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
-           aria-label="${p.name}${p.sold ? ' — sold' : `, R${p.price.toLocaleString()}`}">
+           aria-label="${p.name}${p.sold ? ' — sold' : (p.price == null ? ', enquire on WhatsApp' : ', R' + p.price.toLocaleString())}">
         <div class="feat-img-wrap">
           ${picWithCaption(p.image, p.imageWebp, imgAlt, caption, 'feat-img', '800', '1000')}
         </div>
@@ -162,7 +168,7 @@ function buildCard(p) {
   return `
     <div class="gal-card${p.sold ? ' is-sold' : ''}"
          ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
-         aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
+         aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : (p.price == null ? ', enquire on WhatsApp' : ', R' + p.price.toLocaleString())}">
       <div class="gal-img-wrap">
         ${picWithCaption(p.image, p.imageWebp, imgAlt, caption, 'gal-img', '600', '800', false)}
         <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Details</div>'}</div>
@@ -174,7 +180,7 @@ function buildCard(p) {
           ${p.artist && p.artist !== 'Paivepo Studio' ? `<div class="gal-artist">${p.artist}</div>` : ''}
           <span class="gal-cat-tag">${categoryLabel}</span>
         </div>
-        <span class="gal-price${p.sold ? ' struck' : ''}">R${p.price.toLocaleString()}</span>
+        <span class="gal-price${p.sold ? ' struck' : ''}">${p.price == null ? 'View on WhatsApp' : 'R' + p.price.toLocaleString()}</span>
         ${p.sold ? '<span class="gal-sold-tag">Sold</span>' : ''}
       </div>
     </div>
