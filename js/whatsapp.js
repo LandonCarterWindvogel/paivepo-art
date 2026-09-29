@@ -8,6 +8,25 @@
 export const WHATSAPP_CATALOG_URL = 'https://wa.me/c/27629131440';
 export const WHATSAPP_CHAT_URL = 'https://wa.me/27629131440';
 
+// Current catalogue links supplied from WhatsApp Business.
+// There are 10 unique items in the supplied list; two links were duplicated.
+export const CURRENT_WHATSAPP_CATALOG_LINKS = Object.freeze([
+  'https://wa.me/p/9021802674576203/272790754213933', // catalogue item 1
+  'https://wa.me/p/9555683707812027/272790754213933', // catalogue item 2
+  'https://wa.me/p/9993455604021108/272790754213933', // catalogue item 3
+  'https://wa.me/p/9562012450503283/272790754213933', // catalogue item 4
+  'https://wa.me/p/9989517454428586/272790754213933', // catalogue item 5
+  'https://wa.me/p/9923105047782513/272790754213933', // catalogue item 6
+  'https://wa.me/p/9914895738606999/272790754213933', // catalogue item 7
+  'https://wa.me/p/9863370360381310/272790754213933', // catalogue item 8
+  'https://wa.me/p/9155545147823927/272790754213933', // catalogue item 9
+  'https://wa.me/p/8970746439615205/272790754213933', // catalogue item 10
+]);
+
+// These are intentionally not assigned to website product IDs yet.
+// The WhatsApp URL does not expose the artwork/product name to our tooling,
+// so we do not guess and risk pairing the wrong image with the wrong item.
+
 export const WHATSAPP_ITEM_LINKS = Object.freeze({
   0: '', // The Rooster
   1: '', // The Elephant
