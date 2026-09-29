@@ -13,7 +13,6 @@ import {
 } from './animations.js';
 import { initMobileMenu } from './mobile-menu.js';
 import { initContactForm } from './forms.js';
-import { initWishlist } from './wishlist.js';
 
 // ── LOADING SCREEN ──
 function initLoadingScreen() {
@@ -156,7 +155,6 @@ initGallery();
 initProduct();
 initSoundToggle();
 initMobileMenu();
-initWishlist();
 initBackToTop();
 
 // ── Page transitions ──
