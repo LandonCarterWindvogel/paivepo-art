@@ -1,10 +1,9 @@
 // product.js — Product detail page with schema and carousel
 import { products } from './data.js';
-import { addToCart } from './cart.js';
 import { openZoom, showToast } from './ui.js';
 import { go } from './router.js';
 import { sounds } from './sound.js';
-import { toggleWishlist, isWishlisted } from './wishlist.js';
+import { getWhatsAppLink, hasSpecificWhatsAppLink } from './whatsapp.js';
 
 let currentProduct = null;
 
@@ -93,7 +92,7 @@ export function showProduct(id) {
   renderSoldState(p);
   renderSpecs(p);
   renderRelated(p);
-  renderWishlistState(p);
+  renderWhatsAppCta(p);
 
   renderProductSchema(p);
   renderBreadcrumbSchema(p);
@@ -112,108 +111,83 @@ export function renderProductGallery(p) {
   const container = document.querySelector('.prod-imgs');
   if (!container) return;
 
-  const hasGallery = p.images && p.images.length > 0;
-  const mainSrc = hasGallery ? p.images[0].src : p.imageWebp;
-  const mainAlt = hasGallery ? p.images[0].alt : (p.alt || p.name);
-
-  let thumbsHtml = '';
-  if (hasGallery) {
-    thumbsHtml = `
-      <div class="prod-thumbs" id="prodThumbs" role="group" aria-label="Product image thumbnails">
-        ${p.images.map((img, idx) => `
-          <button class="thumb-btn ${idx === 0 ? 'active' : ''}" data-index="${idx}" aria-label="View image ${idx+1} of ${p.images.length}">
-            <picture>
-              <source srcset="${img.src}" type="image/webp">
-              <img src="${img.src}" alt="${img.alt}" loading="lazy" width="80" height="100">
-            </picture>
-          </button>
-        `).join('')}
-      </div>
-    `;
-  }
-
-  const guardianClass = p.id === 8 ? ' guardian-zoom' : '';
-  const guardianData = p.id === 8 ? ` data-product-id="${p.id}" data-image-index="0"` : '';
+  // The website owns the presentation image. WhatsApp is only the ordering channel.
+  // Keep product presentation deliberately single-image so the catalogue stays clean
+  // even when WhatsApp contains lower-quality or inconsistent source photos.
+  const mainSrc = p.imageWebp || p.image;
+  const mainAlt = p.alt || p.name;
 
   container.innerHTML = `
     <div class="prod-main-wrap">
-      <img id="prodMain" src="${mainSrc}" alt="${mainAlt}" class="zoomable${guardianClass}" width="800" height="1000" fetchpriority="low"${guardianData}>
+      <img id="prodMain"
+           src="${mainSrc}"
+           alt="${mainAlt}"
+           class="zoomable"
+           width="800"
+           height="1000"
+           fetchpriority="high"
+           decoding="async">
     </div>
-    ${thumbsHtml}
   `;
 
-  // ── Thumbnail click listeners ──
-  if (hasGallery) {
-    const thumbs = container.querySelectorAll('.thumb-btn');
-    const mainImg = document.getElementById('prodMain');
-    thumbs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = parseInt(btn.dataset.index);
-        const imgData = p.images[idx];
-        if (!imgData) return;
-        if (mainImg) {
-          mainImg.src = imgData.src;
-          mainImg.alt = imgData.alt;
-          // Update data attribute for zoom modal
-          if (p.id === 8) {
-            mainImg.dataset.imageIndex = idx;
-          }
-          thumbs.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          sounds.click();
-        }
-      });
-    });
+  const mainImg = document.getElementById('prodMain');
+  if (mainImg) {
+    mainImg.addEventListener('click', openZoom);
   }
 }
 
 function renderSoldState(p) {
   const notice = document.getElementById('prodSoldNotice');
-  const atcBtn = document.getElementById('atcBtn');
+  const orderBtn = document.getElementById('atcBtn');
   const commBtn = document.getElementById('commissionBtn');
+  const orderNote = document.getElementById('prodOrderNote');
+
+  if (!notice || !orderBtn || !commBtn) return;
 
   notice.classList.toggle('show', p.sold);
 
   const mainImg = document.getElementById('prodMain');
   if (mainImg) {
     mainImg.classList.toggle('sold-img', p.sold);
-    // Ensure zoomable class remains
     mainImg.classList.add('zoomable');
   }
 
   if (p.sold) {
-    atcBtn.style.display = 'none';
+    orderBtn.style.display = 'none';
     commBtn.classList.add('show');
+    if (orderNote) orderNote.textContent = '';
     sounds.sold();
-  } else {
-    atcBtn.style.display = '';
-    atcBtn.textContent = 'Add to Bag';
-    atcBtn.disabled = false;
-    atcBtn.style.background = '';
-    commBtn.classList.remove('show');
-
-    // Replace button to remove old listeners
-    const newAtc = atcBtn.cloneNode(true);
-    atcBtn.parentNode.replaceChild(newAtc, atcBtn);
-    newAtc.addEventListener('click', () => {
-      addToCart(p);
-      newAtc.textContent = 'Added ✓';
-      newAtc.disabled = true;
-      newAtc.style.transform = 'scale(0.96)';
-      setTimeout(() => {
-        newAtc.style.transform = '';
-      }, 150);
-      setTimeout(() => {
-        newAtc.textContent = 'Add to Bag';
-        newAtc.disabled = false;
-      }, 2000);
-    });
-
-    if (mainImg) {
-      mainImg.removeEventListener('click', openZoom);
-      mainImg.addEventListener('click', openZoom);
-    }
+    return;
   }
+
+  const hasExactLink = hasSpecificWhatsAppLink(p);
+  const label = hasExactLink ? 'Order on WhatsApp' : 'Enquire on WhatsApp';
+
+  orderBtn.style.display = 'inline-flex';
+  orderBtn.href = getWhatsAppLink(p);
+  orderBtn.target = '_blank';
+  orderBtn.rel = 'noopener noreferrer';
+  orderBtn.textContent = label;
+  orderBtn.setAttribute('aria-label', label + ' — ' + p.name);
+  orderBtn.classList.toggle('atc--fallback', !hasExactLink);
+
+  commBtn.classList.remove('show');
+
+  if (orderNote) {
+    orderNote.textContent = hasExactLink
+      ? 'Opens this piece directly in the Paivepo WhatsApp catalogue.'
+      : 'The direct catalogue link still needs to be connected for this piece; WhatsApp opens with the artwork name pre-filled.';
+  }
+
+  if (mainImg) {
+    mainImg.removeEventListener('click', openZoom);
+    mainImg.addEventListener('click', openZoom);
+  }
+}
+
+function renderWhatsAppCta(p) {
+  // Kept as a separate render step so product state and ordering logic stay easy to maintain.
+  renderSoldState(p);
 }
 
 function renderSpecs(p) {
@@ -407,22 +381,6 @@ function renderRelated(p) {
         if (!isNaN(id)) showProduct(id);
       }
     });
-  });
-}
-
-function renderWishlistState(p) {
-  const btn = document.getElementById('wlBtn');
-  if (!btn) return;
-  const wishlisted = isWishlisted(p.id);
-  btn.setAttribute('aria-pressed', String(wishlisted));
-  btn.classList.toggle('wishlisted', wishlisted);
-
-  const newBtn = btn.cloneNode(true);
-  btn.parentNode.replaceChild(newBtn, btn);
-  newBtn.addEventListener('click', () => {
-    const on = toggleWishlist(p);
-    newBtn.setAttribute('aria-pressed', String(on));
-    newBtn.classList.toggle('wishlisted', on);
   });
 }
 
