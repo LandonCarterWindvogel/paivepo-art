@@ -16,13 +16,13 @@ const pageTitles = {
 };
 
 const pageDescriptions = {
-  home: 'Discover African art at Paivepo, Plettenberg Bay\'s premier gallery. View wildlife paintings, handmade beaded sculptures & furniture. Visit Old Nick Village.',
-  gallery: 'Shop African art at Paivepo: wildlife paintings, beaded sculptures, wire art & furniture. Handmade in South Africa. Visit our Plettenberg Bay gallery.',
+  home: 'Discover African art at Paivepo, Plettenberg Bay\'s premier gallery. View wildlife paintings and handmade beaded sculptures. Visit Old Nick Village.',
+  gallery: 'Shop African art at Paivepo: wildlife paintings, beaded sculptures, and wire art. Handmade in South Africa. Visit our Plettenberg Bay gallery.',
   artists: 'Meet the African artists behind Paivepo: William Mwale, Allick & Tinashe Kachama. Based at Old Nick Village, Plettenberg Bay. Visit the studio.',
   about: 'From a grandmother\'s Shona word to Plettenberg Bay\'s premier African art gallery. Discover the story behind Paivepo Art & Decor at Old Nick Village.',
   journal: 'Read stories from African artists at Paivepo. Behind-the-scenes, artist journeys, and the inspiration behind our Plettenberg Bay gallery\'s works.',
   contact: 'Visit Paivepo Art & Decor at Old Nick Village, Plettenberg Bay. Commission custom African art, inquire about pieces, or just say hello. Open daily 9am-5pm.',
-  product: 'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings, beaded sculptures, and furniture. Visit our gallery.'
+  product: 'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings and beaded sculptures. Visit our gallery.'
 };
 
 const canonicalUrls = {

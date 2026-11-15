@@ -52,7 +52,6 @@ function getCategoryLabel(cat) {
     Floral: 'Beaded Sculpture',
     Wire: 'Wire Art',
     Paintings: 'Painting',
-    Furniture: 'Furniture',
   };
   return map[cat] || cat;
 }

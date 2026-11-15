@@ -4,6 +4,7 @@
  */
 
 let transitioning = false;
+let pendingTransition = null;
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ── SCROLL REVEAL (Enhanced) ──
@@ -155,7 +156,10 @@ export function initPageTransition() {
   }
 
   return function transitionTo(fn) {
-    if (transitioning) return;
+    if (transitioning) {
+      pendingTransition = fn;
+      return;
+    }
     transitioning = true;
 
     overlay.style.transformOrigin = 'bottom';
@@ -168,6 +172,9 @@ export function initPageTransition() {
       setTimeout(() => {
         transitioning = false;
         initScrollReveal();
+        const nextTransition = pendingTransition;
+        pendingTransition = null;
+        if (nextTransition) transitionTo(nextTransition);
       }, 500);
     }, 500);
   };

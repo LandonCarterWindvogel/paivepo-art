@@ -33,9 +33,18 @@ The site is structured to accommodate different makers and disciplines, includin
 
 - Beaded sculpture
 - Oil painting
-- Reclaimed barrel furniture
 
 The content can grow as the client adds more artists, products and information.
+
+Furniture is presented separately on [hangingchairs.co.za](https://hangingchairs.co.za/).
+Both domains use the same Netlify site, with a persistent switch between them.
+Add the product JPGs to `images/` using these exact filenames:
+
+- `bench.jpg` and `bench_zoom.jpg`
+- `bars_stool.jpg` and `bars_stool_zoom.jpg`
+- `backbench.jpg` and `backbench_zoom.jpg`
+- `hanging_chair.jpg`
+- `hanging_bench.jpg` and `hanging_bench_zoom.jpg`
 
 ## Technology
 

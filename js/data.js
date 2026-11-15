@@ -242,28 +242,10 @@ export const products = [
     shopifyVariantId: 0
   },
 
-  // FURNITURE
-  {
-    id: 40,
-    name: "Barrel Swing Chair",
-    artist: "Paivepo Studio",
-    cat: "Furniture",
-    price: 8500,
-    sold: false,
-    desc: "A statement piece that transforms any outdoor or indoor space — the Barrel Swing Chair from Paivepo. Crafted from reclaimed wine barrel staves, this handcrafted furniture piece combines the warmth of aged wood with a suspended design that invites complete relaxation. Each chair carries the unique grain and history of its barrel. Made to order at Old Nick Village, Plettenberg Bay.",
-    size: "Approx. 80cm wide × 90cm deep",
-    mats: "Reclaimed wine barrel staves, steel suspension hardware, rope",
-    beads: null,
-    time: "Made to order — 4–6 weeks",
-    image: "images/furniture-swing-chair.webp",
-    imageWebp: "images/furniture-swing-chair.webp",
-    alt: "Wine barrel swing chair, reclaimed wood furniture by Paivepo Studio in Plettenberg Bay",
-    shopifyVariantId: 0
-  }
 ];
 
 // FEATURED PIECE IDs (shown on homepage)
-export const FEATURED_IDS = [1, 2, 40];
+export const FEATURED_IDS = [1, 2, 0];
 
 // ARTISTS
 export const artists = [

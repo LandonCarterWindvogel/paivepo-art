@@ -788,9 +788,6 @@ body::before {
 .coll-img--sculpture {
   background: linear-gradient(160deg, #2D2520 0%, #5C4830 40%, #8B6B45 70%, #3D3028 100%);
 }
-.coll-img--furniture {
-  background: linear-gradient(160deg, #4A3820 0%, #7A5C35 40%, #A07840 70%, #5C4828 100%);
-}
 .coll-img--commissions {
   background: linear-gradient(160deg, #1B1B1B 0%, #2D2520 40%, #3D3530 70%, #282420 100%);
 }
