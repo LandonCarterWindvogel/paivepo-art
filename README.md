@@ -36,9 +36,11 @@ The site is structured to accommodate different makers and disciplines, includin
 
 The content can grow as the client adds more artists, products and information.
 
-Furniture is presented separately on [hangingchairs.co.za](https://hangingchairs.co.za/).
-Both domains use the same Netlify site, with a persistent switch between them.
-Add the product JPGs to `images/` using these exact filenames:
+Furniture is sold through the separate Shopify storefront at
+[hangingchairs.co.za](https://hangingchairs.co.za/). Paivepo remains hosted on
+Netlify; the site switch links visitors between the two storefronts. The
+product JPGs are kept in `images/` as source files and should also be uploaded
+to the corresponding Shopify products:
 
 - `bench.jpg` and `bench_zoom.jpg`
 - `bars_stool.jpg` and `bars_stool_zoom.jpg`

@@ -13,42 +13,11 @@
   status = 301
   force  = true
 
-# Serve Hanging Chairs from its own domain while sharing this Netlify site.
+# Send requests for the retired local furniture page to the Shopify storefront.
 [[redirects]]
-  from = "http://hangingchairs.co.za/*"
-  to = "https://hangingchairs.co.za/:splat"
+  from = "/hangingchairs.html"
+  to = "https://hangingchairs.co.za/"
   status = 301
-  force = true
-
-[[redirects]]
-  from = "http://www.hangingchairs.co.za/*"
-  to = "https://hangingchairs.co.za/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.hangingchairs.co.za/*"
-  to = "https://hangingchairs.co.za/:splat"
-  status = 301
-  force = true
-
-# Keep the Hanging Chairs homepage and crawler files separate from Paivepo's.
-[[redirects]]
-  from = "https://hangingchairs.co.za/"
-  to = "/hangingchairs.html"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "https://hangingchairs.co.za/robots.txt"
-  to = "/hangingchairs-robots.txt"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "https://hangingchairs.co.za/sitemap.xml"
-  to = "/hangingchairs-sitemap.xml"
-  status = 200
   force = true
 
 # Security headers
