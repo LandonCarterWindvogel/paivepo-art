@@ -79,9 +79,9 @@ function renderBreadcrumbSchema(p) {
   document.head.appendChild(script);
 }
 
-export function showProduct(id) {
+export function showProduct(id, historyMode = 'push') {
   const p = products.find(x => x.id === id);
-  if (!p) { showToast('Product not found'); return; }
+  if (!p) { showToast('Product not found'); return false; }
   currentProduct = p;
 
   document.getElementById('prodBc').textContent = p.name;
@@ -97,9 +97,25 @@ export function showProduct(id) {
 
   renderProductSchema(p);
   renderBreadcrumbSchema(p);
+  updateShareLinks(p);
 
   document.title = `${p.name} — African Art from Paivepo, Plettenberg Bay`;
-  go('product');
+  go('product', false, true, historyMode, p.id);
+  return true;
+}
+
+function updateShareLinks(p) {
+  const productUrl = new URL(`product?id=${encodeURIComponent(p.id)}`, 'https://paivepo.co.za/').href;
+  const encodedUrl = encodeURIComponent(productUrl);
+  const facebook = document.getElementById('shareFacebook');
+  const twitter = document.getElementById('shareTwitter');
+  const whatsapp = document.getElementById('shareWhatsApp');
+
+  if (facebook) facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  if (twitter) {
+    twitter.href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodeURIComponent(`Discover ${p.name} at Paivepo`)}`;
+  }
+  if (whatsapp) whatsapp.href = `https://wa.me/?text=${encodedUrl}`;
 }
 
 function renderPrice(p) {

@@ -29,7 +29,7 @@
     Referrer-Policy           = "strict-origin-when-cross-origin"
     Permissions-Policy        = "camera=(), microphone=(), geolocation=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy   = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; media-src 'self' blob:; worker-src blob:; form-action 'self';"
+    Content-Security-Policy   = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; frame-src https://www.google.com; media-src 'self' blob:; worker-src blob:; form-action 'self';"
 
 # Cache images for 1 week
 [[headers]]
@@ -54,3 +54,9 @@
   for = "/js/*"
   [headers.values]
     Cache-Control = "public, max-age=86400, must-revalidate"
+
+# Keep client-side routes working when opened or refreshed directly.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

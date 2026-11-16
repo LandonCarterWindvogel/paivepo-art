@@ -1,6 +1,7 @@
 // router.js — SPA router with auto‑detected base path for GitHub Pages + Netlify compatibility
 import { renderGallery, setFilter } from './gallery.js';
 import { sounds } from './sound.js';
+import { showProduct } from './product.js';
 
 let currentPage = 'home';
 let transitionFn = null;
@@ -95,32 +96,40 @@ function updateMeta(title, description) {
   document.title = title;
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.content = description;
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
 }
 
-function setCanonical(pageId) {
+function setCanonical(pageId, productId = null) {
   const existing = document.querySelector('link[rel="canonical"]');
   if (existing) existing.remove();
 
   const link = document.createElement('link');
   link.rel = 'canonical';
   link.href = canonicalUrls[pageId] || 'https://paivepo.co.za/';
+  if (pageId === 'product' && productId !== null) {
+    link.href += `?id=${encodeURIComponent(productId)}`;
+  }
   document.head.appendChild(link);
+  document.querySelector('meta[property="og:url"]')?.setAttribute('content', link.href);
 }
 
 export function setTransition(fn) {
   transitionFn = fn;
 }
 
-export function go(pageId, skipTransition = false, force = false) {
+export function go(pageId, skipTransition = false, force = false, historyMode = 'push', productId = null) {
   if (pageId === currentPage && !force) return;
   if (skipTransition || !transitionFn) {
-    _swap(pageId);
+    _swap(pageId, historyMode, productId);
   } else {
-    transitionFn(() => _swap(pageId));
+    transitionFn(() => _swap(pageId, historyMode, productId));
   }
 }
 
-function _swap(pageId) {
+function _swap(pageId, historyMode = 'push', productId = null) {
   const allPages = document.querySelectorAll('.page');
   allPages.forEach(p => {
     p.classList.remove('active');
@@ -165,12 +174,18 @@ function _swap(pageId) {
     desc = getProductDescription();
   }
 
-  updateMeta(title, desc);
-  setCanonical(pageId);
-
-  // ── Update URL with correct base path ──
   const targetPath = BASE_PATH + (cleanPaths[pageId] || '/');
-  history.pushState(null, '', targetPath);
+  const targetUrl = pageId === 'product' && productId !== null
+    ? `${targetPath}?id=${encodeURIComponent(productId)}`
+    : targetPath;
+  if (historyMode === 'replace') {
+    history.replaceState(null, '', targetUrl);
+  } else {
+    history.pushState(null, '', targetUrl);
+  }
+
+  updateMeta(title, desc);
+  setCanonical(pageId, productId);
 
   const announcer = document.getElementById('page-announcer');
   if (announcer) {
@@ -199,7 +214,16 @@ export function initRouter() {
 
   // ── Initial page from URL (auto‑detects base path) ──
   const initialPage = getPageIdFromPath(window.location.pathname);
-  _swap(initialPage);
+  if (initialPage === 'product') {
+    const rawProductId = new URLSearchParams(window.location.search).get('id');
+    if (rawProductId && /^\d+$/.test(rawProductId)) {
+      if (!showProduct(Number(rawProductId), 'replace')) _swap('gallery', 'replace');
+    } else {
+      _swap('gallery', 'replace');
+    }
+  } else {
+    _swap(initialPage);
+  }
 
   document.body.addEventListener('click', e => {
     const target = e.target.closest('[data-page]');
@@ -222,6 +246,15 @@ export function initRouter() {
 
   window.addEventListener('popstate', () => {
     const page = getPageIdFromPath(window.location.pathname);
-    _swap(page);
+    if (page === 'product') {
+      const rawProductId = new URLSearchParams(window.location.search).get('id');
+      if (rawProductId && /^\d+$/.test(rawProductId)) {
+        if (!showProduct(Number(rawProductId), 'replace')) _swap('gallery', 'replace');
+      } else {
+        _swap('gallery', 'replace');
+      }
+      return;
+    }
+    _swap(page, 'replace');
   });
 }

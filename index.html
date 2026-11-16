@@ -260,6 +260,7 @@
       id="mobileMenu"
       role="dialog"
       aria-label="Navigation menu"
+      aria-modal="true"
       aria-hidden="true"
       style="display: none"
     >
@@ -674,7 +675,6 @@
                       loading="lazy"
                       width="800"
                       height="1000"
-                      onerror="this.parentElement.classList.add('no-img')"
                     />
                   </picture>
                 </div>
@@ -712,7 +712,6 @@
                       loading="lazy"
                       width="800"
                       height="1000"
-                      onerror="this.parentElement.classList.add('no-img')"
                     />
                   </picture>
                 </div>
@@ -749,7 +748,6 @@
                       loading="lazy"
                       width="800"
                       height="1000"
-                      onerror="this.parentElement.classList.add('no-img')"
                     />
                   </picture>
                 </div>
@@ -933,7 +931,6 @@
                       loading="lazy"
                       width="600"
                       height="400"
-                      onerror="this.parentElement.classList.add('no-img')"
                     />
                   </picture>
                 </div>
@@ -973,7 +970,6 @@
                       loading="lazy"
                       width="600"
                       height="400"
-                      onerror="this.parentElement.classList.add('no-img')"
                     />
                   </picture>
                 </div>
@@ -1005,15 +1001,17 @@
                   aria-label="The Paivepo studio at Old Nick Village"
                 >
                   <picture>
-                    <source srcset="images/journal-3.webp" type="image/webp" />
+                    <source
+                      srcset="images/artist-studio.webp"
+                      type="image/webp"
+                    />
                     <img
-                      src="images/artist-protea.jpg"
+                      src="images/artist-studio.jpg"
                       alt="Tinashe Kachama in his studio at Old Nick Village, Plettenberg Bay"
                       aria-hidden="true"
                       loading="lazy"
                       width="600"
                       height="400"
-                      onerror="this.parentElement.classList.add('no-img')"
                     />
                   </picture>
                 </div>
@@ -1466,18 +1464,21 @@
             <div class="share-buttons">
               <span>Share this piece: </span>
               <a
+                id="shareFacebook"
                 href="https://www.facebook.com/sharer/sharer.php?u=https://paivepo.co.za/product"
                 target="_blank"
                 rel="noopener"
                 >Facebook</a
               >
               <a
+                id="shareTwitter"
                 href="https://twitter.com/intent/tweet?url=https://paivepo.co.za/product&text=Discover%20African%20art%20at%20Paivepo"
                 target="_blank"
                 rel="noopener"
                 >Twitter</a
               >
               <a
+                id="shareWhatsApp"
                 href="https://wa.me/?text=https://paivepo.co.za/product"
                 target="_blank"
                 rel="noopener"
@@ -1527,7 +1528,6 @@
                   width="700"
                   height="900"
                   loading="lazy"
-                  onerror="this.parentElement.classList.add('no-img')"
                 />
               </picture>
               <div class="artist-page-fallback" aria-hidden="true"></div>
@@ -1562,7 +1562,6 @@
                   width="700"
                   height="900"
                   loading="lazy"
-                  onerror="this.parentElement.classList.add('no-img')"
                 />
               </picture>
               <div class="artist-page-fallback" aria-hidden="true"></div>
@@ -1777,7 +1776,7 @@
             <picture>
               <source srcset="images/wire-art.webp" type="image/webp" />
               <img
-                src="images/wire-art.jpg"
+                src="images/wire-art.webp"
                 alt="Paivepo wire fairy sculpture with beaded accents"
                 width="600"
                 height="750"
@@ -1787,10 +1786,10 @@
           </div>
           <div class="abt-photo">
             <picture>
-              <source srcset="images/artist-protea.webp" type="image/webp" />
+              <source srcset="images/product-protea.webp" type="image/webp" />
               <img
-                src="images/artist-protea.jpg"
-                alt="Tinashe Kachama holding a hand-beaded protea sculpture in pale pinks and creamy whites"
+                src="images/product-protea.webp"
+                alt="Hand-beaded protea sculpture in pale pinks and creamy whites"
                 width="600"
                 height="750"
                 loading="lazy"
@@ -2043,13 +2042,12 @@
               <picture>
                 <source srcset="images/journal-4.webp" type="image/webp" />
                 <img
-                  src="images/wire-art.jpg"
+                  src="images/wire-art.webp"
                   alt="Wire fairy sculpture in process at Paivepo"
                   aria-hidden="true"
                   loading="lazy"
                   width="800"
                   height="500"
-                  onerror="this.parentElement.classList.add('no-img')"
                 />
               </picture>
             </div>
