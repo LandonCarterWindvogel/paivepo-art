@@ -63,6 +63,51 @@ I kept the technology deliberately lightweight:
 
 No framework was needed. This is a static website, so I built it like one.
 
+## Project structure
+
+- `index.html` — app shell, page views, shared dialogs and metadata
+- `css/` — site, responsive and brand-bridge styles
+- `js/` — ES modules for navigation, content, catalog, cart and interactions
+- `images/` — artwork, artist and site imagery
+- `netlify.toml` — hosting headers and client-route redirects
+- `.github/workflows/deploy-pages.yml` — GitHub Pages workflow
+
+The site has no package manifest, build step or project test runner. It uses
+static HTML, CSS and JavaScript modules; serve it over HTTP rather than opening
+`index.html` as a local file.
+
+## Local preview and testing
+
+From the repository root, use a static HTTP server, for example:
+
+```powershell
+py -m http.server 8000
+```
+
+Then open `http://localhost:8000/`. This basic server is suitable for the app
+shell and client-side navigation. Refreshing clean routes such as `/gallery`
+requires a server with an SPA fallback; use Netlify Dev with the redirects in
+`netlify.toml` when available. No Netlify CLI dependency is included in this
+repository.
+
+There are no `npm install`, build, lint or test commands for this project.
+Manual and browser checks, their measured viewport sizes, and limitations are
+recorded in [TESTING_REPORT.md](./TESTING_REPORT.md).
+
+## Audit documentation
+
+- [AUDIT_REPORT.md](./AUDIT_REPORT.md) — findings, fixes and release gates
+- [ASSET_INVENTORY.md](./ASSET_INVENTORY.md) — image metadata, references and
+  duplicate/unused assets
+- [CHANGELOG.md](./CHANGELOG.md) — milestone summary
+- [TESTING_REPORT.md](./TESTING_REPORT.md) — checks performed and limitations
+
+## Git workflow
+
+Check `git status --short --branch` before editing, work on a dedicated feature
+branch, and review `git diff --check` and the complete diff before committing.
+Do not force-push or deploy without explicit approval.
+
 ## Current status
 
 **Client work — pre-launch.**
