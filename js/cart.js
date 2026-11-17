@@ -6,6 +6,7 @@ import { showToast } from './ui.js';
 import { go } from './router.js';
 import { sounds } from './sound.js';
 import { burstBeads } from './cursor.js';
+import { products } from './data.js';
 
 let cart = loadCart();
 let cartOpen = false;
@@ -14,8 +15,33 @@ let previousFocus = null;
 // ── LOAD / SAVE ──
 function loadCart() {
   try {
-    return JSON.parse(localStorage.getItem('paivepo_cart') || '[]');
-  } catch { return []; }
+    const stored = JSON.parse(localStorage.getItem('paivepo_cart') || '[]');
+    if (!Array.isArray(stored)) return [];
+
+    return stored.reduce((items, item) => {
+      const product = products.find((candidate) => candidate.id === item?.id);
+      if (!product || !Number.isSafeInteger(item.qty) || item.qty < 1) return items;
+
+      const existing = items.find((candidate) => candidate.id === product.id);
+      if (existing) {
+        existing.qty += item.qty;
+      } else {
+        items.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          qty: item.qty,
+          jpg: product.image,
+          webp: product.imageWebp,
+          shopifyVariantId: product.shopifyVariantId || null,
+        });
+      }
+      return items;
+    }, []);
+  } catch (error) {
+    console.error('Unable to load persisted cart:', error);
+    return [];
+  }
 }
 
 function saveCart() {

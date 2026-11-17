@@ -1,6 +1,6 @@
 import { initRouter, setTransition } from './router.js';
 import { initCursor } from './cursor.js';
-import { initNav, initZoom, initKeyboard, initSoundToggle, initBackToTop } from './ui.js';
+import { initNav, initZoom, initKeyboard, initSoundToggle, initBackToTop, showToast } from './ui.js';
 import { initGallery, renderGallery, renderFeatured } from './gallery.js';
 import { initCart, isCartOpen, closeCart } from './cart.js';
 import { initProduct } from './product.js';
@@ -122,15 +122,27 @@ function initBlurUpImages() {
 
   images.forEach(img => {
     if (img.closest('.loader-dots')) return;
+    if (!img.getAttribute('src')) return;
     if (img.dataset.blurProcessed) return;
 
     img.dataset.blurProcessed = 'true';
 
     img.classList.add('blur-up');
 
+    const markImageUnavailable = () => {
+      img.classList.remove('blur-up');
+      img.classList.add('loaded');
+      img.parentElement?.classList.add('no-img');
+    };
+
     if (img.complete && img.naturalWidth !== 0) {
       img.classList.add('loaded');
       img.classList.remove('blur-up');
+      return;
+    }
+
+    if (img.complete) {
+      markImageUnavailable();
       return;
     }
 
@@ -139,10 +151,7 @@ function initBlurUpImages() {
       img.classList.remove('blur-up');
     });
 
-    img.addEventListener('error', () => {
-      img.classList.remove('blur-up');
-      img.classList.add('loaded');
-    });
+    img.addEventListener('error', markImageUnavailable, { once: true });
   });
 }
 
@@ -243,16 +252,21 @@ setTimeout(() => {
 
     try {
       const body = new URLSearchParams(new FormData(form));
-      await fetch('/', {
+      const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body,
       });
+      if (!response.ok) {
+        throw new Error(`Newsletter submission failed with status ${response.status}`);
+      }
       btn.textContent = 'Subscribed ✓';
       form.querySelector('.nl-input').value = '';
-    } catch {
+    } catch (error) {
+      console.error('Newsletter form error:', error);
       btn.textContent = orig;
       btn.disabled = false;
+      showToast('Subscription failed — please try again later');
     }
   });
 })();
