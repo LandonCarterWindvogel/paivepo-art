@@ -67,6 +67,11 @@
   white-space: nowrap;
 }
 
+.bb-bar__note:last-child {
+  justify-self: end;
+  text-align: right;
+}
+
 .bb-switch {
   --bb-x: 0%;
   --bb-ind: var(--bb-linen);

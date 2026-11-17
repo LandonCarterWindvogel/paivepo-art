@@ -13,13 +13,6 @@
   status = 301
   force  = true
 
-# Send requests for the retired local furniture page to the Shopify storefront.
-[[redirects]]
-  from = "/hangingchairs.html"
-  to = "https://hangingchairs.co.za/"
-  status = 301
-  force = true
-
 # Security headers
 [[headers]]
   for = "/*"

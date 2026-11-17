@@ -36,17 +36,21 @@ The site is structured to accommodate different makers and disciplines, includin
 
 The content can grow as the client adds more artists, products and information.
 
-Furniture is sold through the separate Shopify storefront at
-[hangingchairs.co.za](https://hangingchairs.co.za/). Paivepo remains hosted on
-Netlify; the site switch links visitors between the two storefronts. The
-product JPGs are kept in `images/` as source files and should also be uploaded
-to the corresponding Shopify products:
+The Wine Barrel Collection page is available at `/hangingchairs.html` on the
+Netlify site. It presents five designs around the provenance of reclaimed oak
+wine barrels, with product details, enquiry-confirmed availability and lead
+times, and black or white rope options on the hanging designs. Prices are from
+the owner's Shopify export. The supplied furniture photos are kept in `images/`
+as source files:
 
 - `bench.jpg` and `bench_zoom.jpg`
 - `bars_stool.jpg` and `bars_stool_zoom.jpg`
 - `backbench.jpg` and `backbench_zoom.jpg`
 - `hanging_chair.jpg`
 - `hanging_bench.jpg` and `hanging_bench_zoom.jpg`
+
+The collection uses the matching bench, backrest bench, bar stool, backrest
+swing and swing seat photos.
 
 ## Technology
 
@@ -66,8 +70,9 @@ No framework was needed. This is a static website, so I built it like one.
 ## Project structure
 
 - `index.html` — app shell, page views, shared dialogs and metadata
+- `hangingchairs.html` — standalone furniture collection review page
 - `css/` — site, responsive and brand-bridge styles
-- `js/` — ES modules for navigation, content, catalog, cart and interactions
+- `js/` — ES modules for navigation, content, catalog, cart, interactions and Hanging Chairs product data
 - `images/` — artwork, artist and site imagery
 - `netlify.toml` — hosting headers and client-route redirects
 - `.github/workflows/deploy-pages.yml` — GitHub Pages workflow
