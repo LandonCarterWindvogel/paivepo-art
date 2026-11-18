@@ -6,7 +6,7 @@ export const products = [
     name: "Christmas Reindeer (White)",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 350,
     sold: false,
     desc: "A handcrafted beaded white Christmas reindeer sculpture by Tinashe Kachama.",
     size: null,
@@ -16,14 +16,14 @@ export const products = [
     image: "images/christmas_reindeer_white.jpeg",
     imageWebp: "images/christmas_reindeer_white.jpeg",
     alt: "White beaded Christmas reindeer sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221233853
   },
   {
     id: 102,
     name: "Giraffe",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 1800,
     sold: false,
     desc: "A handcrafted beaded giraffe sculpture by Tinashe Kachama.",
     size: null,
@@ -33,14 +33,14 @@ export const products = [
     image: "images/giraffe.jpeg",
     imageWebp: "images/giraffe.jpeg",
     alt: "Beaded giraffe sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221594301
   },
   {
     id: 103,
     name: "Unicorn",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 1750,
     sold: false,
     desc: "A handcrafted beaded unicorn sculpture by Tinashe Kachama.",
     size: null,
@@ -50,14 +50,14 @@ export const products = [
     image: "images/unicorn.jpeg",
     imageWebp: "images/unicorn.jpeg",
     alt: "Beaded unicorn sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221201085
   },
   {
     id: 104,
     name: "Wild Dog",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 2800,
     sold: false,
     desc: "A handcrafted beaded wild dog sculpture by Tinashe Kachama.",
     size: null,
@@ -67,14 +67,14 @@ export const products = [
     image: "images/wild_dog.jpeg",
     imageWebp: "images/wild_dog.jpeg",
     alt: "Beaded wild dog sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221070013
   },
   {
     id: 105,
     name: "Lion",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 5350,
     sold: false,
     desc: "A handcrafted beaded lion sculpture by Tinashe Kachama.",
     size: null,
@@ -84,14 +84,14 @@ export const products = [
     image: "images/lion.jpeg",
     imageWebp: "images/lion.jpeg",
     alt: "Beaded lion sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221561533
   },
   {
     id: 106,
     name: "Zebra",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 2850,
     sold: false,
     desc: "A handcrafted beaded zebra sculpture by Tinashe Kachama.",
     size: null,
@@ -101,14 +101,14 @@ export const products = [
     image: "images/zebra.jpeg",
     imageWebp: "images/zebra.jpeg",
     alt: "Beaded zebra sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221037245
   },
   {
     id: 107,
     name: "Tiger",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 5670,
     sold: false,
     desc: "A handcrafted beaded tiger sculpture by Tinashe Kachama.",
     size: null,
@@ -118,14 +118,14 @@ export const products = [
     image: "images/tiger.jpeg",
     imageWebp: "images/tiger.jpeg",
     alt: "Beaded tiger sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221528765
   },
   {
     id: 108,
     name: "Cow",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 7500,
     sold: false,
     desc: "A handcrafted beaded cow sculpture by Tinashe Kachama.",
     size: null,
@@ -135,14 +135,14 @@ export const products = [
     image: "images/cow.jpeg",
     imageWebp: "images/cow.jpeg",
     alt: "Beaded cow sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221659837
   },
   {
     id: 109,
     name: "Christmas Reindeer",
     artist: "Tinashe Kachama",
     cat: "Wild",
-    price: null,
+    price: 350,
     sold: false,
     desc: "A handcrafted beaded Christmas reindeer sculpture by Tinashe Kachama.",
     size: null,
@@ -152,7 +152,7 @@ export const products = [
     image: "images/christmas_reindeer.jpeg",
     imageWebp: "images/christmas_reindeer.jpeg",
     alt: "Beaded Christmas reindeer sculpture by Tinashe Kachama",
-    shopifyVariantId: null
+    shopifyVariantId: 68403221266621
   },
 ];
 
