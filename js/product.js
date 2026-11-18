@@ -31,16 +31,6 @@ function renderProductSchema(p) {
     "description": p.desc,
     "image": `https://paivepo.co.za/${p.imageWebp}`,
     "sku": `PAIVEPO-${p.id}`,
-    "offers": {
-      "@type": "Offer",
-      "price": p.price,
-      "priceCurrency": "ZAR",
-      "availability": p.sold ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Paivepo Art & Decor"
-      }
-    },
     "brand": {
       "@type": "Brand",
       "name": "Paivepo"
@@ -50,6 +40,19 @@ function renderProductSchema(p) {
       "name": p.artist || "Paivepo Studio"
     }
   };
+
+  if (Number.isFinite(p.price)) {
+    schema.offers = {
+      "@type": "Offer",
+      "price": p.price,
+      "priceCurrency": "ZAR",
+      "availability": p.sold ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Paivepo Art & Decor"
+      }
+    };
+  }
 
   const script = document.createElement('script');
   script.type = 'application/ld+json';
@@ -120,7 +123,7 @@ function updateShareLinks(p) {
 
 function renderPrice(p) {
   const el = document.getElementById('prodPrice');
-  el.textContent = `R${p.price.toLocaleString()}`;
+  el.textContent = p.price == null ? 'Price coming soon' : `R${p.price.toLocaleString()}`;
   el.className = `prod-price${p.sold ? ' sold-price' : ''}`;
 }
 
@@ -203,27 +206,31 @@ function renderSoldState(p) {
     sounds.sold();
   } else {
     atcBtn.style.display = '';
-    atcBtn.textContent = 'Add to Bag';
-    atcBtn.disabled = false;
-    atcBtn.style.background = '';
     commBtn.classList.remove('show');
 
     // Replace button to remove old listeners
     const newAtc = atcBtn.cloneNode(true);
+    const checkoutReady = Number.isFinite(p.price) && Boolean(p.shopifyVariantId);
+    newAtc.textContent = checkoutReady ? 'Add to Bag' : 'Coming Soon';
+    newAtc.disabled = !checkoutReady;
+    newAtc.setAttribute('aria-label', checkoutReady ? 'Add to bag' : 'Product coming soon');
+    newAtc.title = checkoutReady ? '' : 'Price and checkout details are coming soon';
     atcBtn.parentNode.replaceChild(newAtc, atcBtn);
-    newAtc.addEventListener('click', () => {
-      addToCart(p);
-      newAtc.textContent = 'Added ✓';
-      newAtc.disabled = true;
-      newAtc.style.transform = 'scale(0.96)';
-      setTimeout(() => {
-        newAtc.style.transform = '';
-      }, 150);
-      setTimeout(() => {
-        newAtc.textContent = 'Add to Bag';
-        newAtc.disabled = false;
-      }, 2000);
-    });
+    if (checkoutReady) {
+      newAtc.addEventListener('click', () => {
+        addToCart(p);
+        newAtc.textContent = 'Added ✓';
+        newAtc.disabled = true;
+        newAtc.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          newAtc.style.transform = '';
+        }, 150);
+        setTimeout(() => {
+          newAtc.textContent = 'Add to Bag';
+          newAtc.disabled = false;
+        }, 2000);
+      });
+    }
 
     if (mainImg) {
       mainImg.removeEventListener('click', openZoom);
@@ -296,16 +303,16 @@ function renderRelated(p) {
              scroll-snap-align: start;
              cursor: pointer;
            "
-           aria-label="${r.name}${r.sold ? ' — sold' : `, R${r.price.toLocaleString()}`}">
-        <picture>
-          <source srcset="${r.imageWebp}" type="image/webp">
+           aria-label="${r.name}${r.sold ? ' — sold' : `, ${r.price == null ? 'Price coming soon' : `R${r.price.toLocaleString()}`}`}">
+           <picture>
+             ${r.imageWebp && r.imageWebp.toLowerCase().endsWith('.webp') ? `<source srcset="${r.imageWebp}" type="image/webp">` : ''}
           <img class="rel-img" src="${r.imageWebp}" alt="${imgAlt}" width="400" height="533" loading="lazy" style="width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:2px;">
         </picture>
         <div class="rel-name" style="margin-top:8px; font-family:var(--font-serif); font-size:15px; font-weight:400; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${r.name}</div>
         <div class="rel-price${r.sold ? ' struck' : ''}" style="font-size:13px; color:var(--muted);">
           ${r.sold
             ? '<span style="text-decoration:line-through;opacity:.45">Sold</span>'
-            : `R${r.price.toLocaleString()}`}
+            : r.price == null ? 'Price coming soon' : `R${r.price.toLocaleString()}`}
         </div>
       </div>
     `;

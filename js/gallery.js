@@ -21,9 +21,12 @@ function picWithCaption(jpgSrc, webpSrc, alt, caption, cls = '', w = '', h = '',
   const dims = (w && h) ? ` width="${w}" height="${h}"` : '';
   const load = lazy ? ' loading="lazy"' : '';
   const clsAttr = cls ? ` class="${cls}"` : '';
+  const source = webpSrc && webpSrc.toLowerCase().endsWith('.webp')
+    ? `<source srcset="${webpSrc}" type="image/webp">`
+    : '';
   return `<figure class="gallery-figure">
     <picture>
-      <source srcset="${webpSrc}" type="image/webp">
+      ${source}
       <img src="${jpgSrc}" alt="${alt}"${clsAttr}${dims}${load}>
     </picture>
     <figcaption>${caption}</figcaption>
@@ -56,6 +59,10 @@ function getCategoryLabel(cat) {
   return map[cat] || cat;
 }
 
+function formatPrice(price) {
+  return price == null ? 'Price coming soon' : `R${price.toLocaleString()}`;
+}
+
 export function renderFeatured() {
   const grid = document.getElementById('featGrid');
   if (!grid) return;
@@ -64,9 +71,10 @@ export function renderFeatured() {
     const p = products.find((x) => x.id === id);
     if (!p) return '';
 
-    const priceHTML = p.sold
-      ? `<span style="text-decoration:line-through;opacity:.4">R${p.price.toLocaleString()}</span>`
-      : `R${p.price.toLocaleString()}`;
+    const price = formatPrice(p.price);
+    const priceHTML = p.sold && p.price != null
+      ? `<span style="text-decoration:line-through;opacity:.4">${price}</span>`
+      : price;
     const soldBadge = p.sold
       ? '<div class="feat-sold-badge" aria-label="Sold">Sold</div>'
       : '';
@@ -76,7 +84,7 @@ export function renderFeatured() {
     return `
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
            ${p.sold ? '' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
-           aria-label="${p.name}${p.sold ? ' — sold' : `, R${p.price.toLocaleString()}`}">
+           aria-label="${p.name}${p.sold ? ' — sold' : `, ${price}`}">
         <div class="feat-img-wrap">
           ${picWithCaption(p.image, p.imageWebp, imgAlt, caption, 'feat-img', '800', '1000')}
         </div>
@@ -161,7 +169,7 @@ function buildCard(p) {
   return `
     <div class="gal-card${p.sold ? ' is-sold' : ''}"
          ${p.sold ? 'aria-disabled="true"' : `data-prod-id="${p.id}" role="button" tabindex="0"`}
-         aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : `, R${p.price.toLocaleString()}`}">
+         aria-label="${p.name}, ${categoryLabel}${p.sold ? ', Sold' : `, ${formatPrice(p.price)}`}">
       <div class="gal-img-wrap">
         ${picWithCaption(p.image, p.imageWebp, imgAlt, caption, 'gal-img', '600', '800', false)}
         <div class="gal-ov" aria-hidden="true">${p.sold ? '' : '<div class="gal-view">View Details</div>'}</div>
@@ -173,7 +181,7 @@ function buildCard(p) {
           ${p.artist && p.artist !== 'Paivepo Studio' ? `<div class="gal-artist">${p.artist}</div>` : ''}
           <span class="gal-cat-tag">${categoryLabel}</span>
         </div>
-        <span class="gal-price${p.sold ? ' struck' : ''}">R${p.price.toLocaleString()}</span>
+        <span class="gal-price${p.sold ? ' struck' : ''}">${formatPrice(p.price)}</span>
         ${p.sold ? '<span class="gal-sold-tag">Sold</span>' : ''}
       </div>
     </div>
