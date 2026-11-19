@@ -81,7 +81,7 @@
 
 /* ── Print ── */
 @media print {
-  #nav, .wa-float, #cur, #cur-r, .mobile-menu,
+  #nav, .wa-float, .mobile-menu,
   .cart-ov, .cart-sb, .zoom-modal, .toast,
   .hero-sc, .mq-wrap, .sound-btn, .hamburger { display: none !important; }
 
@@ -122,12 +122,13 @@
   overflow: hidden;
   aspect-ratio: 3 / 4;
   position: relative;
+  background: var(--ivory-deep);
 }
 .feat-img-wrap picture {
   position: absolute; inset: 0;
 }
 .feat-img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%; height: 100%; object-fit: contain;
   display: block;
 }
 .feat-meta {

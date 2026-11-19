@@ -1,5 +1,4 @@
 import { initRouter, setTransition } from './router.js';
-import { initCursor } from './cursor.js';
 import { initNav, initZoom, initKeyboard, initSoundToggle, initBackToTop, showToast } from './ui.js';
 import { initGallery, renderGallery, renderFeatured } from './gallery.js';
 import { initCart, isCartOpen, closeCart } from './cart.js';
@@ -159,7 +158,6 @@ function initBlurUpImages() {
 initLoadingScreen();
 initSound();
 initRouter();
-initCursor();
 initNav();
 initZoom();
 initGallery();
