@@ -25,3 +25,14 @@
   bag, image gallery and Shopify checkout behaviour.
 - Updated the clean Hanging Chairs canonical/social URL and sitemap entry.
 - Changes are on a feature branch; no production deployment was performed.
+
+## 2026-11-21 — Hanging Chairs screenshot-match refinement
+
+- Reworked the masthead and two-way switch to more closely match the approved
+  concept, with an accessible client-side product search.
+- Rebalanced the split hero, icon-led trust strip and three-column collection.
+- Reordered the oak provenance story to copy-left and authentic detail-photo-right.
+- Preserved the five original product images, prices, Shopify variant IDs,
+  rope choices, product galleries, shopping bag and checkout behaviour.
+- Used only source photography already in the repository; the lifestyle setting
+  shown in the visual concept is not present in the supplied photo library.

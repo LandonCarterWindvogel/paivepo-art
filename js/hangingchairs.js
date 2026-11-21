@@ -738,3 +738,56 @@ document.addEventListener("keydown", trapCartFocus);
 const year = document.querySelector("#year");
 if (year) year.textContent = String(new Date().getFullYear());
 renderCart();
+
+
+/* Accessible client-side product search. Search text is never injected into HTML. */
+const searchToggle = document.querySelector("#hc-search-toggle");
+const searchPanel = document.querySelector("#hc-search");
+const searchInput = document.querySelector("#hc-search-input");
+const searchClose = document.querySelector("#hc-search-close");
+const noResults = document.querySelector("#hc-no-results");
+
+function applyProductSearch() {
+  if (!productGrid || !searchInput) return;
+  const query = searchInput.value.trim().toLocaleLowerCase("en-ZA");
+  const cards = [...productGrid.querySelectorAll(".hc-product")];
+  let visibleCount = 0;
+
+  cards.forEach((card) => {
+    const matches = !query || card.textContent.toLocaleLowerCase("en-ZA").includes(query);
+    card.hidden = !matches;
+    if (matches) visibleCount += 1;
+  });
+
+  if (noResults) noResults.hidden = !query || visibleCount > 0;
+}
+
+function closeProductSearch({ reset = false } = {}) {
+  if (!searchPanel || !searchToggle) return;
+  searchPanel.hidden = true;
+  searchToggle.setAttribute("aria-expanded", "false");
+  if (reset && searchInput) {
+    searchInput.value = "";
+    applyProductSearch();
+  }
+  searchToggle.focus();
+}
+
+searchToggle?.addEventListener("click", () => {
+  if (!searchPanel || !searchInput) return;
+  if (!searchPanel.hidden) {
+    closeProductSearch({ reset: true });
+    return;
+  }
+  searchPanel.hidden = false;
+  searchToggle.setAttribute("aria-expanded", "true");
+  searchInput.focus();
+});
+
+searchInput?.addEventListener("input", applyProductSearch);
+searchClose?.addEventListener("click", () => closeProductSearch({ reset: true }));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && searchPanel && !searchPanel.hidden) {
+    closeProductSearch({ reset: true });
+  }
+});

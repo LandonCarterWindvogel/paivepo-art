@@ -151,13 +151,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/brand-bridge.css" />
-    <link rel="stylesheet" href="/css/hangingchairs.css?v=5" />
+    <link rel="stylesheet" href="/css/hangingchairs.css?v=6" />
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
     <a class="hc-skip" href="#main-content">Skip to content</a>
 
-        <div class="bb-bar">
+            <div class="bb-bar">
       <span class="bb-bar__note">Two crafts. One home.</span>
       <span class="bb-bar__note">Plettenberg Bay · South Africa</span>
     </div>
@@ -167,7 +167,6 @@
         <span>PAIVEPO</span>
         <span>ART &amp; DECOR</span>
       </a>
-
       <div class="bb-switch" data-side="barrel" role="group"
         aria-label="Switch between Paivepo Art & Decor and Hanging Chairs">
         <span class="bb-switch__ind" aria-hidden="true"></span>
@@ -180,24 +179,33 @@
           <span class="bb-short">Chairs</span>
         </a>
       </div>
-
       <nav class="hc-nav" aria-label="Main navigation">
         <a href="#collection">The collection</a>
         <a href="#provenance">Our oak</a>
         <a href="#making">The making</a>
-        <a class="hc-nav__enquire" href="#enquire">Enquire <span aria-hidden="true">↗</span></a>
+        <button class="hc-search-toggle" id="hc-search-toggle" type="button"
+          aria-controls="hc-search" aria-expanded="false" aria-label="Search the collection">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path>
+          </svg>
+        </button>
         <button class="hc-cart-toggle" id="hc-cart-toggle" type="button"
-          aria-controls="hc-cart" aria-expanded="false"
-          aria-label="Open shopping bag, 0 items">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"
+          aria-controls="hc-cart" aria-expanded="false" aria-label="Open shopping bag, 0 items">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none"
             stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
             stroke-linejoin="round" aria-hidden="true">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" />
           </svg>
-          <span>Bag</span>
           <span class="hc-cart-count" id="hc-cart-count" aria-hidden="true">0</span>
         </button>
       </nav>
+      <form class="hc-search" id="hc-search" role="search" hidden>
+        <label class="hc-sr-only" for="hc-search-input">Search the Wine Barrel Collection</label>
+        <input id="hc-search-input" name="q" type="search"
+          placeholder="Search the collection…" autocomplete="off" />
+        <button id="hc-search-close" type="button" aria-label="Close search">×</button>
+      </form>
     </header>
 
     <main id="main-content" class="hc-main">
@@ -206,16 +214,16 @@
           <p class="hc-kicker">The Wine Barrel Collection · Plettenberg Bay</p>
           <h1 id="hc-title">Oak shaped by wine.<br /><em>Made to be lived with.</em></h1>
           <p class="hc-intro">
-            Handcrafted chairs, benches and swings made from reclaimed oak wine
-            barrels. Each piece carries the character of a previous life.
+            Chairs, benches and swings made from genuine oak wine barrels. Timber
+            with a past, carefully shaped for the moments still to come.
           </p>
           <div class="hc-hero__actions">
             <a class="hc-hero__primary" href="#collection">
               Explore the collection <span aria-hidden="true">→</span>
             </a>
-            <a class="hc-hero__secondary" href="#provenance">Discover the oak</a>
+            <a class="hc-hero__secondary" href="#making">Discover the craft</a>
           </div>
-          <p class="hc-hero__edition"><span>01—05</span> Five distinct designs</p>
+          <p class="hc-hero__edition"><span>01—05</span> Five distinct designs <i aria-hidden="true"></i> Made in South Africa</p>
         </div>
         <div class="hc-hero__image">
           <img src="/images/hanging_chair.jpg"
@@ -225,19 +233,10 @@
         </div>
       </section>
 
-      <section class="hc-trust" aria-label="The Hanging Chairs collection">
-        <div class="hc-trust__item">
-          <span class="hc-trust__symbol" aria-hidden="true">01</span>
-          <span><small>Material</small><strong>Reclaimed wine-barrel oak</strong></span>
-        </div>
-        <div class="hc-trust__item">
-          <span class="hc-trust__symbol" aria-hidden="true">02</span>
-          <span><small>Made in</small><strong>Plettenberg Bay, South Africa</strong></span>
-        </div>
-        <div class="hc-trust__item">
-          <span class="hc-trust__symbol" aria-hidden="true">03</span>
-          <span><small>Checkout</small><strong>Secure Shopify checkout</strong></span>
-        </div>
+            <section class="hc-trust" aria-label="The Hanging Chairs collection">
+        <div class="hc-trust__item"><span class="hc-trust__symbol" aria-hidden="true">✳</span><span class="hc-trust__label">Reclaimed wine-barrel oak</span></div>
+        <div class="hc-trust__item"><span class="hc-trust__symbol" aria-hidden="true">⌁</span><span class="hc-trust__label">Made with care in South Africa</span></div>
+        <div class="hc-trust__item"><span class="hc-trust__symbol" aria-hidden="true">↗</span><span class="hc-trust__label">Secure Shopify checkout</span></div>
       </section>
 
       
@@ -248,17 +247,9 @@
         aria-labelledby="collection-title"
       >
         <header class="hc-collection__heading">
-          <div>
-            <p class="hc-kicker">01 / Five designs, shaped by the material</p>
-            <h2 id="collection-title">The <em>collection.</em></h2>
-            <p>
-              A considered range of seats for the table, the garden and the
-              quieter corner. Each barrel yields only a limited number of pieces.
-            </p>
-          </div>
-          <a class="hc-collection__all" href="#hc-products">
-            View all pieces <span aria-hidden="true">→</span>
-          </a>
+          <h2 id="collection-title">The collection</h2>
+          <span class="hc-collection__rule" aria-hidden="true"></span>
+          <a class="hc-collection__all" href="#hc-products">View all pieces <span aria-hidden="true">→</span></a>
         </header>
 
         <div
@@ -266,6 +257,7 @@
           id="hc-products"
           aria-label="Five designs in the Wine Barrel Collection"
         ></div>
+        <p class="hc-no-results" id="hc-no-results" role="status" hidden>No pieces match that search. Try another name or material.</p>
         <p class="hc-collection__footnote">
           Inventory and variant pricing are shown for each piece. Shipping
           costs and delivery details are confirmed securely by Shopify at checkout.
@@ -277,15 +269,6 @@
         id="provenance"
         aria-labelledby="hc-provenance-title"
       >
-        <div class="hc-provenance__image">
-          <img
-            src="/images/bench_zoom.jpg"
-            alt="Close view of oak barrel staves, their grain, dark wine marks and old fastenings"
-            loading="lazy"
-            decoding="async"
-          />
-          <span>Oak with its history still visible</span>
-        </div>
         <div class="hc-provenance__copy">
           <p class="hc-kicker">02 / Material provenance</p>
           <h2 id="hc-provenance-title">This oak held wine for years.</h2>
@@ -302,6 +285,15 @@
           <p class="hc-provenance__note">
             The material is not made to look old. It already is.
           </p>
+        </div>
+        <div class="hc-provenance__image">
+          <img
+            src="/images/bench_zoom.jpg"
+            alt="Close view of oak barrel staves, their grain, dark wine marks and old fastenings"
+            loading="lazy"
+            decoding="async"
+          />
+          <span>Oak with its history still visible</span>
         </div>
       </section>
 
