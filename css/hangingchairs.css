@@ -3785,9 +3785,7 @@ body { min-width:320px; overflow-x:clip; background:var(--hc-paper); color:var(-
   }
 }
 
-
-/* Retain the original site product photograph in the hero while preserving
-   the soft linen fade. The white studio background blends into the page. */
+/* Keep the original site photograph in the hero with its soft linen fade. */
 .hc-hero__image {
   background: var(--hc-paper);
 }
@@ -3803,5 +3801,229 @@ body { min-width:320px; overflow-x:clip; background:var(--hc-paper); color:var(-
   .hc-hero__image img {
     object-position: center 55%;
     padding: 8px 14px;
+  }
+}
+
+/* Match the compact editorial hero while keeping the existing content and photo. */
+:root {
+  --side: clamp(22px, 3.7vw, 58px);
+}
+
+.hc-hero {
+  min-height: clamp(390px, 35vw, 460px);
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+}
+
+.bb-bar {
+  height: 28px;
+  min-height: 28px;
+}
+
+.hc-masthead {
+  min-height: 60px;
+  grid-template-columns: minmax(210px, 1fr) auto minmax(390px, 1fr);
+  gap: 16px;
+  padding-block: 8px;
+}
+
+.bb-tab {
+  min-width: 157px;
+  padding-inline: 12px;
+}
+
+.bb-switch[data-side="barrel"] {
+  --bb-t-art: var(--hc-ink);
+  --bb-t-bar: var(--hc-paper);
+}
+
+.hc-hero__content {
+  padding: clamp(24px, 3.2vw, 44px) clamp(18px, 2.2vw, 32px)
+    clamp(20px, 2.2vw, 28px) var(--side);
+}
+
+.hc-hero h1 {
+  margin-block: 18px 16px;
+  font-size: clamp(46px, 4.65vw, 64px);
+  line-height: 0.98;
+}
+
+.hc-hero__content .hc-kicker {
+  display: block;
+  width: 100%;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--hc-accent);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+.hc-hero__content .hc-kicker::after {
+  display: none;
+}
+
+.hc-intro {
+  max-width: 430px;
+  font: 400 clamp(15px, 1.3vw, 17px) / 1.45 var(--hc-sans);
+}
+
+.hc-hero__actions {
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.hc-hero__primary {
+  min-height: 36px;
+  padding-inline: 20px;
+  font-size: 8px;
+}
+
+.hc-hero__secondary {
+  min-height: 32px;
+  font-size: 8px;
+}
+
+.hc-hero__edition {
+  max-width: 490px;
+  gap: 8px;
+  margin-top: 34px;
+  padding-top: 0;
+  border-top: 0;
+  font-size: 8px;
+}
+
+.hc-hero__edition i {
+  width: auto;
+  height: 1px;
+  flex: 1;
+  margin-inline: 6px 0;
+}
+
+.hc-trust {
+  min-height: 36px;
+  padding-block: 4px;
+}
+
+.hc-trust__symbol {
+  font-size: 18px;
+}
+
+.hc-collection {
+  padding-top: 18px;
+}
+
+.hc-collection__heading {
+  margin-bottom: 6px;
+}
+
+.hc-collection__heading h2 {
+  font-size: clamp(42px, 4.2vw, 54px);
+}
+
+.hc-hero__image {
+  height: clamp(390px, 35vw, 460px);
+  min-height: 0;
+}
+
+.hc-hero__image img {
+  object-fit: cover;
+  object-position: center 62%;
+  padding: 0;
+}
+
+.hc-wordmark span:first-child {
+  font-size: clamp(28px, 3.2vw, 42px);
+  letter-spacing: -0.045em;
+}
+
+@media (max-width: 1120px) {
+  .hc-hero {
+    min-height: 390px;
+    grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  }
+
+  .hc-hero__content {
+    padding-right: 22px;
+  }
+
+  .hc-hero__image {
+    height: 390px;
+  }
+
+  .hc-hero h1 {
+    font-size: clamp(44px, 5vw, 56px);
+  }
+}
+
+@media (max-width: 760px) {
+  .bb-bar {
+    height: 30px;
+    min-height: 30px;
+  }
+
+  .hc-masthead {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .bb-switch {
+    width: min(190px, 42vw);
+  }
+
+  .bb-tab {
+    min-width: 0;
+    padding-inline: 12px;
+  }
+
+  .hc-nav {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hc-hero {
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .hc-hero__content {
+    padding: 38px var(--side) 28px;
+  }
+
+  .hc-hero__image {
+    height: clamp(360px, 92vw, 480px);
+  }
+
+  .hc-hero__image img {
+    object-position: center 70%;
+  }
+
+  .hc-trust {
+    min-height: 0;
+    gap: 10px;
+    padding-block: 14px;
+  }
+
+  .hc-collection {
+    padding-top: 38px;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --side: 20px;
+  }
+
+  .bb-tab {
+    padding-inline: 9px;
+  }
+
+  .hc-wordmark span:first-child {
+    font-size: clamp(18px, 5.4vw, 25px);
+  }
+
+  .hc-hero__content {
+    padding-top: 34px;
+  }
+
+  .hc-hero h1 {
+    font-size: clamp(43px, 11vw, 56px);
   }
 }
