@@ -3784,3 +3784,24 @@ body { min-width:320px; overflow-x:clip; background:var(--hc-paper); color:var(-
     transition: none;
   }
 }
+
+
+/* Retain the original site product photograph in the hero while preserving
+   the soft linen fade. The white studio background blends into the page. */
+.hc-hero__image {
+  background: var(--hc-paper);
+}
+
+.hc-hero__image img {
+  object-fit: contain;
+  object-position: center 55%;
+  mix-blend-mode: multiply;
+  padding: clamp(8px, 1.6vw, 24px);
+}
+
+@media (max-width: 760px) {
+  .hc-hero__image img {
+    object-position: center 55%;
+    padding: 8px 14px;
+  }
+}
