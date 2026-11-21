@@ -36,8 +36,9 @@ The site is structured to accommodate different makers and disciplines, includin
 
 The content can grow as the client adds more artists, products and information.
 
-The Wine Barrel Collection page is available at `/hangingchairs.html` on the
-Netlify site. It presents five designs around the provenance of reclaimed oak
+The Wine Barrel Collection page is available at `/hangingchairs` on the
+Netlify site. It uses a separate editorial storefront while sharing the Paivepo
+brand identity through the two-way brand switch. It presents five designs around the provenance of reclaimed oak
 wine barrels, with product details, enquiry-confirmed availability and lead
 times, and black or white rope options on the hanging designs. Prices are from
 the owner's Shopify export. The supplied furniture photos are kept in `images/`
