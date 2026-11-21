@@ -785,6 +785,10 @@ searchToggle?.addEventListener("click", () => {
 });
 
 searchInput?.addEventListener("input", applyProductSearch);
+searchPanel?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  applyProductSearch();
+});
 searchClose?.addEventListener("click", () => closeProductSearch({ reset: true }));
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && searchPanel && !searchPanel.hidden) {
