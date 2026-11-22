@@ -37,7 +37,7 @@ function renderProductSchema(p) {
     },
     "manufacturer": {
       "@type": "Organization",
-      "name": p.artist || "Paivepo Studio"
+      "name": "Paivepo Art & Decor"
     }
   };
 
@@ -245,7 +245,6 @@ function renderSpecs(p) {
     { l: 'Materials', v: p.mats },
     { l: 'Bead Count', v: p.beads },
     { l: 'Time to Create', v: p.time },
-    { l: 'Artist', v: p.artist || 'Paivepo Studio' },
     { l: 'Edition', v: p.sold ? 'Sold — One of a Kind' : 'One of a Kind' },
   ].filter(s => s.v && s.v !== 'To be confirmed');
 
@@ -293,7 +292,7 @@ function renderRelated(p) {
     width: 100%;
   `;
   carousel.innerHTML = related.map(r => {
-    const imgAlt = r.alt || `${r.name} — handmade ${r.cat} artwork by ${r.artist || 'Paivepo'}`;
+    const imgAlt = r.alt || `${r.name} — ${r.cat} artwork from Paivepo`;
     return `
       <div class="rel-card${r.sold ? ' is-sold' : ''}"
            ${r.sold ? '' : `data-prod-id="${r.id}" role="button" tabindex="0"`}
