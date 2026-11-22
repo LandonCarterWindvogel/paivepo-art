@@ -3,7 +3,7 @@ import { products, FEATURED_IDS } from './data.js';
 import { showProduct } from './product.js';
 import { sounds } from './sound.js';
 
-let activeFilter = 'All';
+let activeFilter = 'ALL WORKS';
 let visibleCount = 6; // Number of items to show initially
 const LOAD_MORE_STEP = 6;
 
@@ -43,20 +43,8 @@ function pic(jpgSrc, webpSrc, alt, cls = '', w = '', h = '', lazy = true) {
   </picture>`;
 }
 
-function artistLabel(p) {
-  if (!p.artist || p.artist === 'Paivepo Studio') return '';
-  return `<span class="gal-artist">${p.artist}</span>`;
-}
-
 function getCategoryLabel(cat) {
-  const map = {
-    Birds: 'Beaded Sculpture',
-    Wild: 'Beaded Sculpture',
-    Floral: 'Beaded Sculpture',
-    Wire: 'Wire Art',
-    Paintings: 'Painting',
-  };
-  return map[cat] || cat;
+  return cat || 'ARTWORK';
 }
 
 function formatPrice(price) {
@@ -78,8 +66,8 @@ export function renderFeatured() {
     const soldBadge = p.sold
       ? '<div class="feat-sold-badge" aria-label="Sold">Sold</div>'
       : '';
-    const imgAlt = p.alt || `${p.name}${p.artist ? ` by ${p.artist}` : ''} — Paivepo Art & Decor`;
-    const caption = `${p.name}${p.artist ? ` by ${p.artist}` : ''}`;
+    const imgAlt = p.alt || `${p.name} — Paivepo Art & Decor`;
+    const caption = p.name;
 
     return `
       <div class="feat-item${p.sold ? ' is-sold' : ''}"
@@ -92,7 +80,6 @@ export function renderFeatured() {
         <div class="feat-info" aria-hidden="true">
           <div class="feat-name">${p.name}</div>
           <div class="feat-meta">
-            ${p.artist ? `<span class="feat-artist">${p.artist}</span>` : ''}
             <div class="feat-price">${priceHTML}</div>
           </div>
         </div>
@@ -104,7 +91,7 @@ export function renderFeatured() {
 export function renderGallery() {
   const availOnly = document.getElementById('availOnly')?.checked ?? false;
 
-  let list = activeFilter === 'All'
+  let list = activeFilter === 'ALL WORKS'
     ? products
     : products.filter((p) => p.cat === activeFilter);
 
@@ -122,7 +109,9 @@ export function renderGallery() {
   grid.style.opacity = '0';
 
   setTimeout(() => {
-    grid.innerHTML = itemsToShow.map(buildCard).join('');
+    grid.innerHTML = itemsToShow.length
+      ? itemsToShow.map(buildCard).join('')
+      : '<p role="status" style="grid-column:1/-1;text-align:center;padding:48px 16px;color:var(--muted);font-family:var(--font-sans);font-size:14px;">New works in this category are coming soon.</p>';
 
     // Add "Load More" button if needed
     if (hasMore) {
@@ -162,9 +151,9 @@ function buildCard(p) {
       <div class="sold-sub">This piece has found its home</div>
     </div>` : '';
 
-  const imgAlt = p.alt || `${p.name}${p.artist ? ` by ${p.artist}` : ''} — ${p.cat}, Paivepo Art & Decor`;
+  const imgAlt = p.alt || `${p.name} — ${categoryLabel}, Paivepo Art & Decor`;
   const categoryLabel = getCategoryLabel(p.cat);
-  const caption = `${p.name}${p.artist ? ` by ${p.artist}` : ''}`;
+  const caption = p.name;
 
   return `
     <div class="gal-card${p.sold ? ' is-sold' : ''}"
@@ -178,7 +167,6 @@ function buildCard(p) {
       <div class="gal-name">${p.name}</div>
       <div class="gal-meta">
         <div>
-          ${p.artist && p.artist !== 'Paivepo Studio' ? `<div class="gal-artist">${p.artist}</div>` : ''}
           <span class="gal-cat-tag">${categoryLabel}</span>
         </div>
         <span class="gal-price${p.sold ? ' struck' : ''}">${formatPrice(p.price)}</span>
