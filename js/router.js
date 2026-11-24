@@ -13,7 +13,8 @@ const pageTitles = {
   about: 'Our Story — How Paivepo Became Plettenberg Bay\'s Premier African Art Gallery',
   journal: 'African Art Stories — Journal from Paivepo Art & Decor, Plettenberg Bay',
   contact: 'Contact Paivepo — African Art Gallery in Plettenberg Bay, Old Nick Village',
-  product: 'Work — Paivepo Art & Decor'
+  product: 'Work — Paivepo Art & Decor',
+  shipping: 'Shipping & Delivery | Paivepo-Art'
 };
 
 const pageDescriptions = {
@@ -23,7 +24,8 @@ const pageDescriptions = {
   about: 'From a grandmother\'s Shona word to Plettenberg Bay\'s premier African art gallery. Discover the story behind Paivepo Art & Decor at Old Nick Village.',
   journal: 'Read stories from African artists at Paivepo. Behind-the-scenes, artist journeys, and the inspiration behind our Plettenberg Bay gallery\'s works.',
   contact: 'Visit Paivepo Art & Decor at Old Nick Village, Plettenberg Bay. Commission custom African art, inquire about pieces, or just say hello. Open daily 9am-5pm.',
-  product: 'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings and beaded sculptures. Visit our gallery.'
+  product: 'Handcrafted African art from Paivepo, Plettenberg Bay. Browse unique wildlife paintings and beaded sculptures. Visit our gallery.',
+  shipping: 'Learn about Paivepo-Art delivery in South Africa, PostNet2PostNet checkout rates, courier quotations and international shipping.'
 };
 
 const canonicalUrls = {
@@ -33,7 +35,8 @@ const canonicalUrls = {
   about: 'https://paivepo.co.za/story',
   journal: 'https://paivepo.co.za/journal',
   contact: 'https://paivepo.co.za/contact',
-  product: 'https://paivepo.co.za/product'
+  product: 'https://paivepo.co.za/product',
+  shipping: 'https://paivepo.co.za/shipping-delivery'
 };
 
 const cleanPaths = {
@@ -43,7 +46,8 @@ const cleanPaths = {
   about: '/story',
   journal: '/journal',
   contact: '/contact',
-  product: '/product'
+  product: '/product',
+  shipping: '/shipping-delivery'
 };
 
 // ── AUTO‑DETECT BASE PATH ──
@@ -73,7 +77,8 @@ function getPageIdFromPath(path) {
     '/story': 'about',
     '/journal': 'journal',
     '/contact': 'contact',
-    '/product': 'product'
+    '/product': 'product',
+    '/shipping-delivery': 'shipping'
   };
   return map[clean] || 'home';
 }
@@ -228,6 +233,12 @@ export function initRouter() {
   document.body.addEventListener('click', e => {
     const target = e.target.closest('[data-page]');
     if (!target) return;
+    if (target instanceof HTMLAnchorElement) {
+      e.preventDefault();
+      if (target.closest('#cartSb')) {
+        document.getElementById('cartCloseBtn')?.click();
+      }
+    }
 
     const page = target.dataset.page;
     const filter = target.dataset.filter;

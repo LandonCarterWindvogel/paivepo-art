@@ -1550,6 +1550,7 @@ body {
 .hc-cart__close:focus-visible,
 .hc-cart__checkout:focus-visible,
 .hc-cart__continue:focus-visible,
+.hc-cart__delivery a:focus-visible,
 .hc-cart__item button:focus-visible {
   outline: 2px solid var(--hc-accent);
   outline-offset: 3px;
@@ -1740,6 +1741,38 @@ body {
   color: var(--hc-muted);
   font-size: 10px;
   line-height: 1.6;
+}
+
+.hc-cart__delivery {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border: 1px solid var(--hc-line);
+  background: #fff;
+}
+
+.hc-cart__delivery h3 {
+  margin: 0 0 6px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hc-cart__delivery p,
+.hc-cart__delivery a {
+  color: var(--hc-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.hc-cart__delivery p {
+  margin: 0 0 7px;
+}
+
+.hc-cart__delivery a {
+  color: var(--hc-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .hc-cart__checkout {
@@ -3460,6 +3493,12 @@ body { min-width:320px; overflow-x:clip; background:var(--hc-paper); color:var(-
   font-size: 17px;
 }
 
+.hc-collection__footnote a {
+  color: var(--hc-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .hc-provenance__copy > p:not(.hc-kicker, .hc-provenance__note) {
   font-size: 14px;
   line-height: 1.85;
@@ -3508,6 +3547,7 @@ body { min-width:320px; overflow-x:clip; background:var(--hc-paper); color:var(-
 
 .hc-nav a:focus-visible,
 .hc-collection__all:focus-visible,
+.hc-collection__footnote a:focus-visible,
 .hc-hero__primary:focus-visible,
 .hc-hero__secondary:focus-visible,
 .hc-product__add:focus-visible,
