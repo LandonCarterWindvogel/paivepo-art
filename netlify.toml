@@ -1,4 +1,4 @@
-# Paivepo Art & Decor — Netlify Configuration
+# Paivepo Art & Decor - Netlify Configuration
 
 # Force HTTPS and redirect Netlify subdomain to custom domain
 [[redirects]]

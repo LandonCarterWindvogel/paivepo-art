@@ -1,4 +1,4 @@
-# Paivepo Art & Decor — Audit Report
+# Paivepo Art & Decor - Audit Report
 
 **Audit date:** 2026-11-16
 **Project:** `LandonCarterWindvogel/paivepo-art`
@@ -19,20 +19,20 @@ for route fallback.
 
 ## Findings and disposition
 
-| Priority | Finding | Disposition |
-|---|---|---|
-| High | Several picture fallbacks pointed to nonexistent JPGs; one journal card paired a Paivepo logo WebP with an unrelated artist fallback. | Corrected the missing paths and made the journal card consistently use the existing studio portrait. |
-| High | Product views did not retain a product identifier in the URL, making direct sharing/reload unreliable. | Added `?id=` product routes, canonical/social metadata updates, and browser-history handling. |
-| High | Newsletter submission treated an HTTP error response as success. | Non-2xx responses now show a failure notice, restore the submit control, and log the failure. |
-| High | Persisted cart entries could supply display data instead of being rebuilt from the catalog. | Cart items are now reconstructed from trusted catalog records; invalid entries are discarded. |
-| Medium | Image error handling used inline handlers that conflicted with the configured script CSP; empty-source modal images could be misclassified. | Centralized image-error handling and skip empty sources. |
-| Medium | Netlify's CSP did not permit the existing Google Maps frame. | Added a narrowly scoped `frame-src https://www.google.com` directive. |
-| Medium | Sitemap entries used fragment URLs instead of the clean client routes. | Updated sitemap URLs to the app's clean routes. |
-| Medium | GitHub Pages did not provide a not-found fallback for client routes. | The workflow now creates `404.html` from the app shell. |
-| Medium | Asset collection contains unused and byte-identical files; a few referenced images are large. | Recorded in [ASSET_INVENTORY.md](./ASSET_INVENTORY.md). No source image was deleted or recompressed. |
-| Medium | Product checkout readiness cannot be confirmed: only 1 of 13 catalog items has a nonzero Shopify variant ID. | Requires verified commerce/catalog IDs from the business; no values were invented. |
-| Medium | The homepage calls Allick Malawian while other content identifies him as Zimbabwean. | Left unchanged pending business confirmation. |
-| Low | The two root favicon files are identical; the provided Apple touch icon is not referenced. | Documented; retained without changing branding assets. |
+| Priority | Finding                                                                                                                                     | Disposition                                                                                          |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| High     | Several picture fallbacks pointed to nonexistent JPGs; one journal card paired a Paivepo logo WebP with an unrelated artist fallback.       | Corrected the missing paths and made the journal card consistently use the existing studio portrait. |
+| High     | Product views did not retain a product identifier in the URL, making direct sharing/reload unreliable.                                      | Added `?id=` product routes, canonical/social metadata updates, and browser-history handling.        |
+| High     | Newsletter submission treated an HTTP error response as success.                                                                            | Non-2xx responses now show a failure notice, restore the submit control, and log the failure.        |
+| High     | Persisted cart entries could supply display data instead of being rebuilt from the catalog.                                                 | Cart items are now reconstructed from trusted catalog records; invalid entries are discarded.        |
+| Medium   | Image error handling used inline handlers that conflicted with the configured script CSP; empty-source modal images could be misclassified. | Centralized image-error handling and skip empty sources.                                             |
+| Medium   | Netlify's CSP did not permit the existing Google Maps frame.                                                                                | Added a narrowly scoped `frame-src https://www.google.com` directive.                                |
+| Medium   | Sitemap entries used fragment URLs instead of the clean client routes.                                                                      | Updated sitemap URLs to the app's clean routes.                                                      |
+| Medium   | GitHub Pages did not provide a not-found fallback for client routes.                                                                        | The workflow now creates `404.html` from the app shell.                                              |
+| Medium   | Asset collection contains unused and byte-identical files; a few referenced images are large.                                               | Recorded in [ASSET_INVENTORY.md](./ASSET_INVENTORY.md). No source image was deleted or recompressed. |
+| Medium   | Product checkout readiness cannot be confirmed: only 1 of 13 catalog items has a nonzero Shopify variant ID.                                | Requires verified commerce/catalog IDs from the business; no values were invented.                   |
+| Medium   | The homepage calls Allick Malawian while other content identifies him as Zimbabwean.                                                        | Left unchanged pending business confirmation.                                                        |
+| Low      | The two root favicon files are identical; the provided Apple touch icon is not referenced.                                                  | Documented; retained without changing branding assets.                                               |
 
 ## Quality review
 

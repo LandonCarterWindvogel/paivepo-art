@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-16 — Site audit and reliability improvements
+## 2026-11-16 - Site audit and reliability improvements
 
 - Added direct product URLs, route-history handling, dynamic canonical metadata,
   and product-specific share links.
@@ -13,7 +13,7 @@
 - Added the audit, asset inventory, testing, and project setup documentation.
 - No live deployment was performed.
 
-## 2026-11-21 — Hanging Chairs storefront refinement
+## 2026-11-21 - Hanging Chairs storefront refinement
 
 - Reworked the standalone Hanging Chairs header into a clear Paivepo brand
   system, with the two-way switch beside the PAIVEPO wordmark.
@@ -26,7 +26,7 @@
 - Updated the clean Hanging Chairs canonical/social URL and sitemap entry.
 - Changes are on a feature branch; no production deployment was performed.
 
-## 2026-11-21 — Hanging Chairs screenshot-match refinement
+## 2026-11-21 - Hanging Chairs screenshot-match refinement
 
 - Reworked the masthead and two-way switch to more closely match the approved
   concept, with an accessible client-side product search.
